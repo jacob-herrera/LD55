@@ -1,0 +1,54 @@
+[gd_scene load_steps=3 format=3 uid="uid://7umwqpsbjp4e"]
+
+[ext_resource type="Script" path="res://scripts/pause_menu.gd" id="1_rr6ye"]
+[ext_resource type="FontFile" uid="uid://ey5uk5evoi8o" path="res://assets/nes.ttf" id="2_rutg5"]
+
+[node name="pause_menu" type="CenterContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rr6ye")
+
+[node name="Backdrop" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(1000, 1000)
+layout_mode = 2
+color = Color(0, 0, 0, 0.501961)
+
+[node name="VBox" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Resume" type="Button" parent="VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_neighbor_top = NodePath("../Quit")
+focus_neighbor_bottom = NodePath("../Settings")
+focus_next = NodePath("../Settings")
+focus_previous = NodePath("../Quit")
+theme_override_fonts/font = ExtResource("2_rutg5")
+theme_override_font_sizes/font_size = 16
+text = "RESUME"
+
+[node name="Settings" type="Button" parent="VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_neighbor_top = NodePath("../Resume")
+focus_neighbor_bottom = NodePath("../Quit")
+focus_next = NodePath("../Quit")
+focus_previous = NodePath("../Resume")
+theme_override_fonts/font = ExtResource("2_rutg5")
+theme_override_font_sizes/font_size = 16
+text = "SETTINGS"
+
+[node name="Quit" type="Button" parent="VBox"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+focus_neighbor_top = NodePath("../Settings")
+focus_neighbor_bottom = NodePath("../Resume")
+focus_next = NodePath("../Resume")
+focus_previous = NodePath("../Settings")
+theme_override_fonts/font = ExtResource("2_rutg5")
+theme_override_font_sizes/font_size = 16
+text = "QUIT"

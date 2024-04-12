@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://ckp0vm2f151ip"]
+
+[sub_resource type="Environment" id="Environment_574ik"]
+background_mode = 1
+background_color = Color(0.08, 0.08, 0.08, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.8, 0.8, 0.8, 1)
+
+[node name="simple_env" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_574ik")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.915352, 0.402608, 0.00611607, -0.273243, 0.609933, 0.743855, 0.295752, -0.68256, 0.668313, 0, 4, 0)
