@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dnpi8mksbjqnn"]
+[gd_scene load_steps=25 format=3 uid="uid://dnpi8mksbjqnn"]
 
 [ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map.gd" id="1_fle1t"]
 [ext_resource type="Resource" uid="uid://btwxy5brwdbg4" path="res://fgd/map_settings.tres" id="2_obqiq"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://scripts/carriable.gd" id="7_l8dio"]
 [ext_resource type="Script" path="res://scripts/summon.gd" id="8_015lv"]
 [ext_resource type="Script" path="res://scripts/coins.gd" id="9_ioesj"]
+[ext_resource type="PackedScene" uid="uid://muhjc2nl2al" path="res://scenes/character.tscn" id="10_kn88i"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_bfqq4"]
 _surfaces = [{
@@ -191,3 +192,5 @@ shape = SubResource("BoxShape3D_eok7l")
 offset_right = 40.0
 offset_bottom = 23.0
 script = ExtResource("9_ioesj")
+
+[node name="character" parent="." instance=ExtResource("10_kn88i")]
