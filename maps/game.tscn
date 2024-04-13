@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://uffaica5spud"]
+[gd_scene load_steps=29 format=3 uid="uid://uffaica5spud"]
 
 [ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map.gd" id="1_vmt1n"]
 [ext_resource type="Resource" uid="uid://btwxy5brwdbg4" path="res://fgd/map_settings.tres" id="2_hpaan"]
@@ -9,6 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://2ljib8g6rii4" path="res://assets/shadow.png" id="7_6cf3t"]
 [ext_resource type="Script" path="res://scripts/carriable.gd" id="8_sjb6n"]
 [ext_resource type="Script" path="res://scripts/coins.gd" id="9_r7tbf"]
+[ext_resource type="FontFile" uid="uid://ey5uk5evoi8o" path="res://assets/nes.ttf" id="9_x0uos"]
+[ext_resource type="Script" path="res://scripts/mana_label.gd" id="11_ndgwl"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_bfqq4"]
 _surfaces = [{
@@ -67,6 +69,17 @@ ambient_light_color = Color(0.8, 0.8, 0.8, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_eok7l"]
 size = Vector3(0.5, 0.75, 0.5)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3wifx"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pbfqa"]
+bg_color = Color(0.286275, 0.611765, 0.968627, 1)
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="GDScript" id="GDScript_qya2d"]
+script/source = "extends ProgressBar
+
+"
 
 [node name="game" type="Node3D"]
 metadata/_edit_lock_ = true
@@ -188,7 +201,32 @@ script = ExtResource("8_sjb6n")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.375, 0)
 shape = SubResource("BoxShape3D_eok7l")
 
-[node name="Coins" type="Label" parent="."]
-offset_right = 40.0
+[node name="coins" type="Label" parent="."]
+offset_right = 80.0
 offset_bottom = 23.0
+theme_override_colors/font_color = Color(0.976471, 0.843137, 0.494118, 1)
+theme_override_fonts/font = ExtResource("9_x0uos")
+text = "Coins"
 script = ExtResource("9_r7tbf")
+
+[node name="mana label" type="Label" parent="."]
+offset_top = 25.0
+offset_right = 64.0
+offset_bottom = 48.0
+theme_override_colors/font_color = Color(0.435294, 0.717647, 0.968627, 1)
+theme_override_fonts/font = ExtResource("9_x0uos")
+text = "mana"
+script = ExtResource("11_ndgwl")
+
+[node name="mana bar" type="ProgressBar" parent="."]
+z_index = 1
+offset_top = 60.0
+offset_right = 240.0
+offset_bottom = 80.0
+theme_override_styles/background = SubResource("StyleBoxEmpty_3wifx")
+theme_override_styles/fill = SubResource("StyleBoxFlat_pbfqa")
+max_value = 10.0
+step = 1.0
+value = 3.0
+show_percentage = false
+script = SubResource("GDScript_qya2d")
