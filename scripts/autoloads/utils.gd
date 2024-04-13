@@ -17,6 +17,8 @@ func death_animation(origin: Vector3, dir: Vector3, sprite: Sprite3D, shadow: De
 	node_death.global_position = origin
 	sprite_clone.billboard = BaseMaterial3D.BILLBOARD_DISABLED
 	pass
+	
+#func get_char()
 
 static func get_closest_in_range(to: Vector3, nodes: Array[Node], aoe_range: float) -> Node3D:
 	var closest: Node3D

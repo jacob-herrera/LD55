@@ -69,6 +69,7 @@ static func vec_to_direction(vec: Vector2) -> Direction:
 		return Direction.SOUTH
 
 func _ready() -> void:
+	globals.character = self
 	last_heading = jump_sprite.global_basis.z
 	collision_layer = LAYER
 	camera.set_priority(10)

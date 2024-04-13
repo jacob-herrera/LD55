@@ -21,9 +21,8 @@ config/icon="res://icon.svg"
 controls="*res://scripts/autoloads/controls.gd"
 pauser="*res://scripts/autoloads/pauser.gd"
 game_coordinator="*res://scripts/autoloads/game_coordinator.gd"
-global="*res://scripts/autoloads/global.gd"
+globals="*res://scripts/autoloads/globals.gd"
 utils="*res://scripts/autoloads/utils.gd"
-map_changer="*res://scripts/autoloads/map_changer.gd"
 ui="*res://scenes/ui.tscn"
 
 [display]
