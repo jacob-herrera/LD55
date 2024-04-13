@@ -20,10 +20,10 @@ config/icon="res://icon.svg"
 
 controls="*res://scripts/autoloads/controls.gd"
 pauser="*res://scripts/autoloads/pauser.gd"
-game_coordinator="*res://scripts/autoloads/game_coordinator.gd"
 globals="*res://scripts/autoloads/globals.gd"
 utils="*res://scripts/autoloads/utils.gd"
 ui="*res://scenes/ui.tscn"
+game_coordinator="*res://scenes/game_coordinator.tscn"
 
 [display]
 

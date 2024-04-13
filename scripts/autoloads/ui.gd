@@ -9,4 +9,4 @@ func _process(_delta: float) -> void:
 	coins_label.text = "$" + str(Globals.coins)
 	mana_bar.value = Globals.mana
 	mana_bar.max_value = Globals.max_mana
-	time.text = str(int(GameCoordinator.time))
+	time.text = str(ceil(GameCoordinator.time))

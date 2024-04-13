@@ -1,9 +1,9 @@
-[gd_scene load_steps=75 format=3 uid="uid://dnpi8mksbjqnn"]
+[gd_scene load_steps=76 format=3 uid="uid://dnpi8mksbjqnn"]
 
 [ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map.gd" id="1_fle1t"]
 [ext_resource type="Resource" uid="uid://btwxy5brwdbg4" path="res://fgd/map_settings.tres" id="2_obqiq"]
 [ext_resource type="Material" uid="uid://dqbweinqt7qpy" path="res://trenchbroom/textures/checkered.tres" id="3_fu3gy"]
-[ext_resource type="Material" path="res://trenchbroom/textures/dark_checkered.tres" id="4_02otx"]
+[ext_resource type="Material" uid="uid://cy736heb2jukn" path="res://trenchbroom/textures/dark_checkered.tres" id="4_02otx"]
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="4_slxya"]
 [ext_resource type="Texture2D" uid="uid://dl247yikdxjdm" path="res://icon.svg" id="5_j4ios"]
 [ext_resource type="Texture2D" uid="uid://2ljib8g6rii4" path="res://assets/shadow.png" id="6_003y4"]
@@ -17,6 +17,7 @@
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="13_2hxcw"]
 [ext_resource type="Resource" uid="uid://k62lirijanxl" path="res://assets/cam_tween_player.tres" id="15_36f27"]
 [ext_resource type="Script" path="res://scripts/shop.gd" id="15_itd2k"]
+[ext_resource type="Resource" uid="uid://dab5weecvnpwr" path="res://assets/camera_resource.tres" id="16_6jxv8"]
 [ext_resource type="Resource" uid="uid://be15co36abbxx" path="res://assets/cam_tween_shop.tres" id="16_uunvf"]
 [ext_resource type="Script" path="res://scripts/mana_pool.gd" id="17_5wmwc"]
 [ext_resource type="AudioStream" uid="uid://bls3hxlr2qynn" path="res://assets/audio/mana_pickup.mp3" id="20_8o20s"]
@@ -885,7 +886,7 @@ look_at_mode = 0
 tween_parameters = ExtResource("15_36f27")
 tween_on_load = false
 inactive_update_mode = 0
-camera_3D_resource = null
+camera_3D_resource = ExtResource("16_6jxv8")
 
 [node name="Shop" type="Node" parent="." node_paths=PackedStringArray("cameras")]
 script = ExtResource("15_itd2k")
@@ -962,7 +963,6 @@ camera_3D_resource = null
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.766044, 0.642788, 0, -0.642788, 0.766044, 0, 2.5, 3)
-fov = 74.858
 
 [node name="PhantomCameraHost" type="Node" parent="Camera3D"]
 script = ExtResource("13_2hxcw")
