@@ -126,7 +126,7 @@ transform = Transform3D(0.915352, 0.402608, 0.00611584, -0.273243, 0.609933, 0.7
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, 0)
 collision_layer = 8
 script = ExtResource("4_slxya")
-health = 15
+health = 9
 
 [node name="Sprite3D" type="Sprite3D" parent="Enemy"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.295127, 0)
