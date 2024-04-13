@@ -36,6 +36,8 @@ var attack_cooldown: float = 0.0
 func do_attack() -> void:
 	var enemies: Array[Node] = get_tree().get_nodes_in_group(Enemy.GROUP)
 	# TODO get closest enemy
+	if enemies.is_empty():
+		return
 	var enemy: Enemy = enemies[0] as Enemy
 	var proj: Projectile = projectile.instantiate() as Projectile
 	get_tree().current_scene.add_child(proj)
