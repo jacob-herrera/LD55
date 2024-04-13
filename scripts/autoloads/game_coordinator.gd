@@ -19,7 +19,7 @@ const HUB_TIME: float = 15.0
 const COMBAT_TIME: float = 30.0
 
 static var state: GameState = GameState.HUB
-static var round: int = 0
+static var current_round: int = 0
 static var time: float = HUB_TIME
 
 func _process(delta: float) -> void:
@@ -39,6 +39,6 @@ func _process(delta: float) -> void:
 				state = GameState.HUB
 				globals.character.global_position = HUB_TELE
 				time = HUB_TIME
-				round += 1
+				current_round += 1
 		anim_player.play("fade_in")	
 
