@@ -7,9 +7,9 @@ class_name Healthbar
 func _ready() -> void:
 	texture = subviewport.get_texture()
 
-func initalize(max: int, col: CollisionShape3D) -> void:
-	progress_bar.max_value = max
-	progress_bar.value = max
+func initalize(max_val: int, col: CollisionShape3D) -> void:
+	progress_bar.max_value = max_val
+	progress_bar.value = max_val
 	global_position = Utils.get_top_of_box(col)
 	
 func update(val: int) -> void:

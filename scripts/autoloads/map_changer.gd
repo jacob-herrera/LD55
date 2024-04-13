@@ -1,14 +1,14 @@
 extends Node
 class_name MapChanger
 
-@onready var black: ColorRect = $CanvasLayer/BlackFill
-@onready var anim_player : AnimationPlayer = $CanvasLayer/AnimationPlayer
+#@onready var black: ColorRect = $CanvasLayer/BlackFill
+#@onready var anim_player : AnimationPlayer = $CanvasLayer/AnimationPlayer
 
-static  var _initalized: bool = false
-static var _is_transitioning: bool = false
+#static  var _initalized: bool = false
+#static var _is_transitioning: bool = false
 
-static var map_path: String
-static var is_in_map: bool = false
+#static var map_path: String
+#static var is_in_map: bool = false
 
 #static var all_map_names: Array[String] = MapChanger._get_map_names()
 

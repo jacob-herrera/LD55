@@ -11,7 +11,7 @@
 [ext_resource type="Script" path="res://scripts/coins.gd" id="9_ioesj"]
 [ext_resource type="PackedScene" uid="uid://bk2528lpxk3ek" path="res://scenes/healthbar.tscn" id="9_vsnug"]
 [ext_resource type="Script" path="res://scripts/character.gd" id="11_1oluy"]
-[ext_resource type="PackedScene" path="res://shop.tscn" id="11_7iq0o"]
+[ext_resource type="PackedScene" uid="uid://b3lvbmdrqg7x1" path="res://shop.tscn" id="11_7iq0o"]
 [ext_resource type="Texture2D" uid="uid://baahi8fbu5g6g" path="res://assets/temp_char.png" id="12_mjo44"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3D.gd" id="12_q4tpe"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="13_2hxcw"]
@@ -74,10 +74,10 @@ ambient_light_color = Color(0.8, 0.8, 0.8, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_eok7l"]
 size = Vector3(0.5, 0.75, 0.5)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_vq7mp"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_k6yf0"]
 viewport_path = NodePath("Summon/Healthbar/SubViewport")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_pgdg1"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_ufwil"]
 viewport_path = NodePath("Summon/Healthbar/SubViewport")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2vgn0"]
@@ -661,13 +661,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.375, 0)
 shape = SubResource("BoxShape3D_eok7l")
 
 [node name="healthbar" parent="Enemy" instance=ExtResource("9_vsnug")]
-texture = SubResource("ViewportTexture_vq7mp")
+texture = SubResource("ViewportTexture_k6yf0")
 
 [node name="Summon" type="AnimatableBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.0389775, -1.5)
 collision_layer = 16
 script = ExtResource("8_015lv")
-range = 5.0
+attack_range = 5.0
 attack_rate = 1.0
 damage = 3
 health = 30
@@ -701,7 +701,7 @@ shape = SubResource("BoxShape3D_eok7l")
 
 [node name="healthbar" parent="Summon" instance=ExtResource("9_vsnug")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -0.0289775, 0)
-texture = SubResource("ViewportTexture_pgdg1")
+texture = SubResource("ViewportTexture_ufwil")
 
 [node name="Coins" type="Label" parent="."]
 offset_right = 40.0
@@ -777,7 +777,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.15103, -0.013701, 2.3585)
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.766044, 0.642788, 0, -0.642788, 0.766044, 0, 2.5, 3)
-fov = 74.917
+fov = 73.9705
 
 [node name="PhantomCameraHost" type="Node" parent="Camera3D"]
 script = ExtResource("13_2hxcw")

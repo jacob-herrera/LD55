@@ -9,7 +9,7 @@ const LAYER: int = 16
 const GROUP: String = "summons"
 
 ## Attack range
-@export var range: float
+@export var attack_range: float
 ## Attacks per second
 @export var attack_rate: float
 ## Damage per attack
@@ -37,7 +37,7 @@ var attack_cooldown: float = 0.0
 	
 func do_attack() -> void:
 	var enemies: Array[Node] = get_tree().get_nodes_in_group(Enemy.GROUP)
-	var enemy: Enemy = Utils.get_closest_in_range(global_position, enemies, range)
+	var enemy: Enemy = Utils.get_closest_in_range(global_position, enemies, attack_range)
 	if enemy == null: return
 	
 	#var enemy: Enemy = enemies[0] as Enemy

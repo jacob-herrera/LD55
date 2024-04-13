@@ -72,10 +72,9 @@ func _ready() -> void:
 	last_heading = jump_sprite.global_basis.z
 	collision_layer = LAYER
 	camera.set_follow_target_node(self)
-	print(camera.get_follow_target_node())
 
 func  _process(delta: float) -> void:
-	rot += delta * JUMP_SPIN_SPEED if jumped else 0
+	rot += delta * JUMP_SPIN_SPEED if jumped else 0.0
 
 func _physics_process(delta: float) -> void:
 	if Pauser.is_paused: return

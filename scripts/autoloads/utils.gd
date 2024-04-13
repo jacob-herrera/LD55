@@ -18,14 +18,14 @@ func death_animation(origin: Vector3, dir: Vector3, sprite: Sprite3D, shadow: De
 	sprite_clone.billboard = BaseMaterial3D.BILLBOARD_DISABLED
 	pass
 
-static func get_closest_in_range(to: Vector3, nodes: Array[Node], range: float) -> Node3D:
+static func get_closest_in_range(to: Vector3, nodes: Array[Node], aoe_range: float) -> Node3D:
 	var closest: Node3D
 	var closest_distance: float = 1000000.0
 	for node: Node in nodes:
 		if node is Node3D:
 			var node3d := node as Node3D
 			var dist: float = to.distance_to(node3d.global_position)
-			if dist < range and dist < closest_distance:
+			if dist < aoe_range and dist < closest_distance:
 				closest = node3d
 	return closest
 

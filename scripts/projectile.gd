@@ -31,7 +31,6 @@ func _process(delta: float) -> void:
 	try_to_hit()
 
 func try_to_hit() -> void:
-	var enemies: Array[Node] = get_tree().get_nodes_in_group(Enemy.GROUP)
 	var params := PhysicsPointQueryParameters3D.new()
 	params.position = global_position
 	params.collision_mask = Enemy.LAYER
