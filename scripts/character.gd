@@ -77,7 +77,7 @@ func  _process(delta: float) -> void:
 	rot += delta * JUMP_SPIN_SPEED if jumped else 0.0
 
 func _physics_process(delta: float) -> void:
-	if Pauser.is_paused: return
+	if Pauser.is_paused or Controls.lock_movement: return
 	
 	var change: Vector3
 
