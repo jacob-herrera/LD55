@@ -1,5 +1,7 @@
 extends Area3D
 
+@onready var mana_sound = $mana_pickup_sound
+
 const TIME: float = 0.25 # Every one second
 var time: float = 0.0
 
@@ -14,7 +16,17 @@ func _process(delta: float) -> void:
 		for body: Node3D in bodies:
 			if body is Character:
 				Globals.mana += 1
-			if body is Summon:
+				play_mana()
+			elif body is Summon:
 				var summon: Summon = body as Summon
 				summon.health += 1
+				print("summon")
+			else:
+				mana_sound.stop()
+				print("stop")
+				
 			
+func play_mana() -> void:
+	if !mana_sound.playing:
+		mana_sound.play()
+		print("started")
