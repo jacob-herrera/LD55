@@ -33,6 +33,9 @@ static func get_move_input() -> Vector2:
 static func is_move_input() -> bool:
 	return not get_move_input().is_equal_approx(Vector2.ZERO)
 
+static func try_pickup() -> bool:
+	return Input.is_action_just_pressed("pickup")
+
 # Move direction relative to camera orientation
 static func get_forward(relative_to: Node3D) -> Basis:
 	var move_input: Vector2 = get_move_input()

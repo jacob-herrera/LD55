@@ -6,6 +6,10 @@ class_name Character
 @onready var anim_player: AnimationPlayer = $AnimationPlayer
 @onready var camera: Camera3D = $Camera3D
 
+@export_flags_3d_physics var ground_layer: int
+
+var carrying: Node3D
+
 const CHAR_SPEED: float = 5.0
 const ACCEL: float = 100.0
 const STOP_ACCEL: float = 15.0
@@ -68,15 +72,36 @@ static func vec_to_direction(vec: Vector2) -> Direction:
 func _ready() -> void:
 	last_heading = jump_sprite.global_basis.z
 
+
+func do_carry() -> void:
+	if carrying == null:
+		var closest_carryable: Node3D
+		var closest_distance: float = 100000.0
+		for node: Node in get_tree().get_nodes_in_group("carryable"):
+			if node.is_class("Node3D"):
+				var carryable: Node3D = node as Node3D
+				var dist: float = global_position.distance_to(carryable.global_position)
+				if dist < 1.0 and dist < closest_distance:
+					closest_carryable = carryable
+		
+		if Controls.try_pickup() and closest_carryable != null:
+			carrying = closest_carryable
+	elif carrying != null and Controls.try_pickup():
+		var space_rid := get_world_3d().space
+		var space_state := PhysicsServer3D.space_get_direct_state(space_rid)
+		var from: Vector3 = global_position + Vector3(0, 1, 0)
+		var to: Vector3 = global_position - Vector3(0, 100, 0)
+		var query := PhysicsRayQueryParameters3D.create(from, to, ground_layer)
+		var result = space_state.intersect_ray(query)
+		if not result.is_empty():
+			carrying.position = result.position
+			carrying = null
+
 func  _process(delta: float) -> void:
-	if jumped:
-		rot += delta * JUMP_SPIN_SPEED
-	else:
-		rot = 0
+	if jumped: rot += delta * JUMP_SPIN_SPEED
+	else: rot = 0
 	
-	#if Controls.is_move_input():
-		#var prefix: String = "walk"
-		#anim_player.play(prefix + "_" + DIRECTION_TO_STRING[dir])
+	do_carry()
 
 func _physics_process(delta: float) -> void:
 	if Pauser.is_paused: return
@@ -129,3 +154,6 @@ func _physics_process(delta: float) -> void:
 			coyote_time = COYOTE_TIME
 		
 	move_and_slide()
+
+	if carrying != null:
+		carrying.global_position = global_position + Vector3(0, 0.7 ,0)

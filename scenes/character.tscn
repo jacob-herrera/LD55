@@ -503,12 +503,15 @@ _data = {
 collision_layer = 4
 collision_mask = 3
 script = ExtResource("1_48ou4")
+ground_layer = 1
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.375, 0)
 shape = SubResource("BoxShape3D_2vgn0")
 
 [node name="MainSprite" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.34, 0)
 layers = 16
 flip_h = true
 pixel_size = 0.04
@@ -520,6 +523,7 @@ vframes = 5
 frame = 8
 
 [node name="JumpSprite" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, 0)
 visible = false
 layers = 16
 pixel_size = 0.04
