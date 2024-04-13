@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://scripts/map_spawn.gd" id="5_l3u80"]
 [ext_resource type="Texture2D" uid="uid://dl247yikdxjdm" path="res://icon.svg" id="6_pcon5"]
 [ext_resource type="Texture2D" uid="uid://2ljib8g6rii4" path="res://assets/shadow.png" id="7_lwcfs"]
-[ext_resource type="Script" path="res://scripts/carryable.gd" id="8_gvek1"]
+[ext_resource type="Script" path="res://scripts/carriable.gd" id="8_gvek1"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_7jmwv"]
 _surfaces = [{

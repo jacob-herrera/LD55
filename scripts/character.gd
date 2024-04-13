@@ -77,7 +77,7 @@ func do_carry() -> void:
 	if carrying == null:
 		var closest_carriable: Node3D
 		var closest_distance: float = 100000.0
-		for node: Node in get_tree().get_nodes_in_group("carriable"):
+		for node: Node in get_tree().get_nodes_in_group(Carriable.GROUP):
 			if node.is_class("Node3D"):
 				var carryable: Node3D = node as Node3D
 				var dist: float = global_position.distance_to(carryable.global_position)
