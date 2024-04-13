@@ -24,6 +24,7 @@ game_coordinator="*res://scripts/autoloads/game_coordinator.gd"
 global="*res://scripts/autoloads/global.gd"
 utils="*res://scripts/autoloads/utils.gd"
 map_changer="*res://scripts/autoloads/map_changer.gd"
+ui="*res://scenes/ui.tscn"
 
 [display]
 
