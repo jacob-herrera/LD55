@@ -1,9 +1,9 @@
-[gd_scene load_steps=71 format=3 uid="uid://dnpi8mksbjqnn"]
+[gd_scene load_steps=74 format=3 uid="uid://dnpi8mksbjqnn"]
 
 [ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map.gd" id="1_fle1t"]
 [ext_resource type="Resource" uid="uid://btwxy5brwdbg4" path="res://fgd/map_settings.tres" id="2_obqiq"]
 [ext_resource type="Material" uid="uid://dqbweinqt7qpy" path="res://trenchbroom/textures/checkered.tres" id="3_fu3gy"]
-[ext_resource type="Material" path="res://trenchbroom/textures/dark_checkered.tres" id="4_02otx"]
+[ext_resource type="Material" uid="uid://cy736heb2jukn" path="res://trenchbroom/textures/dark_checkered.tres" id="4_02otx"]
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="4_slxya"]
 [ext_resource type="Texture2D" uid="uid://dl247yikdxjdm" path="res://icon.svg" id="5_j4ios"]
 [ext_resource type="Texture2D" uid="uid://2ljib8g6rii4" path="res://assets/shadow.png" id="6_003y4"]
@@ -11,11 +11,13 @@
 [ext_resource type="Script" path="res://scripts/summon.gd" id="8_015lv"]
 [ext_resource type="PackedScene" uid="uid://bk2528lpxk3ek" path="res://scenes/healthbar.tscn" id="9_vsnug"]
 [ext_resource type="Script" path="res://scripts/character.gd" id="11_1oluy"]
-[ext_resource type="PackedScene" uid="uid://b3lvbmdrqg7x1" path="res://shop.tscn" id="11_7iq0o"]
 [ext_resource type="Texture2D" uid="uid://djhkf5s85u2eb" path="res://assets/summon_wizard.png" id="11_r8uq3"]
 [ext_resource type="Texture2D" uid="uid://baahi8fbu5g6g" path="res://assets/temp_char.png" id="12_mjo44"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3D.gd" id="12_q4tpe"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="13_2hxcw"]
+[ext_resource type="Resource" uid="uid://k62lirijanxl" path="res://assets/cam_tween_player.tres" id="15_36f27"]
+[ext_resource type="Script" path="res://scripts/shop.gd" id="15_itd2k"]
+[ext_resource type="Resource" uid="uid://be15co36abbxx" path="res://assets/cam_tween_shop.tres" id="16_uunvf"]
 [ext_resource type="Script" path="res://scripts/mana_pool.gd" id="17_5wmwc"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_pjoy7"]
@@ -628,6 +630,9 @@ _data = {
 "walk_west": SubResource("Animation_qxmx6")
 }
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_77h1f"]
+size = Vector3(1.5, 5, 1.5)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_ha2t1"]
 size = Vector3(3.5, 0.5, 3)
 
@@ -873,56 +878,90 @@ libraries = {
 transform = Transform3D(1, 0, 0, 0, 0.766044, 0.642788, 0, -0.642788, 0.766044, 0, 2.5, 3)
 script = ExtResource("12_q4tpe")
 priority_override = false
-priority = 0
+priority = 1
 follow_mode = 0
 look_at_mode = 0
-tween_parameters = null
-tween_on_load = true
+tween_parameters = ExtResource("15_36f27")
+tween_on_load = false
 inactive_update_mode = 0
 camera_3D_resource = null
 
-[node name="Shop" parent="." node_paths=PackedStringArray("cameras") instance=ExtResource("11_7iq0o")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2)
-cameras = [NodePath("Item1Cam"), NodePath("Item2Cam"), NodePath("Item3Cam")]
+[node name="Shop" type="Node" parent="." node_paths=PackedStringArray("cameras")]
+script = ExtResource("15_itd2k")
+cameras = [NodePath("ItemCamera0"), NodePath("ItemCamera1"), NodePath("ItemCamera2"), NodePath("ItemCamera3"), NodePath("ItemCamera4")]
 
-[node name="Item1Cam" type="Node3D" parent="Shop"]
-transform = Transform3D(-4.37114e-08, 0.707106, -0.707107, 0, 0.707106, 0.707107, 1, 3.09086e-08, -3.09086e-08, 1.5, 2, 0)
+[node name="Area3D" type="Area3D" parent="Shop"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.75, 0.25, -3.5)
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Shop/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0.25)
+shape = SubResource("BoxShape3D_77h1f")
+
+[node name="ItemCamera0" type="Node3D" parent="Shop"]
+transform = Transform3D(1, 0, 0, 0, 0.766044, 0.642788, 0, -0.642787, 0.766045, -4.5, 2.25, -3.75)
 script = ExtResource("12_q4tpe")
 priority_override = false
 priority = 0
 follow_mode = 0
 look_at_mode = 0
-tween_parameters = null
+tween_parameters = ExtResource("16_uunvf")
 tween_on_load = true
 inactive_update_mode = 0
 camera_3D_resource = null
 
-[node name="Item2Cam" type="Node3D" parent="Shop"]
-transform = Transform3D(-0.707107, 0.5, -0.5, 0, 0.707107, 0.707107, 0.707107, 0.5, -0.5, 1, 2, 2)
+[node name="ItemCamera1" type="Node3D" parent="Shop"]
+transform = Transform3D(1, 0, 0, 0, 0.766044, 0.642788, 0, -0.642788, 0.766044, -3, 2.25, -3.75)
 script = ExtResource("12_q4tpe")
 priority_override = false
 priority = 0
 follow_mode = 0
 look_at_mode = 0
-tween_parameters = null
+tween_parameters = ExtResource("16_uunvf")
 tween_on_load = true
 inactive_update_mode = 0
 camera_3D_resource = null
 
-[node name="Item3Cam" type="Node3D" parent="Shop"]
-transform = Transform3D(0.707107, 0.5, -0.5, 0, 0.707107, 0.707107, 0.707107, -0.5, 0.5, 1, 2, -2)
+[node name="ItemCamera2" type="Node3D" parent="Shop"]
+transform = Transform3D(1, 0, 0, 0, 0.766045, 0.642788, 0, -0.642788, 0.766045, -1.5, 2.25, -3.75)
 script = ExtResource("12_q4tpe")
 priority_override = false
 priority = 0
 follow_mode = 0
 look_at_mode = 0
-tween_parameters = null
+tween_parameters = ExtResource("16_uunvf")
+tween_on_load = true
+inactive_update_mode = 0
+camera_3D_resource = null
+
+[node name="ItemCamera3" type="Node3D" parent="Shop"]
+transform = Transform3D(1, 0, 0, 0, 0.766045, 0.642788, 0, -0.642788, 0.766045, 0, 2.25, -3.75)
+script = ExtResource("12_q4tpe")
+priority_override = false
+priority = 0
+follow_mode = 0
+look_at_mode = 0
+tween_parameters = ExtResource("16_uunvf")
+tween_on_load = true
+inactive_update_mode = 0
+camera_3D_resource = null
+
+[node name="ItemCamera4" type="Node3D" parent="Shop"]
+transform = Transform3D(1, 0, 0, 0, 0.766045, 0.642788, 0, -0.642788, 0.766045, 1.5, 2.25, -3.75)
+script = ExtResource("12_q4tpe")
+priority_override = false
+priority = 0
+follow_mode = 0
+look_at_mode = 0
+tween_parameters = ExtResource("16_uunvf")
 tween_on_load = true
 inactive_update_mode = 0
 camera_3D_resource = null
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.766044, 0.642788, 0, -0.642788, 0.766044, 0, 2.5, 3)
+fov = 74.858
 
 [node name="PhantomCameraHost" type="Node" parent="Camera3D"]
 script = ExtResource("13_2hxcw")
@@ -957,3 +996,6 @@ gravity = Vector3(0, 0, 0)
 initial_velocity_min = 1.0
 initial_velocity_max = 1.0
 color_ramp = SubResource("Gradient_s0fa4")
+
+[connection signal="body_entered" from="Shop/Area3D" to="Shop" method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Shop/Area3D" to="Shop" method="_on_area_3d_body_exited"]

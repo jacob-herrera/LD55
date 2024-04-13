@@ -10,8 +10,8 @@ const HUB_TELE := Vector3(0,0,0)
 const LEVEL_1_TELE := Vector3(32, 0, 0)
 
 
-const HUB_TIME: float = 15.0
-const COMBAT_TIME: float = 15.0
+const HUB_TIME: float = 30.0
+const COMBAT_TIME: float = 60.0
 
 static var state: GameState = GameState.HUB
 
