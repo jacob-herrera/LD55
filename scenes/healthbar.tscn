@@ -4,16 +4,9 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s5ce3"]
 bg_color = Color(0, 0, 0, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ietn8"]
 bg_color = Color(1, 0, 0, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_bottom = 1
 
 [node name="healthbar" type="Sprite3D"]
 billboard = 1

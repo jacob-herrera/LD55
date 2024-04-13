@@ -29,10 +29,12 @@ static func get_closest_in_range(to: Vector3, nodes: Array[Node], aoe_range: flo
 				closest = node3d
 	return closest
 
+
+const HEALTH_BAR_OFFSET: Vector3 = Vector3(0, 0.1, 0)
 static func get_top_of_box(col: CollisionShape3D) -> Vector3:
 	if not (col.shape is BoxShape3D):
 		printerr("Only works for box colliders.")
 		return Vector3.ZERO
 	var box := col.shape as BoxShape3D
 	var y_offset: float = box.size.y / 2
-	return col.global_position + Vector3(0, y_offset, 0)
+	return col.global_position + Vector3(0, y_offset, 0) + HEALTH_BAR_OFFSET
