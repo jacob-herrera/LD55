@@ -1,9 +1,9 @@
-[gd_scene load_steps=74 format=3 uid="uid://dnpi8mksbjqnn"]
+[gd_scene load_steps=75 format=3 uid="uid://dnpi8mksbjqnn"]
 
 [ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map.gd" id="1_fle1t"]
 [ext_resource type="Resource" uid="uid://btwxy5brwdbg4" path="res://fgd/map_settings.tres" id="2_obqiq"]
 [ext_resource type="Material" uid="uid://dqbweinqt7qpy" path="res://trenchbroom/textures/checkered.tres" id="3_fu3gy"]
-[ext_resource type="Material" uid="uid://cy736heb2jukn" path="res://trenchbroom/textures/dark_checkered.tres" id="4_02otx"]
+[ext_resource type="Material" path="res://trenchbroom/textures/dark_checkered.tres" id="4_02otx"]
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="4_slxya"]
 [ext_resource type="Texture2D" uid="uid://dl247yikdxjdm" path="res://icon.svg" id="5_j4ios"]
 [ext_resource type="Texture2D" uid="uid://2ljib8g6rii4" path="res://assets/shadow.png" id="6_003y4"]
@@ -19,6 +19,7 @@
 [ext_resource type="Script" path="res://scripts/shop.gd" id="15_itd2k"]
 [ext_resource type="Resource" uid="uid://be15co36abbxx" path="res://assets/cam_tween_shop.tres" id="16_uunvf"]
 [ext_resource type="Script" path="res://scripts/mana_pool.gd" id="17_5wmwc"]
+[ext_resource type="AudioStream" uid="uid://bls3hxlr2qynn" path="res://assets/audio/mana_pickup.mp3" id="20_8o20s"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_pjoy7"]
 _surfaces = [{
@@ -996,6 +997,10 @@ gravity = Vector3(0, 0, 0)
 initial_velocity_min = 1.0
 initial_velocity_max = 1.0
 color_ramp = SubResource("Gradient_s0fa4")
+
+[node name="mana_pickup_sound" type="AudioStreamPlayer3D" parent="ManaPool"]
+stream = ExtResource("20_8o20s")
+bus = &"Effects"
 
 [connection signal="body_entered" from="Shop/Area3D" to="Shop" method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Shop/Area3D" to="Shop" method="_on_area_3d_body_exited"]
