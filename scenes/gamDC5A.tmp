@@ -1,0 +1,197 @@
+[gd_scene load_steps=25 format=3 uid="uid://dnpi8mksbjqnn"]
+
+[ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map.gd" id="1_fle1t"]
+[ext_resource type="Resource" uid="uid://btwxy5brwdbg4" path="res://fgd/map_settings.tres" id="2_obqiq"]
+[ext_resource type="Material" uid="uid://dqbweinqt7qpy" path="res://trenchbroom/textures/checkered.tres" id="3_fu3gy"]
+[ext_resource type="Script" path="res://scripts/enemy.gd" id="4_slxya"]
+[ext_resource type="Texture2D" uid="uid://dl247yikdxjdm" path="res://icon.svg" id="5_j4ios"]
+[ext_resource type="Texture2D" uid="uid://2ljib8g6rii4" path="res://assets/shadow.png" id="6_003y4"]
+[ext_resource type="Script" path="res://scripts/carriable.gd" id="7_l8dio"]
+[ext_resource type="Script" path="res://scripts/summon.gd" id="8_015lv"]
+[ext_resource type="Script" path="res://scripts/coins.gd" id="9_ioesj"]
+[ext_resource type="PackedScene" uid="uid://muhjc2nl2al" path="res://scenes/character.tscn" id="10_kn88i"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_bfqq4"]
+_surfaces = [{
+"aabb": AABB(-38, 0, -6, 44, 1e-05, 12),
+"attribute_data": PackedByteArray(0, 0, 192, 192, 0, 0, 192, 192, 0, 0, 192, 64, 0, 0, 192, 192, 0, 0, 192, 64, 0, 0, 192, 64, 0, 0, 192, 192, 0, 0, 192, 64, 0, 0, 192, 192, 0, 0, 208, 65, 0, 0, 192, 64, 0, 0, 208, 65, 0, 0, 192, 64, 0, 0, 24, 66, 0, 0, 192, 192, 0, 0, 24, 66),
+"format": 34359742487,
+"index_count": 12,
+"index_data": PackedByteArray(0, 0, 1, 0, 2, 0, 0, 0, 2, 0, 3, 0, 4, 0, 5, 0, 6, 0, 4, 0, 6, 0, 7, 0),
+"material": ExtResource("3_fu3gy"),
+"name": "checkered",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray(0, 0, 192, 64, 0, 0, 0, 0, 0, 0, 192, 192, 0, 0, 192, 64, 0, 0, 0, 0, 0, 0, 192, 64, 0, 0, 192, 192, 0, 0, 0, 0, 0, 0, 192, 64, 0, 0, 192, 192, 0, 0, 0, 0, 0, 0, 192, 192, 0, 0, 208, 193, 0, 0, 0, 0, 0, 0, 192, 192, 0, 0, 208, 193, 0, 0, 0, 0, 0, 0, 192, 64, 0, 0, 24, 194, 0, 0, 0, 0, 0, 0, 192, 64, 0, 0, 24, 194, 0, 0, 0, 0, 0, 0, 192, 192, 255, 127, 255, 255, 255, 127, 255, 191, 255, 127, 255, 255, 255, 127, 255, 191, 255, 127, 255, 255, 255, 127, 255, 191, 255, 127, 255, 255, 255, 127, 255, 191, 255, 127, 255, 255, 255, 127, 255, 191, 255, 127, 255, 255, 255, 127, 255, 191, 255, 127, 255, 255, 255, 127, 255, 191, 255, 127, 255, 255, 255, 127, 255, 191)
+}]
+
+[sub_resource type="ArrayOccluder3D" id="ArrayOccluder3D_vsav5"]
+vertices = PackedVector3Array(6, 0, -6, 6, 0, 6, -6, 0, 6, -6, 0, -6, -26, 0, -6, -26, 0, 6, -38, 0, 6, -38, 0, -6)
+indices = PackedInt32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 0, 2, 3, 4, 5, 6, 4, 6, 7)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_f2r38"]
+points = PackedVector3Array(-6, 0, -6, -6, -1, -6, 6, -1, -6, 6, 0, -6, -6, 0, 6, -6, -1, 6, 6, -1, 6, 6, 0, 6)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_10yrb"]
+points = PackedVector3Array(-7, 6, -6, -7, -1, -6, -6, -1, -6, -6, 6, -6, -7, 6, 6, -7, -1, 6, -6, -1, 6, -6, 6, 6)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_4hhxn"]
+points = PackedVector3Array(-7, 6, 6, -7, -1, 6, 7, -1, 6, 7, 6, 6, -7, 6, 7, -7, -1, 7, 7, -1, 7, 7, 6, 7)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_gw7jy"]
+points = PackedVector3Array(6, 6, -6, 6, -1, -6, 7, -1, -6, 7, 6, -6, 6, 6, 6, 6, -1, 6, 7, -1, 6, 7, 6, 6)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ns04y"]
+points = PackedVector3Array(-7, 6, -7, -7, -1, -7, 7, -1, -7, 7, 6, -7, -7, 6, -6, -7, -1, -6, 7, -1, -6, 7, 6, -6)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_mhog8"]
+points = PackedVector3Array(-38, 0, -6, -38, -1, -6, -26, -1, -6, -26, 0, -6, -38, 0, 6, -38, -1, 6, -26, -1, 6, -26, 0, 6)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_2hroe"]
+points = PackedVector3Array(-39, 6, -7, -39, -1, -7, -25, -1, -7, -25, 6, -7, -39, 6, -6, -39, -1, -6, -25, -1, -6, -25, 6, -6)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ohgtp"]
+points = PackedVector3Array(-39, 6, -6, -39, -1, -6, -38, -1, -6, -38, 6, -6, -39, 6, 6, -39, -1, 6, -38, -1, 6, -38, 6, 6)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_wfdyp"]
+points = PackedVector3Array(-39, 6, 6, -39, -1, 6, -25, -1, 6, -25, 6, 6, -39, 6, 7, -39, -1, 7, -25, -1, 7, -25, 6, 7)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_nlbt3"]
+points = PackedVector3Array(-26, 6, -6, -26, -1, -6, -25, -1, -6, -25, 6, -6, -26, 6, 6, -26, -1, 6, -25, -1, 6, -25, 6, 6)
+
+[sub_resource type="Environment" id="Environment_574ik"]
+background_mode = 1
+background_color = Color(0.08, 0.08, 0.08, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.8, 0.8, 0.8, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_eok7l"]
+size = Vector3(0.5, 0.75, 0.5)
+
+[node name="game" type="Node3D"]
+metadata/_edit_lock_ = true
+
+[node name="FuncGodotMap" type="Node3D" parent="."]
+script = ExtResource("1_fle1t")
+local_map_file = "res://trenchbroom/game.map"
+map_settings = ExtResource("2_obqiq")
+metadata/_edit_lock_ = true
+
+[node name="entity_0_worldspawn" type="StaticBody3D" parent="FuncGodotMap"]
+
+[node name="entity_0_mesh_instance" type="MeshInstance3D" parent="FuncGodotMap/entity_0_worldspawn"]
+mesh = SubResource("ArrayMesh_bfqq4")
+
+[node name="entity_0_occluder_instance" type="OccluderInstance3D" parent="FuncGodotMap/entity_0_worldspawn"]
+occluder = SubResource("ArrayOccluder3D_vsav5")
+
+[node name="entity_0_brush_0_collision_shape" type="CollisionShape3D" parent="FuncGodotMap/entity_0_worldspawn"]
+shape = SubResource("ConvexPolygonShape3D_f2r38")
+
+[node name="entity_0_brush_1_collision_shape" type="CollisionShape3D" parent="FuncGodotMap/entity_0_worldspawn"]
+shape = SubResource("ConvexPolygonShape3D_10yrb")
+
+[node name="entity_0_brush_2_collision_shape" type="CollisionShape3D" parent="FuncGodotMap/entity_0_worldspawn"]
+shape = SubResource("ConvexPolygonShape3D_4hhxn")
+
+[node name="entity_0_brush_3_collision_shape" type="CollisionShape3D" parent="FuncGodotMap/entity_0_worldspawn"]
+shape = SubResource("ConvexPolygonShape3D_gw7jy")
+
+[node name="entity_0_brush_4_collision_shape" type="CollisionShape3D" parent="FuncGodotMap/entity_0_worldspawn"]
+shape = SubResource("ConvexPolygonShape3D_ns04y")
+
+[node name="entity_0_brush_5_collision_shape" type="CollisionShape3D" parent="FuncGodotMap/entity_0_worldspawn"]
+shape = SubResource("ConvexPolygonShape3D_mhog8")
+
+[node name="entity_0_brush_6_collision_shape" type="CollisionShape3D" parent="FuncGodotMap/entity_0_worldspawn"]
+shape = SubResource("ConvexPolygonShape3D_2hroe")
+
+[node name="entity_0_brush_7_collision_shape" type="CollisionShape3D" parent="FuncGodotMap/entity_0_worldspawn"]
+shape = SubResource("ConvexPolygonShape3D_ohgtp")
+
+[node name="entity_0_brush_8_collision_shape" type="CollisionShape3D" parent="FuncGodotMap/entity_0_worldspawn"]
+shape = SubResource("ConvexPolygonShape3D_wfdyp")
+
+[node name="entity_0_brush_9_collision_shape" type="CollisionShape3D" parent="FuncGodotMap/entity_0_worldspawn"]
+shape = SubResource("ConvexPolygonShape3D_nlbt3")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_574ik")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.915352, 0.402608, 0.00611584, -0.273243, 0.609933, 0.743855, 0.295752, -0.68256, 0.668313, 0, 4, 0)
+
+[node name="Enemy" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, 0)
+collision_layer = 8
+script = ExtResource("4_slxya")
+health = 9
+
+[node name="Sprite3D" type="Sprite3D" parent="Enemy"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.295127, 0)
+layers = 16
+flip_h = true
+modulate = Color(1, 0.541176, 0.541176, 1)
+pixel_size = 0.004
+billboard = 1
+texture_filter = 0
+texture = ExtResource("5_j4ios")
+
+[node name="Shadow" type="Decal" parent="Enemy"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.75, 0)
+size = Vector3(0.5, 10, 0.5)
+texture_albedo = ExtResource("6_003y4")
+modulate = Color(1, 1, 1, 0.909804)
+upper_fade = 0.0181113
+lower_fade = 0.0304595
+cull_mask = 1048559
+
+[node name="Carriable" type="Node" parent="Enemy"]
+script = ExtResource("7_l8dio")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enemy"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.375, 0)
+shape = SubResource("BoxShape3D_eok7l")
+
+[node name="Summon" type="AnimatableBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.0389775, 0)
+collision_layer = 16
+script = ExtResource("8_015lv")
+range = 2.0
+attack_rate = 1.0
+damage = 3
+health = 30
+
+[node name="Sprite3D" type="Sprite3D" parent="Summon"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.295127, 0)
+layers = 16
+flip_h = true
+pixel_size = 0.004
+billboard = 2
+texture_filter = 0
+texture = ExtResource("5_j4ios")
+
+[node name="Shadow" type="Decal" parent="Summon"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.75, 0)
+size = Vector3(0.5, 10, 0.5)
+texture_albedo = ExtResource("6_003y4")
+modulate = Color(1, 1, 1, 0.909804)
+upper_fade = 0.0181113
+lower_fade = 0.0304595
+cull_mask = 1048559
+
+[node name="Carriable" type="Node" parent="Summon"]
+script = ExtResource("7_l8dio")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Summon"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.375, 0)
+shape = SubResource("BoxShape3D_eok7l")
+
+[node name="Coins" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Coins"
+script = ExtResource("9_ioesj")
+
+[node name="character" parent="." instance=ExtResource("10_kn88i")]

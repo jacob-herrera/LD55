@@ -1,16 +1,15 @@
-[gd_scene load_steps=29 format=3 uid="uid://uffaica5spud"]
+[gd_scene load_steps=25 format=3 uid="uid://dnpi8mksbjqnn"]
 
-[ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map.gd" id="1_vmt1n"]
-[ext_resource type="Resource" uid="uid://btwxy5brwdbg4" path="res://fgd/map_settings.tres" id="2_hpaan"]
-[ext_resource type="Material" uid="uid://dqbweinqt7qpy" path="res://trenchbroom/textures/checkered.tres" id="3_wctfg"]
-[ext_resource type="Script" path="res://scripts/enemy.gd" id="4_txf5n"]
-[ext_resource type="Script" path="res://scripts/summon.gd" id="4_w6onq"]
-[ext_resource type="Texture2D" uid="uid://dl247yikdxjdm" path="res://icon.svg" id="6_hlsfb"]
-[ext_resource type="Texture2D" uid="uid://2ljib8g6rii4" path="res://assets/shadow.png" id="7_6cf3t"]
-[ext_resource type="Script" path="res://scripts/carriable.gd" id="8_sjb6n"]
-[ext_resource type="Script" path="res://scripts/coins.gd" id="9_r7tbf"]
-[ext_resource type="FontFile" uid="uid://ey5uk5evoi8o" path="res://assets/nes.ttf" id="9_x0uos"]
-[ext_resource type="Script" path="res://scripts/mana_label.gd" id="11_ndgwl"]
+[ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map.gd" id="1_fle1t"]
+[ext_resource type="Resource" uid="uid://btwxy5brwdbg4" path="res://fgd/map_settings.tres" id="2_obqiq"]
+[ext_resource type="Material" uid="uid://dqbweinqt7qpy" path="res://trenchbroom/textures/checkered.tres" id="3_fu3gy"]
+[ext_resource type="Script" path="res://scripts/enemy.gd" id="4_slxya"]
+[ext_resource type="Texture2D" uid="uid://dl247yikdxjdm" path="res://icon.svg" id="5_j4ios"]
+[ext_resource type="Texture2D" uid="uid://2ljib8g6rii4" path="res://assets/shadow.png" id="6_003y4"]
+[ext_resource type="Script" path="res://scripts/carriable.gd" id="7_l8dio"]
+[ext_resource type="Script" path="res://scripts/summon.gd" id="8_015lv"]
+[ext_resource type="Script" path="res://scripts/coins.gd" id="9_ioesj"]
+[ext_resource type="PackedScene" uid="uid://muhjc2nl2al" path="res://scenes/character.tscn" id="10_kn88i"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_bfqq4"]
 _surfaces = [{
@@ -19,7 +18,7 @@ _surfaces = [{
 "format": 34359742487,
 "index_count": 12,
 "index_data": PackedByteArray(0, 0, 1, 0, 2, 0, 0, 0, 2, 0, 3, 0, 4, 0, 5, 0, 6, 0, 4, 0, 6, 0, 7, 0),
-"material": ExtResource("3_wctfg"),
+"material": ExtResource("3_fu3gy"),
 "name": "checkered",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -70,24 +69,13 @@ ambient_light_color = Color(0.8, 0.8, 0.8, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_eok7l"]
 size = Vector3(0.5, 0.75, 0.5)
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3wifx"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pbfqa"]
-bg_color = Color(0.286275, 0.611765, 0.968627, 1)
-border_color = Color(0, 0, 0, 1)
-
-[sub_resource type="GDScript" id="GDScript_qya2d"]
-script/source = "extends ProgressBar
-
-"
-
 [node name="game" type="Node3D"]
 metadata/_edit_lock_ = true
 
 [node name="FuncGodotMap" type="Node3D" parent="."]
-script = ExtResource("1_vmt1n")
+script = ExtResource("1_fle1t")
 local_map_file = "res://trenchbroom/game.map"
-map_settings = ExtResource("2_hpaan")
+map_settings = ExtResource("2_obqiq")
 metadata/_edit_lock_ = true
 
 [node name="entity_0_worldspawn" type="StaticBody3D" parent="FuncGodotMap"]
@@ -128,20 +116,19 @@ shape = SubResource("ConvexPolygonShape3D_wfdyp")
 [node name="entity_0_brush_9_collision_shape" type="CollisionShape3D" parent="FuncGodotMap/entity_0_worldspawn"]
 shape = SubResource("ConvexPolygonShape3D_nlbt3")
 
-[node name="simple_env" type="Node3D" parent="."]
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="simple_env"]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_574ik")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="simple_env"]
-transform = Transform3D(0.915352, 0.402608, 0.00611607, -0.273243, 0.609933, 0.743855, 0.295752, -0.68256, 0.668313, 0, 4, 0)
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.915352, 0.402608, 0.00611584, -0.273243, 0.609933, 0.743855, 0.295752, -0.68256, 0.668313, 0, 4, 0)
 
 [node name="Enemy" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, 0)
 collision_layer = 8
-script = ExtResource("4_txf5n")
+script = ExtResource("4_slxya")
+health = 9
 
-[node name="MainSprite" type="Sprite3D" parent="Enemy"]
+[node name="Sprite3D" type="Sprite3D" parent="Enemy"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.295127, 0)
 layers = 16
 flip_h = true
@@ -149,19 +136,19 @@ modulate = Color(1, 0.541176, 0.541176, 1)
 pixel_size = 0.004
 billboard = 1
 texture_filter = 0
-texture = ExtResource("6_hlsfb")
+texture = ExtResource("5_j4ios")
 
 [node name="Shadow" type="Decal" parent="Enemy"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.75, 0)
 size = Vector3(0.5, 10, 0.5)
-texture_albedo = ExtResource("7_6cf3t")
+texture_albedo = ExtResource("6_003y4")
 modulate = Color(1, 1, 1, 0.909804)
 upper_fade = 0.0181113
 lower_fade = 0.0304595
 cull_mask = 1048559
 
 [node name="Carriable" type="Node" parent="Enemy"]
-script = ExtResource("8_sjb6n")
+script = ExtResource("7_l8dio")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Enemy"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.375, 0)
@@ -170,63 +157,41 @@ shape = SubResource("BoxShape3D_eok7l")
 [node name="Summon" type="AnimatableBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.0389775, 0)
 collision_layer = 16
-script = ExtResource("4_w6onq")
+script = ExtResource("8_015lv")
 range = 2.0
 attack_rate = 1.0
 damage = 3
 health = 30
 
-[node name="MainSprite" type="Sprite3D" parent="Summon"]
+[node name="Sprite3D" type="Sprite3D" parent="Summon"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.295127, 0)
 layers = 16
 flip_h = true
 pixel_size = 0.004
 billboard = 2
 texture_filter = 0
-texture = ExtResource("6_hlsfb")
+texture = ExtResource("5_j4ios")
 
 [node name="Shadow" type="Decal" parent="Summon"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.75, 0)
 size = Vector3(0.5, 10, 0.5)
-texture_albedo = ExtResource("7_6cf3t")
+texture_albedo = ExtResource("6_003y4")
 modulate = Color(1, 1, 1, 0.909804)
 upper_fade = 0.0181113
 lower_fade = 0.0304595
 cull_mask = 1048559
 
 [node name="Carriable" type="Node" parent="Summon"]
-script = ExtResource("8_sjb6n")
+script = ExtResource("7_l8dio")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Summon"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.375, 0)
 shape = SubResource("BoxShape3D_eok7l")
 
-[node name="coins" type="Label" parent="."]
-offset_right = 80.0
+[node name="Coins" type="Label" parent="."]
+offset_right = 40.0
 offset_bottom = 23.0
-theme_override_colors/font_color = Color(0.976471, 0.843137, 0.494118, 1)
-theme_override_fonts/font = ExtResource("9_x0uos")
 text = "Coins"
-script = ExtResource("9_r7tbf")
+script = ExtResource("9_ioesj")
 
-[node name="mana label" type="Label" parent="."]
-offset_top = 25.0
-offset_right = 64.0
-offset_bottom = 48.0
-theme_override_colors/font_color = Color(0.435294, 0.717647, 0.968627, 1)
-theme_override_fonts/font = ExtResource("9_x0uos")
-text = "mana"
-script = ExtResource("11_ndgwl")
-
-[node name="mana bar" type="ProgressBar" parent="."]
-z_index = 1
-offset_top = 60.0
-offset_right = 240.0
-offset_bottom = 80.0
-theme_override_styles/background = SubResource("StyleBoxEmpty_3wifx")
-theme_override_styles/fill = SubResource("StyleBoxFlat_pbfqa")
-max_value = 10.0
-step = 1.0
-value = 3.0
-show_percentage = false
-script = SubResource("GDScript_qya2d")
+[node name="character" parent="." instance=ExtResource("10_kn88i")]
