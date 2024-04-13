@@ -25,11 +25,14 @@ func _process(_delta: float):
 			curItem = curItem % total
 			cameras[curItem].set_priority(20)
 		if Input.is_action_just_pressed("ui_cancel"):
+			cameras[curItem].set_priority(0)
+			Controls.lock_movement = false
 			inShop = false
 			
 
 func _on_area_3d_body_entered(body):
 	print("Entered Shop")
+	Controls.lock_movement = true
 	inShop = true
 	cameras[0].set_priority(20)
 	

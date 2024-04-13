@@ -12,7 +12,7 @@ func _process(delta: float) -> void:
 	jump_buffer -= delta
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("menu"):
+	if event.is_action_pressed("menu") && !lock_movement:
 		if not Pauser.is_paused:
 			pauser.pause()
 		else:
