@@ -2,6 +2,8 @@ extends CharacterBody3D
 class_name Enemy
 
 @onready var col: CollisionShape3D = $CollisionShape3D
+@onready var sprite: Sprite3D = $Sprite3D
+@onready var shadow: Decal = $Shadow
 
 @export var health: int
 
@@ -18,4 +20,5 @@ func get_center() -> Vector3:
 func take_damage(damage_taking: int) -> void:
 	health -= damage_taking
 	if health <= 0:
+		utils.death_animation(sprite, shadow)
 		queue_free()

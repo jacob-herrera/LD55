@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="LD55"
-run/main_scene="res://maps/game.tscn"
+run/main_scene="res://scenes/game.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 run/max_fps=60
 config/icon="res://icon.svg"
@@ -23,6 +23,7 @@ pauser="*res://scripts/autoloads/pauser.gd"
 map_changer="*res://scenes/map_changer.tscn"
 game_coordinator="*res://scripts/game_coordinator.gd"
 global="*res://scripts/autoloads/global.gd"
+utils="*res://scripts/utils.gd"
 
 [display]
 
