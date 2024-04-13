@@ -8,6 +8,8 @@ class_name Character
 
 @export_flags_3d_physics var ground_layer: int
 
+const LAYER: int = 4
+
 var carrying: Node3D
 
 const CHAR_SPEED: float = 5.0
@@ -71,7 +73,7 @@ static func vec_to_direction(vec: Vector2) -> Direction:
 
 func _ready() -> void:
 	last_heading = jump_sprite.global_basis.z
-
+	collision_layer = LAYER
 
 func do_carry() -> void:
 	if carrying == null:
