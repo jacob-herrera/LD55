@@ -39,7 +39,7 @@ func try_to_hit() -> void:
 	for result: Dictionary in results:
 		if result.collider is Enemy:
 			var enemy: Enemy = result.collider as Enemy
-			enemy.take_damage(damage)
+			enemy.take_damage(damage, dir)
 			queue_free()
 		else:
 			printerr("Collider, " + result.collider.name + " in enemy layer without being an Enemy")
