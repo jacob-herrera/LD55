@@ -4,9 +4,9 @@ class_name Character
 @onready var main_sprite: Sprite3D = $MainSprite
 @onready var jump_sprite: Sprite3D = $JumpSprite
 @onready var anim_player: AnimationPlayer = $AnimationPlayer
-@onready var camera: Camera3D = $Camera3D
 
 @export_flags_3d_physics var ground_layer: int
+@export var camera: PhantomCamera3D
 
 const LAYER: int = 4
 
@@ -74,6 +74,8 @@ static func vec_to_direction(vec: Vector2) -> Direction:
 func _ready() -> void:
 	last_heading = jump_sprite.global_basis.z
 	collision_layer = LAYER
+	camera.set_follow_target_node(self)
+	print(camera.get_follow_target_node())
 
 func do_carry() -> void:
 	if carrying == null:

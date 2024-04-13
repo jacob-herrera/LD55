@@ -10,6 +10,9 @@
 [ext_resource type="Script" path="res://scripts/summon.gd" id="8_015lv"]
 [ext_resource type="Script" path="res://scripts/coins.gd" id="9_ioesj"]
 [ext_resource type="PackedScene" uid="uid://muhjc2nl2al" path="res://scenes/character.tscn" id="10_kn88i"]
+[ext_resource type="PackedScene" uid="uid://dfafkwpolbm8n" path="res://shop.tscn" id="11_7iq0o"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3D.gd" id="12_q4tpe"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="13_2hxcw"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_bfqq4"]
 _surfaces = [{
@@ -194,4 +197,27 @@ offset_bottom = 23.0
 text = "Coins"
 script = ExtResource("9_ioesj")
 
-[node name="character" parent="." instance=ExtResource("10_kn88i")]
+[node name="character" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("10_kn88i")]
+camera = NodePath("../PhantomCamera3D")
+
+[node name="Shop" parent="." instance=ExtResource("11_7iq0o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.15103, -0.013701, 2.3585)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.766044, 0.642788, 0, -0.642788, 0.766044, 0, 2.5, 3)
+fov = 74.767
+
+[node name="PhantomCameraHost" type="Node" parent="Camera3D"]
+script = ExtResource("13_2hxcw")
+
+[node name="PhantomCamera3D" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.766044, 0.642788, 0, -0.642788, 0.766044, 0, 2.5, 3)
+script = ExtResource("12_q4tpe")
+priority_override = false
+priority = 0
+follow_mode = 0
+look_at_mode = 0
+tween_parameters = null
+tween_on_load = true
+inactive_update_mode = 0
+camera_3D_resource = null
