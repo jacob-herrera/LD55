@@ -3,7 +3,7 @@ class_name Controls
 
 const JUMP_BUFFER: float = 4.0 / 60.0 # 4 Frame jump buffer window.
 static var jump_buffer: float = 0.0
-static var lock_movement: bool = true
+static var lock_movement: bool = false
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
