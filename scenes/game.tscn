@@ -74,10 +74,10 @@ ambient_light_color = Color(0.8, 0.8, 0.8, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_eok7l"]
 size = Vector3(0.5, 0.75, 0.5)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_k6yf0"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_04fwp"]
 viewport_path = NodePath("Summon/Healthbar/SubViewport")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_ufwil"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_p3mhv"]
 viewport_path = NodePath("Summon/Healthbar/SubViewport")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2vgn0"]
@@ -661,7 +661,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.375, 0)
 shape = SubResource("BoxShape3D_eok7l")
 
 [node name="healthbar" parent="Enemy" instance=ExtResource("9_vsnug")]
-texture = SubResource("ViewportTexture_k6yf0")
+texture = SubResource("ViewportTexture_04fwp")
 
 [node name="Summon" type="AnimatableBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.0389775, -1.5)
@@ -701,7 +701,7 @@ shape = SubResource("BoxShape3D_eok7l")
 
 [node name="healthbar" parent="Summon" instance=ExtResource("9_vsnug")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -0.0289775, 0)
-texture = SubResource("ViewportTexture_ufwil")
+texture = SubResource("ViewportTexture_p3mhv")
 
 [node name="Coins" type="Label" parent="."]
 offset_right = 40.0
@@ -752,9 +752,6 @@ upper_fade = 0.0181113
 lower_fade = 0.0304595
 cull_mask = 1048559
 
-[node name="Camera3D" type="Camera3D" parent="character"]
-transform = Transform3D(1, 0, 0, 0, 0.766044, 0.642788, 0, -0.642788, 0.766044, 0, 2.5, 3)
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="character"]
 libraries = {
 "": SubResource("AnimationLibrary_3crut")
@@ -772,12 +769,48 @@ tween_on_load = true
 inactive_update_mode = 0
 camera_3D_resource = null
 
-[node name="Shop" parent="." instance=ExtResource("11_7iq0o")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.15103, -0.013701, 2.3585)
+[node name="Shop" parent="." node_paths=PackedStringArray("cameras") instance=ExtResource("11_7iq0o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2)
+cameras = [NodePath("Item1Cam"), NodePath("Item2Cam"), NodePath("Item3Cam")]
+
+[node name="Item1Cam" type="Node3D" parent="Shop"]
+transform = Transform3D(-4.37114e-08, 0.707106, -0.707107, 0, 0.707106, 0.707107, 1, 3.09086e-08, -3.09086e-08, 1.5, 2, 0)
+script = ExtResource("12_q4tpe")
+priority_override = false
+priority = 0
+follow_mode = 0
+look_at_mode = 0
+tween_parameters = null
+tween_on_load = true
+inactive_update_mode = 0
+camera_3D_resource = null
+
+[node name="Item2Cam" type="Node3D" parent="Shop"]
+transform = Transform3D(-0.707107, 0.5, -0.5, 0, 0.707107, 0.707107, 0.707107, 0.5, -0.5, 1, 2, 2)
+script = ExtResource("12_q4tpe")
+priority_override = false
+priority = 0
+follow_mode = 0
+look_at_mode = 0
+tween_parameters = null
+tween_on_load = true
+inactive_update_mode = 0
+camera_3D_resource = null
+
+[node name="Item3Cam" type="Node3D" parent="Shop"]
+transform = Transform3D(0.707107, 0.5, -0.5, 0, 0.707107, 0.707107, 0.707107, -0.5, 0.5, 1, 2, -2)
+script = ExtResource("12_q4tpe")
+priority_override = false
+priority = 0
+follow_mode = 0
+look_at_mode = 0
+tween_parameters = null
+tween_on_load = true
+inactive_update_mode = 0
+camera_3D_resource = null
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.766044, 0.642788, 0, -0.642788, 0.766044, 0, 2.5, 3)
-fov = 73.9705
 
 [node name="PhantomCameraHost" type="Node" parent="Camera3D"]
 script = ExtResource("13_2hxcw")

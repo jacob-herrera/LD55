@@ -71,7 +71,7 @@ static func vec_to_direction(vec: Vector2) -> Direction:
 func _ready() -> void:
 	last_heading = jump_sprite.global_basis.z
 	collision_layer = LAYER
-	camera.set_follow_target_node(self)
+	camera.set_priority(10)
 
 func  _process(delta: float) -> void:
 	rot += delta * JUMP_SPIN_SPEED if jumped else 0.0
