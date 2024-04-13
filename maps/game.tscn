@@ -153,8 +153,9 @@ script = ExtResource("8_sjb6n")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.375, 0)
 shape = SubResource("BoxShape3D_eok7l")
 
-[node name="Summon" type="Node3D" parent="."]
+[node name="Summon" type="AnimatableBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.0389775, 0)
+collision_layer = 16
 script = ExtResource("4_w6onq")
 range = 2.0
 attack_rate = 1.0
@@ -181,3 +182,7 @@ cull_mask = 1048559
 
 [node name="Carriable" type="Node" parent="Summon"]
 script = ExtResource("8_sjb6n")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Summon"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.375, 0)
+shape = SubResource("BoxShape3D_eok7l")

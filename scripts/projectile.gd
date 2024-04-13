@@ -11,7 +11,7 @@ enum CanHit {
 @export var dir: Vector3
 @export var speed: float = 10.0
 
-const LIFETIME: float = 15.0
+const LIFETIME: float = 8.0
 var lifetime: float = LIFETIME
 
 

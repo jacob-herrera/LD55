@@ -1,7 +1,8 @@
-extends Node3D
+extends AnimatableBody3D
 class_name Summon
 
 @onready var projectile: PackedScene = preload("res://scenes/projectile.tscn")
+@onready var col: CollisionShape3D = $CollisionShape3D
 
 const GROUP: String = "summons"
 
@@ -21,6 +22,10 @@ enum RangeType {
 
 func _ready() -> void:
 	add_to_group(Summon.GROUP)
+	sync_to_physics = false
+	
+func get_center() -> Vector3:
+	return col.global_position
 	
 var attack_cooldown: float = 0.0
 	
@@ -30,8 +35,8 @@ func do_attack() -> void:
 	var enemy: Enemy = enemies[0] as Enemy
 	var proj: Projectile = projectile.instantiate() as Projectile
 	get_tree().current_scene.add_child(proj)
-	proj.global_position = global_position
-	proj.dir = global_position.direction_to(enemy.global_position)
+	proj.global_position = get_center()
+	proj.dir = get_center().direction_to(enemy.get_center())
 	
 	
 func _process(delta: float) -> void:
