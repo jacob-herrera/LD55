@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://7umwqpsbjp4e"]
+[gd_scene load_steps=4 format=3 uid="uid://7umwqpsbjp4e"]
 
 [ext_resource type="Script" path="res://scripts/pause_menu.gd" id="1_rr6ye"]
 [ext_resource type="FontFile" uid="uid://ey5uk5evoi8o" path="res://assets/nes.ttf" id="2_rutg5"]
+[ext_resource type="PackedScene" uid="uid://b56jbfnwrg5u0" path="res://scenes/volume_slider.tscn" id="3_8ax3d"]
 
 [node name="pause_menu" type="CenterContainer"]
 anchors_preset = 15
@@ -16,39 +17,70 @@ custom_minimum_size = Vector2(1000, 1000)
 layout_mode = 2
 color = Color(0, 0, 0, 0.501961)
 
-[node name="VBox" type="VBoxContainer" parent="."]
+[node name="Main" type="VBoxContainer" parent="."]
 layout_mode = 2
 
-[node name="Resume" type="Button" parent="VBox"]
+[node name="Resume" type="Button" parent="Main"]
 unique_name_in_owner = true
 layout_mode = 2
-focus_neighbor_top = NodePath("../Quit")
 focus_neighbor_bottom = NodePath("../Settings")
 focus_next = NodePath("../Settings")
-focus_previous = NodePath("../Quit")
 theme_override_fonts/font = ExtResource("2_rutg5")
 theme_override_font_sizes/font_size = 16
 text = "RESUME"
 
-[node name="Settings" type="Button" parent="VBox"]
+[node name="Settings" type="Button" parent="Main"]
 unique_name_in_owner = true
 layout_mode = 2
 focus_neighbor_top = NodePath("../Resume")
-focus_neighbor_bottom = NodePath("../Quit")
-focus_next = NodePath("../Quit")
 focus_previous = NodePath("../Resume")
 theme_override_fonts/font = ExtResource("2_rutg5")
 theme_override_font_sizes/font_size = 16
 text = "SETTINGS"
 
-[node name="Quit" type="Button" parent="VBox"]
-unique_name_in_owner = true
+[node name="Settings" type="VBoxContainer" parent="."]
 visible = false
 layout_mode = 2
-focus_neighbor_top = NodePath("../Settings")
-focus_neighbor_bottom = NodePath("../Resume")
-focus_next = NodePath("../Resume")
-focus_previous = NodePath("../Settings")
+
+[node name="Sounds" type="Button" parent="Settings"]
+layout_mode = 2
 theme_override_fonts/font = ExtResource("2_rutg5")
 theme_override_font_sizes/font_size = 16
-text = "QUIT"
+text = " SOUNDS "
+
+[node name="Sounds" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 2
+
+[node name="Master Label" type="Label" parent="Sounds"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_rutg5")
+theme_override_font_sizes/font_size = 16
+text = " MASTER "
+horizontal_alignment = 1
+
+[node name="Master Slider" parent="Sounds" instance=ExtResource("3_8ax3d")]
+layout_mode = 2
+bus_name = "Master"
+
+[node name="Effects Label" type="Label" parent="Sounds"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_rutg5")
+theme_override_font_sizes/font_size = 16
+text = "EFFECTS"
+horizontal_alignment = 1
+
+[node name="Effects Slider" parent="Sounds" instance=ExtResource("3_8ax3d")]
+layout_mode = 2
+bus_name = "Effects"
+
+[node name="Music Label" type="Label" parent="Sounds"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_rutg5")
+theme_override_font_sizes/font_size = 16
+text = "MUSIC"
+horizontal_alignment = 1
+
+[node name="Music Slider" parent="Sounds" instance=ExtResource("3_8ax3d")]
+layout_mode = 2
+bus_name = "Music"
