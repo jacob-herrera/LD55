@@ -41,4 +41,6 @@ func _on_area_3d_body_entered(_body: Node3D):
 func _on_area_3d_body_exited(_body: Node3D):
 	in_area = false
 	if in_shop:
+		if GameCoordinator.state == GameCoordinator.GameState.COMBAT:
+			globals.character.camera.tween_parameters.duration = 0
 		exit_shop()
