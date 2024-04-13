@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://ch25pxeud6lnq"]
+[gd_scene load_steps=25 format=3 uid="uid://dnpi8mksbjqnn"]
 
 [ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map.gd" id="1_fle1t"]
 [ext_resource type="Resource" uid="uid://btwxy5brwdbg4" path="res://fgd/map_settings.tres" id="2_obqiq"]
@@ -9,11 +9,7 @@
 [ext_resource type="Script" path="res://scripts/carriable.gd" id="7_l8dio"]
 [ext_resource type="Script" path="res://scripts/summon.gd" id="8_015lv"]
 [ext_resource type="Script" path="res://scripts/coins.gd" id="9_ioesj"]
-[ext_resource type="PackedScene" uid="uid://bk2528lpxk3ek" path="res://scenes/healthbar.tscn" id="9_vsnug"]
 [ext_resource type="PackedScene" uid="uid://muhjc2nl2al" path="res://scenes/character.tscn" id="10_kn88i"]
-[ext_resource type="PackedScene" uid="uid://dfafkwpolbm8n" path="res://shop.tscn" id="11_7iq0o"]
-[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3D.gd" id="12_q4tpe"]
-[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="13_2hxcw"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_bfqq4"]
 _surfaces = [{
@@ -73,12 +69,6 @@ ambient_light_color = Color(0.8, 0.8, 0.8, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_eok7l"]
 size = Vector3(0.5, 0.75, 0.5)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_ms4k1"]
-viewport_path = NodePath("Summon/Healthbar/SubViewport")
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_pdjpp"]
-viewport_path = NodePath("Summon/Healthbar/SubViewport")
-
 [node name="game" type="Node3D"]
 metadata/_edit_lock_ = true
 
@@ -133,7 +123,7 @@ environment = SubResource("Environment_574ik")
 transform = Transform3D(0.915352, 0.402608, 0.00611584, -0.273243, 0.609933, 0.743855, 0.295752, -0.68256, 0.668313, 0, 4, 0)
 
 [node name="Enemy" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, -1.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, 0)
 collision_layer = 8
 script = ExtResource("4_slxya")
 health = 15
@@ -164,11 +154,8 @@ script = ExtResource("7_l8dio")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.375, 0)
 shape = SubResource("BoxShape3D_eok7l")
 
-[node name="healthbar" parent="Enemy" instance=ExtResource("9_vsnug")]
-texture = SubResource("ViewportTexture_ms4k1")
-
 [node name="Summon" type="AnimatableBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.0389775, -1.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.0389775, 0)
 collision_layer = 16
 script = ExtResource("8_015lv")
 range = 5.0
@@ -203,37 +190,10 @@ shape = SubResource("BoxShape3D_eok7l")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Summon"]
 
-[node name="healthbar" parent="Summon" instance=ExtResource("9_vsnug")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -0.0289775, 0)
-texture = SubResource("ViewportTexture_pdjpp")
-
 [node name="Coins" type="Label" parent="."]
 offset_right = 40.0
 offset_bottom = 23.0
 text = "Coins"
 script = ExtResource("9_ioesj")
 
-[node name="character" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("10_kn88i")]
-camera = NodePath("../PhantomCamera3D")
-
-[node name="Shop" parent="." instance=ExtResource("11_7iq0o")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.15103, -0.013701, 2.3585)
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.766044, 0.642788, 0, -0.642788, 0.766044, 0, 2.5, 3)
-fov = 74.767
-
-[node name="PhantomCameraHost" type="Node" parent="Camera3D"]
-script = ExtResource("13_2hxcw")
-
-[node name="PhantomCamera3D" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.766044, 0.642788, 0, -0.642788, 0.766044, 0, 2.5, 3)
-script = ExtResource("12_q4tpe")
-priority_override = false
-priority = 0
-follow_mode = 0
-look_at_mode = 0
-tween_parameters = null
-tween_on_load = true
-inactive_update_mode = 0
-camera_3D_resource = null
+[node name="character" parent="." instance=ExtResource("10_kn88i")]

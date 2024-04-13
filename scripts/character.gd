@@ -11,6 +11,8 @@ class_name Character
 const LAYER: int = 4
 
 var carrying: Node3D
+const CARRY_SPEED_SLOW: float = 0.65
+
 
 const CHAR_SPEED: float = 5.0
 const ACCEL: float = 100.0
@@ -30,14 +32,10 @@ var jumped: bool = false
 var rot: float = 0
 
 enum Direction {
-	NORTH,
-	NORTH_EAST,
+	NORTH_EAST, NORTH, NORTH_WEST,
 	EAST,
-	SOUTH_EAST,
-	SOUTH,
-	SOUTH_WEST,
+	SOUTH_EAST, SOUTH, SOUTH_WEST,
 	WEST,
-	NORTH_WEST
 }
 
 const DIRECTION_TO_STRING: Dictionary = {
@@ -50,7 +48,6 @@ const DIRECTION_TO_STRING: Dictionary = {
 	Direction.WEST: "west",
 	Direction.NORTH_WEST: "north_west"
 }
-
 
 static func vec_to_direction(vec: Vector2) -> Direction:
 	var angle: float = rad_to_deg(vec.angle_to(Vector2.UP))
@@ -77,35 +74,8 @@ func _ready() -> void:
 	camera.set_follow_target_node(self)
 	print(camera.get_follow_target_node())
 
-func do_carry() -> void:
-	if carrying == null:
-		var closest_carriable: Node3D
-		var closest_distance: float = 100000.0
-		for node: Node in get_tree().get_nodes_in_group(Carriable.GROUP):
-			if node.is_class("Node3D"):
-				var carryable: Node3D = node as Node3D
-				var dist: float = global_position.distance_to(carryable.global_position)
-				if dist < 1.0 and dist < closest_distance:
-					closest_carriable = carryable
-		
-		if Controls.try_pickup() and closest_carriable != null:
-			carrying = closest_carriable
-	elif carrying != null and Controls.try_pickup():
-		var space_rid := get_world_3d().space
-		var space_state := PhysicsServer3D.space_get_direct_state(space_rid)
-		var from: Vector3 = global_position + Vector3(0, 1, 0)
-		var to: Vector3 = global_position - Vector3(0, 100, 0)
-		var query := PhysicsRayQueryParameters3D.create(from, to, ground_layer)
-		var result = space_state.intersect_ray(query)
-		if not result.is_empty():
-			carrying.position = result.position
-			carrying = null
-
 func  _process(delta: float) -> void:
-	if jumped: rot += delta * JUMP_SPIN_SPEED
-	else: rot = 0
-	
-	do_carry()
+	rot += delta * JUMP_SPIN_SPEED if jumped else 0
 
 func _physics_process(delta: float) -> void:
 	if Pauser.is_paused: return
@@ -114,19 +84,20 @@ func _physics_process(delta: float) -> void:
 
 	if Controls.is_move_input():
 		var heading: Basis = Controls.get_forward(camera)
-		var target_velocity: Vector3 = -heading.z * CHAR_SPEED
+		var speed: float = CHAR_SPEED * CARRY_SPEED_SLOW if carrying != null else CHAR_SPEED
+		var target_velocity: Vector3 = -heading.z * speed
 		var flat_velocity: Vector3 = Vector3(velocity.x, 0, velocity.z)
 		var needed_accel: Vector3 = (target_velocity - flat_velocity) / delta
 		needed_accel = needed_accel.limit_length(ACCEL)
-		change = needed_accel * delta
 		last_heading = -heading.z
 		last_direction = Character.vec_to_direction(Controls.get_move_input())
 		anim_player.play("walk_" + DIRECTION_TO_STRING[last_direction])
+		change = needed_accel * delta
 	else:
 		var needed_accel: Vector3 = -velocity / delta
 		needed_accel = needed_accel.limit_length(STOP_ACCEL)
-		change = needed_accel * delta
 		anim_player.play("idle_" + DIRECTION_TO_STRING[last_direction])
+		change = needed_accel * delta
 		
 	velocity = velocity + change
 	
@@ -158,6 +129,24 @@ func _physics_process(delta: float) -> void:
 			coyote_time = COYOTE_TIME
 		
 	move_and_slide()
-
-	if carrying != null:
+	do_carry()
+		
+func do_carry() -> void:
+	if carrying == null:
+		var carriables: Array[Node] = get_tree().get_nodes_in_group(Carriable.GROUP)
+		var closest: Node3D = Utils.get_closest_in_range(global_position, carriables, 1.0)
+		if Controls.try_pickup() and closest != null:
+			carrying = closest
+	elif carrying != null:
 		carrying.global_position = global_position + Vector3(0, 0.7 ,0)
+		if Controls.try_pickup():
+			# raycast to floor
+			var space_rid := get_world_3d().space
+			var space_state := PhysicsServer3D.space_get_direct_state(space_rid)
+			var from: Vector3 = global_position + Vector3(0, 1, 0)
+			var to: Vector3 = global_position - Vector3(0, 100, 0)
+			var query := PhysicsRayQueryParameters3D.create(from, to, ground_layer)
+			var result = space_state.intersect_ray(query)
+			if not result.is_empty():
+				carrying.position = result.position
+				carrying = null

@@ -1,8 +1,6 @@
 extends Node
 class_name Utils
 
-#var spin_script: Script = 
-
 func death_animation(origin: Vector3, dir: Vector3, sprite: Sprite3D, shadow: Decal) -> void:
 	var node_death: Node3D = Node3D.new()
 	node_death.set_script(load("res://scripts/ragdoll_projectile.gd"))
@@ -19,3 +17,22 @@ func death_animation(origin: Vector3, dir: Vector3, sprite: Sprite3D, shadow: De
 	node_death.global_position = origin
 	sprite_clone.billboard = BaseMaterial3D.BILLBOARD_DISABLED
 	pass
+
+static func get_closest_in_range(to: Vector3, nodes: Array[Node], range: float) -> Node3D:
+	var closest: Node3D
+	var closest_distance: float = 1000000.0
+	for node: Node in nodes:
+		if node is Node3D:
+			var node3d := node as Node3D
+			var dist: float = to.distance_to(node3d.global_position)
+			if dist < range and dist < closest_distance:
+				closest = node3d
+	return closest
+
+static func get_top_of_box(col: CollisionShape3D) -> Vector3:
+	if not (col.shape is BoxShape3D):
+		printerr("Only works for box colliders.")
+		return Vector3.ZERO
+	var box := col.shape as BoxShape3D
+	var y_offset: float = box.size.y / 2
+	return col.global_position + Vector3(0, y_offset, 0)

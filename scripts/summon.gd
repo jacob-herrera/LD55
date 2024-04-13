@@ -3,6 +3,7 @@ class_name Summon
 
 @onready var projectile: PackedScene = preload("res://scenes/projectile.tscn")
 @onready var col: CollisionShape3D = $CollisionShape3D
+@onready var healthbar: Healthbar = $healthbar
 
 const LAYER: int = 16
 const GROUP: String = "summons"
@@ -15,12 +16,13 @@ const GROUP: String = "summons"
 @export var damage: int
 @export var health: int
 @export var range_type: RangeType
-enum RangeType { PROJECTILE, MELEE }
+enum RangeType { RANGED, MELEE }
 
 func _ready() -> void:
 	add_to_group(Summon.GROUP)
 	collision_layer = LAYER
 	sync_to_physics = false
+	healthbar.initalize(health, col)
 	
 func _process(delta: float) -> void:
 	attack_cooldown -= delta
@@ -35,10 +37,10 @@ var attack_cooldown: float = 0.0
 	
 func do_attack() -> void:
 	var enemies: Array[Node] = get_tree().get_nodes_in_group(Enemy.GROUP)
-	# TODO get closest enemy
-	if enemies.is_empty():
-		return
-	var enemy: Enemy = enemies[0] as Enemy
+	var enemy: Enemy = Utils.get_closest_in_range(global_position, enemies, range)
+	if enemy == null: return
+	
+	#var enemy: Enemy = enemies[0] as Enemy
 	var proj: Projectile = projectile.instantiate() as Projectile
 	get_tree().current_scene.add_child(proj)
 	proj.global_position = get_center()
