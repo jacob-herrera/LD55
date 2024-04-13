@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map.gd" id="1_fle1t"]
 [ext_resource type="Resource" uid="uid://btwxy5brwdbg4" path="res://fgd/map_settings.tres" id="2_obqiq"]
 [ext_resource type="Material" uid="uid://dqbweinqt7qpy" path="res://trenchbroom/textures/checkered.tres" id="3_fu3gy"]
-[ext_resource type="Material" uid="uid://cy736heb2jukn" path="res://trenchbroom/textures/dark_checkered.tres" id="4_02otx"]
+[ext_resource type="Material" path="res://trenchbroom/textures/dark_checkered.tres" id="4_02otx"]
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="4_slxya"]
 [ext_resource type="Texture2D" uid="uid://dl247yikdxjdm" path="res://icon.svg" id="5_j4ios"]
 [ext_resource type="Texture2D" uid="uid://2ljib8g6rii4" path="res://assets/shadow.png" id="6_003y4"]
@@ -128,10 +128,10 @@ ambient_light_color = Color(0.8, 0.8, 0.8, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_eok7l"]
 size = Vector3(0.5, 0.75, 0.5)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_7ggn8"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_fd75y"]
 viewport_path = NodePath("Summon/Healthbar/SubViewport")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_f5l4x"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_qsrko"]
 viewport_path = NodePath("Summon/Healthbar/SubViewport")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2vgn0"]
@@ -757,7 +757,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.375, 0)
 shape = SubResource("BoxShape3D_eok7l")
 
 [node name="healthbar" parent="Enemy" instance=ExtResource("9_vsnug")]
-texture = SubResource("ViewportTexture_7ggn8")
+texture = SubResource("ViewportTexture_fd75y")
 
 [node name="Summon" type="AnimatableBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.0389775, -1.5)
@@ -797,7 +797,7 @@ shape = SubResource("BoxShape3D_eok7l")
 
 [node name="healthbar" parent="Summon" instance=ExtResource("9_vsnug")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -0.0289775, 0)
-texture = SubResource("ViewportTexture_f5l4x")
+texture = SubResource("ViewportTexture_qsrko")
 
 [node name="Character" type="CharacterBody3D" parent="." node_paths=PackedStringArray("camera")]
 collision_layer = 4
@@ -842,9 +842,6 @@ modulate = Color(1, 1, 1, 0.909804)
 upper_fade = 0.0181113
 lower_fade = 0.0304595
 cull_mask = 1048559
-
-[node name="Camera3D" type="Camera3D" parent="Character"]
-transform = Transform3D(1, 0, 0, 0, 0.766044, 0.642788, 0, -0.642788, 0.766044, 0, 2.5, 3)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Character"]
 libraries = {
@@ -905,7 +902,7 @@ camera_3D_resource = null
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.766044, 0.642788, 0, -0.642788, 0.766044, 0, 2.5, 3)
-fov = 74.9804
+fov = 74.6142
 
 [node name="PhantomCameraHost" type="Node" parent="Camera3D"]
 script = ExtResource("13_2hxcw")
