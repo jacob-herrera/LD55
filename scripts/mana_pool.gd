@@ -18,8 +18,8 @@ func _process(delta: float) -> void:
 		for body: Node3D in bodies:
 			if body is Character:
 				Globals.mana += 1
-				play_mana()
 				is_in_pool = true
+				play_mana()
 			elif body is Summon:
 				var summon: Summon = body as Summon
 				summon.health += 1
@@ -30,4 +30,3 @@ func _process(delta: float) -> void:
 func play_mana() -> void:
 	if !mana_sound.playing:
 		mana_sound.play()
-		print("started")
