@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dnpi8mksbjqnn"]
+[gd_scene load_steps=24 format=3 uid="uid://uffaica5spud"]
 
 [ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map.gd" id="1_vmt1n"]
 [ext_resource type="Resource" uid="uid://btwxy5brwdbg4" path="res://fgd/map_settings.tres" id="2_hpaan"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dl247yikdxjdm" path="res://icon.svg" id="6_hlsfb"]
 [ext_resource type="Texture2D" uid="uid://2ljib8g6rii4" path="res://assets/shadow.png" id="7_6cf3t"]
 [ext_resource type="Script" path="res://scripts/carriable.gd" id="8_sjb6n"]
+[ext_resource type="Script" path="res://scripts/coins.gd" id="9_r7tbf"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_bfqq4"]
 _surfaces = [{
@@ -185,3 +186,8 @@ script = ExtResource("8_sjb6n")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Summon"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.375, 0)
 shape = SubResource("BoxShape3D_eok7l")
+
+[node name="Coins" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+script = ExtResource("9_r7tbf")
