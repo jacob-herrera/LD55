@@ -11,3 +11,5 @@ func _process(delta: float) -> void:
 	y_vel += GRAV * delta
 	var vel: Vector3 = Vector3(flat_vel.x, y_vel, flat_vel.z)
 	global_position += vel * delta
+	if global_position.y < -1:
+		queue_free()
