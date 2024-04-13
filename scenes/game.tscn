@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://dnpi8mksbjqnn"]
+[gd_scene load_steps=26 format=3 uid="uid://dnpi8mksbjqnn"]
 
 [ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map.gd" id="1_fle1t"]
 [ext_resource type="Resource" uid="uid://btwxy5brwdbg4" path="res://fgd/map_settings.tres" id="2_obqiq"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://2ljib8g6rii4" path="res://assets/shadow.png" id="6_003y4"]
 [ext_resource type="Script" path="res://scripts/carriable.gd" id="7_l8dio"]
 [ext_resource type="Script" path="res://scripts/summon.gd" id="8_015lv"]
+[ext_resource type="FontFile" uid="uid://ey5uk5evoi8o" path="res://assets/nes.ttf" id="9_8g1ti"]
 [ext_resource type="Script" path="res://scripts/coins.gd" id="9_ioesj"]
 [ext_resource type="PackedScene" uid="uid://muhjc2nl2al" path="res://scenes/character.tscn" id="10_kn88i"]
 
@@ -68,17 +69,6 @@ ambient_light_color = Color(0.8, 0.8, 0.8, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_eok7l"]
 size = Vector3(0.5, 0.75, 0.5)
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3wifx"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pbfqa"]
-bg_color = Color(0.286275, 0.611765, 0.968627, 1)
-border_color = Color(0, 0, 0, 1)
-
-[sub_resource type="GDScript" id="GDScript_qya2d"]
-script/source = "extends ProgressBar
-
-"
 
 [node name="game" type="Node3D"]
 metadata/_edit_lock_ = true
@@ -202,6 +192,8 @@ shape = SubResource("BoxShape3D_eok7l")
 [node name="coins" type="Label" parent="."]
 offset_right = 80.0
 offset_bottom = 23.0
+theme_override_colors/font_color = Color(0.976471, 0.843137, 0.494118, 1)
+theme_override_fonts/font = ExtResource("9_8g1ti")
 text = "Coins"
 script = ExtResource("9_ioesj")
 
