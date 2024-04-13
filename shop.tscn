@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://dfafkwpolbm8n"]
+
+[ext_resource type="Script" path="res://Shop.gd" id="1_33vb6"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_t40ju"]
+size = Vector3(3, 0.1, 3)
+
+[sub_resource type="BoxMesh" id="BoxMesh_wgcnx"]
+size = Vector3(3, 0.1, 3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_77h1f"]
+size = Vector3(3, 3, 3)
+
+[node name="Shop" type="StaticBody3D"]
+script = ExtResource("1_33vb6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_t40ju")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_wgcnx")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_77h1f")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
