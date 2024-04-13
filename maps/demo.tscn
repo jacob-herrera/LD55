@@ -205,5 +205,5 @@ upper_fade = 0.0181113
 lower_fade = 0.0304595
 cull_mask = 1048559
 
-[node name="Carryable" type="Node" parent="TestPickup"]
+[node name="Carriable" type="Node" parent="TestPickup"]
 script = ExtResource("8_gvek1")

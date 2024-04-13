@@ -75,17 +75,17 @@ func _ready() -> void:
 
 func do_carry() -> void:
 	if carrying == null:
-		var closest_carryable: Node3D
+		var closest_carriable: Node3D
 		var closest_distance: float = 100000.0
-		for node: Node in get_tree().get_nodes_in_group("carryable"):
+		for node: Node in get_tree().get_nodes_in_group("carriable"):
 			if node.is_class("Node3D"):
 				var carryable: Node3D = node as Node3D
 				var dist: float = global_position.distance_to(carryable.global_position)
 				if dist < 1.0 and dist < closest_distance:
-					closest_carryable = carryable
+					closest_carriable = carryable
 		
-		if Controls.try_pickup() and closest_carryable != null:
-			carrying = closest_carryable
+		if Controls.try_pickup() and closest_carriable != null:
+			carrying = closest_carriable
 	elif carrying != null and Controls.try_pickup():
 		var space_rid := get_world_3d().space
 		var space_state := PhysicsServer3D.space_get_direct_state(space_rid)
