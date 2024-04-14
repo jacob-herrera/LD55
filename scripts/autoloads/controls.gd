@@ -17,8 +17,7 @@ func _input(event: InputEvent) -> void:
 			pauser.pause()
 		else:
 			pauser.unpause()
-	elif event.is_action_pressed("dev_pause_timer"):
-		GameCoordinator.DEV_timer_paused = not GameCoordinator.DEV_timer_paused
+
 	elif event.is_action_pressed("jump") and not Pauser.is_paused and not lock_movement:
 		jump_buffer = JUMP_BUFFER
 		
