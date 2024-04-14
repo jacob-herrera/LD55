@@ -19,7 +19,7 @@ const PLAYER_SUMMON_DURATION = 6.0
 const HUB_TIME: float = 30.0
 const COMBAT_TIME: float = 60.0
 
-const ROOM_MULTI_TEMP: float = 2.0 #REPLACE THIS WHEN ROOM MULTIPLIERS CALCS ARE SET UP
+static var room_multi: int = 0
 
 static var current_room: Room = Room.HUB
 static var current_round: int = 0
@@ -27,7 +27,7 @@ static var time: float = HUB_TIME
 
 static var DEV_timer_paused: bool = false
 
-var earnings: float = 0
+static var in_hub: bool = true
 
 func DEV():
 	if Input.is_action_just_pressed("dev_pause_timer"):
@@ -43,9 +43,13 @@ func goto_room(target_room: Room) -> void:
 		Room.HUB:
 			time = HUB_TIME
 			globals.character.global_position = ROOM_HUB_TELE
+			in_hub = true
+			room_multi = 0
 		Room.ROOM_1:
 			time = COMBAT_TIME
 			globals.character.global_position = ROOM_1_TELE
+			in_hub = false
+			room_multi = 1
 	anim_player.play("fade_in")	
 	globals.character.summon_circle.stop_anim()
 	globals.character.camera.tween_parameters.duration = PLAYER_CAMERA_DEFAULT_TWEEN
@@ -71,6 +75,5 @@ func _process(delta: float) -> void:
 				goto_room(Room.HUB)
 	calc_earnings()
 
-func calc_earnings() -> void:
-	earnings = time * ROOM_MULTI_TEMP
-	#print(earnings)
+func calc_earnings() -> int:
+	return time * room_multi * current_round
