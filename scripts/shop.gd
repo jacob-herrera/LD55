@@ -4,10 +4,27 @@ extends Node
 var current_item = 0
 var in_shop = false
 var in_area: bool = false
-
+var pool = {
+ 1: {archer = 3, knight = 3, farmer = 1},
+ 2: {archer = 3, knight = 3, farmer = 3},
+ 3: {archer = 1, knight = 1, farmer = 2, wizard = 2}
+}
+var current_display = []
+var rng = RandomNumberGenerator.new()
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	var total = 0;
+	for val in pool[1].values():
+		total += val
+	for i in range(cameras.size() - 1):
+		var idx = rng.randi_range(1, total)
+		var curRange = 0
+		for key in pool[1].keys():
+			curRange += pool[1][key]
+			if idx <= curRange:
+				current_display.append([key, false])
+				break
+		
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float):
@@ -44,3 +61,19 @@ func _on_area_3d_body_exited(_body: Node3D):
 		if GameCoordinator.state == GameCoordinator.GameState.COMBAT:
 			globals.character.camera.tween_parameters.duration = 0
 		exit_shop()
+
+func reroll(roundNum: int) -> void:
+	var total = 0;
+	for val in pool[roundNum].values():
+		total += val
+	for i in range(current_display.size()):
+		if(current_display[i][1] == true):
+			continue
+		var idx = rng.randi_range(1, total)
+		var curRange = 0
+		for key in pool[roundNum].keys():
+			curRange += pool[roundNum][key]
+			if idx <= curRange:
+				current_display[i][0] = key
+				break
+	
