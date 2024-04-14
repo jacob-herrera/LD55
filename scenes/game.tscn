@@ -923,6 +923,7 @@ bus = &"Effects"
 
 [node name="Footsteps" type="AudioStreamPlayer3D" parent="Character"]
 stream = ExtResource("20_p7t87")
+volume_db = -22.129
 bus = &"Effects"
 
 [node name="Jump" type="AudioStreamPlayer3D" parent="Character"]
