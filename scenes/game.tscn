@@ -212,8 +212,9 @@ ambient_light_color = Color(0.8, 0.8, 0.8, 1)
 [sub_resource type="SphereShape3D" id="SphereShape3D_2vogo"]
 radius = 0.25
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_2vgn0"]
-size = Vector3(0.25, 0.75, 0.25)
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yxn7a"]
+radius = 0.25
+height = 0.75
 
 [sub_resource type="Animation" id="Animation_lfsj3"]
 resource_name = "idle_east"
@@ -941,7 +942,7 @@ camera = NodePath("PhantomCamera3D")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Character"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.375, 0)
-shape = SubResource("BoxShape3D_2vgn0")
+shape = SubResource("CapsuleShape3D_yxn7a")
 
 [node name="MainSprite" type="Sprite3D" parent="Character"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.34, 0)

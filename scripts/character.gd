@@ -16,7 +16,7 @@ const LAYER: int = 4
 
 var carrying: Node3D
 const CARRY_SPEED_SLOW: float = 0.7
-
+const CARRY_JUMP: float = 8.0
 
 const CHAR_SPEED: float = 5.0
 const ACCEL: float = 100.0
@@ -111,8 +111,8 @@ func _physics_process(delta: float) -> void:
 	jump_sprite.global_basis = final_basis
 	
 	var grounded: bool = coyote_time > 0.0 or is_on_floor()
-	if Controls.get_jump() and grounded and carrying == null:
-		velocity.y = JUMP
+	if Controls.get_jump() and grounded:
+		velocity.y = CARRY_JUMP if carrying != null else JUMP
 		jumped = true
 		Controls.jump_buffer = 0.0
 		coyote_time = 0.0

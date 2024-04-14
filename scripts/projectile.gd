@@ -11,6 +11,8 @@ enum CanHit {
 @export var speed: float = 10.0 # Default to 10 units per second
 @export var damage: int
 
+@export var hitbox: SphereShape3D
+
 const LIFETIME: float = 8.0
 var lifetime: float = LIFETIME
 
@@ -31,10 +33,11 @@ func _process(delta: float) -> void:
 	try_to_hit()
 
 func try_to_hit() -> void:
-	var params := PhysicsPointQueryParameters3D.new()
-	params.position = global_position
+	var params := PhysicsShapeQueryParameters3D.new()
+	params.shape = hitbox
+	params.transform = global_transform
 	params.collision_mask = Enemy.LAYER
-	var results: Array[Dictionary] = space_state.intersect_point(params)
+	var results: Array[Dictionary] = space_state.intersect_shape(params)
 	for result: Dictionary in results:
 		if result.collider is Enemy:
 			var enemy: Enemy = result.collider as Enemy

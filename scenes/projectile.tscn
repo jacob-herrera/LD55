@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://8pij03wn56ho"]
+[gd_scene load_steps=4 format=3 uid="uid://8pij03wn56ho"]
 
 [ext_resource type="Texture2D" uid="uid://cmthoh6l2uxvh" path="res://assets/simple_projectile.png" id="1_hgy18"]
 [ext_resource type="Script" path="res://scripts/projectile.gd" id="2_ecl1a"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_2pfa0"]
+radius = 0.2
 
 [node name="Projectile" type="Sprite3D"]
 modulate = Color(1, 0.552941, 0.388235, 1)
@@ -10,3 +13,4 @@ billboard = 1
 texture_filter = 0
 texture = ExtResource("1_hgy18")
 script = ExtResource("2_ecl1a")
+hitbox = SubResource("SphereShape3D_2pfa0")
