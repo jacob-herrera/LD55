@@ -97,8 +97,7 @@ func _physics_process(delta: float) -> void:
 		last_direction = Character.vec_to_direction(Controls.get_move_input())
 		anim_player.play("walk_" + DIRECTION_TO_STRING[last_direction])
 		change = needed_accel * delta
-		if is_on_floor():	
-			play_footsteps()
+		play_footsteps()
 	else:
 		var needed_accel: Vector3 = -velocity / delta
 		needed_accel = needed_accel.limit_length(STOP_ACCEL)
@@ -118,6 +117,7 @@ func _physics_process(delta: float) -> void:
 		Controls.jump_buffer = 0.0
 		coyote_time = 0.0
 		jump.play()
+		footsteps.stop()
 	else:	
 		if not is_on_floor():
 			coyote_time -= delta
@@ -161,5 +161,5 @@ func do_carry() -> void:
 				summon_place.play()
 				
 func play_footsteps() -> void:
-	if !footsteps.playing:
+	if !footsteps.playing && is_on_floor():
 		footsteps.play()
