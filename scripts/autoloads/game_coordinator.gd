@@ -27,7 +27,7 @@ static var time: float = HUB_TIME
 
 static var DEV_timer_paused: bool = false
 
-var earnings: float = 0
+static var in_hub: bool = true
 
 func DEV():
 	if Input.is_action_just_pressed("dev_pause_timer"):
@@ -43,9 +43,11 @@ func goto_room(target_room: Room) -> void:
 		Room.HUB:
 			time = HUB_TIME
 			globals.character.global_position = ROOM_HUB_TELE
+			in_hub = true
 		Room.ROOM_1:
 			time = COMBAT_TIME
 			globals.character.global_position = ROOM_1_TELE
+			in_hub = false
 	anim_player.play("fade_in")	
 	globals.character.summon_circle.stop_anim()
 	globals.character.camera.tween_parameters.duration = PLAYER_CAMERA_DEFAULT_TWEEN
@@ -71,6 +73,6 @@ func _process(delta: float) -> void:
 				goto_room(Room.HUB)
 	calc_earnings()
 
-func calc_earnings() -> void:
-	earnings = time * ROOM_MULTI_TEMP
+func calc_earnings() -> int:
+	return time * ROOM_MULTI_TEMP
 	#print(earnings)
