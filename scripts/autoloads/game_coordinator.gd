@@ -15,8 +15,9 @@ const ROOM_1_TELE := Vector3(32, 0, 0)
 const PLAYER_CAMERA_DEFAULT_TWEEN: float = 0.5
 const FADE_DURATION: float = 10.0 / 30.0
 const PLAYER_SUMMON_DURATION = 6.0
-const HUB_TIME: float = 10.0
-const COMBAT_TIME: float = 10.0
+
+const HUB_TIME: float = 30.0
+const COMBAT_TIME: float = 60.0
 
 static var current_room: Room = Room.HUB
 static var current_round: int = 0
