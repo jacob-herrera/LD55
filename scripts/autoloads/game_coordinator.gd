@@ -14,9 +14,9 @@ const LEVEL_1_TELE := Vector3(32, 0, 0)
 
 const PLAYER_CAMERA_DEFAULT_TWEEN: float = 0.5
 const FADE_DURATION: float = 10.0 / 30.0
-
-const HUB_TIME: float = 15.0
-const COMBAT_TIME: float = 30.0
+const PLAYER_SUMMON_DURATION = 6.0
+const HUB_TIME: float = 10.0
+const COMBAT_TIME: float = 10.0
 
 static var state: GameState = GameState.HUB
 static var current_round: int = 0
@@ -26,6 +26,8 @@ func _process(delta: float) -> void:
 	time -= delta
 	if time <= FADE_DURATION:
 		anim_player.play("fade_out")
+	if time <= PLAYER_SUMMON_DURATION:
+		globals.character.summon_circle.start_anim()
 	
 	if time <= 0:
 		# Reset tween
@@ -41,4 +43,5 @@ func _process(delta: float) -> void:
 				time = HUB_TIME
 				current_round += 1
 		anim_player.play("fade_in")	
+		globals.character.summon_circle.stop_anim()
 

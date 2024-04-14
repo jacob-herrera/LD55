@@ -1,4 +1,4 @@
-[gd_scene load_steps=76 format=3 uid="uid://dnpi8mksbjqnn"]
+[gd_scene load_steps=77 format=3 uid="uid://dnpi8mksbjqnn"]
 
 [ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map.gd" id="1_fle1t"]
 [ext_resource type="Resource" uid="uid://btwxy5brwdbg4" path="res://fgd/map_settings.tres" id="2_obqiq"]
@@ -20,6 +20,7 @@
 [ext_resource type="Resource" uid="uid://dab5weecvnpwr" path="res://assets/camera_resource.tres" id="16_6jxv8"]
 [ext_resource type="Resource" uid="uid://be15co36abbxx" path="res://assets/cam_tween_shop.tres" id="16_uunvf"]
 [ext_resource type="Script" path="res://scripts/mana_pool.gd" id="17_5wmwc"]
+[ext_resource type="PackedScene" uid="uid://ofw4dvit1lbl" path="res://scenes/summon_circle.tscn" id="17_q38df"]
 [ext_resource type="AudioStream" uid="uid://bls3hxlr2qynn" path="res://assets/audio/mana_pickup.mp3" id="20_8o20s"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_pjoy7"]
@@ -887,6 +888,8 @@ tween_parameters = ExtResource("15_36f27")
 tween_on_load = false
 inactive_update_mode = 0
 camera_3D_resource = ExtResource("16_6jxv8")
+
+[node name="summon_circle" parent="Character" instance=ExtResource("17_q38df")]
 
 [node name="Shop" type="Node" parent="." node_paths=PackedStringArray("cameras")]
 script = ExtResource("15_itd2k")

@@ -4,7 +4,7 @@ class_name Character
 @onready var main_sprite: Sprite3D = $MainSprite
 @onready var jump_sprite: Sprite3D = $JumpSprite
 @onready var anim_player: AnimationPlayer = $AnimationPlayer
-
+@onready var summon_circle: SummonCircle = $summon_circle
 @export_flags_3d_physics var ground_layer: int
 @export var camera: PhantomCamera3D
 
