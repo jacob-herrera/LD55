@@ -1096,7 +1096,7 @@ inactive_update_mode = 0
 camera_3D_resource = null
 
 [node name="ItemCamera4" type="Node3D" parent="Shop"]
-transform = Transform3D(1, 0, 0, 0, 0.766045, 0.642788, 0, -0.642788, 0.766045, 1.5, 2.25, -3.75)
+transform = Transform3D(1, 0, 0, 0, 0.766045, 0.642788, 0, -0.642788, 0.766045, 1.5, 2, -3.75)
 script = ExtResource("12_q4tpe")
 priority_override = false
 priority = 0

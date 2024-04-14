@@ -15,6 +15,7 @@ collision_mask = 9
 floor_constant_speed = true
 script = ExtResource("1_iar1l")
 health = 10
+gold_value = 5
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.295127, 0)

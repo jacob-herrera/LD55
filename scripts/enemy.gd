@@ -13,6 +13,8 @@ class_name Enemy
 @export var attack_rate: float = 1.0
 @export var attack_damage: float = 1.0 
 
+@export var gold_value: int
+
 const LAYER: int = 8
 const GROUP: String = "enemies"
 const GRAVITY: float = -1
@@ -105,6 +107,7 @@ func take_damage(damage_taking: int, damage_dir: Vector3) -> void:
 	health -= damage_taking
 	healthbar.update(health)
 	if health <= 0:
+		Globals.coins += gold_value
 		utils.death_animation(global_position, damage_dir, sprite, shadow)
 		queue_free()
 	
