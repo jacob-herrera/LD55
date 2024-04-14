@@ -12,7 +12,7 @@ size = Vector3(0.5, 1.12292, 0.5)
 [node name="wizard_summon" type="AnimatableBody3D"]
 collision_layer = 16
 script = ExtResource("1_2v8pu")
-base_attack_range = 10.0
+base_attack_range = 5.0
 base_attack_rate = 2.0
 base_damage = 2
 base_max_health = 10
