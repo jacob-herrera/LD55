@@ -1,6 +1,8 @@
 extends AnimatableBody3D
 class_name Summon
 
+@onready var sprite: Sprite3D = $Sprite3D
+@onready var shadow: Decal = $Shadow
 @onready var projectile: PackedScene = preload("res://scenes/projectile.tscn")
 @onready var col: CollisionShape3D = $CollisionShape3D
 @onready var healthbar: Healthbar = $healthbar
@@ -58,6 +60,7 @@ func _process(delta: float) -> void:
 		attack_cooldown = 1.0 / attack_rate
 		do_attack()
 	reset_to_base()
+	
 func get_center() -> Vector3:
 	return col.global_position
 	
@@ -96,6 +99,14 @@ func do_buff() -> void:
 	# iterate through array of nearby allies to change stats
 	for node : Node in nearby:
 		node.damage += 30
+
+
+func take_damage(damage_taking: int, damage_dir: Vector3) -> void:
+	health -= damage_taking
+	healthbar.update(health)
+	if health <= 0:
+		utils.death_animation(global_position, damage_dir, sprite, shadow)
+		queue_free()
 
 func death() -> void:
 	pass

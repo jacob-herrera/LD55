@@ -9,14 +9,18 @@ class_name Enemy
 
 @export var health: int
 @export var move_speed: float = 2
+@export var attack_range: float = 1.0
+@export var attack_rate: float = 1.0
+@export var attack_damage: float = 1.0 
 
 const LAYER: int = 8
 const GROUP: String = "enemies"
-
 const GRAVITY: float = -1
-static var space_state: PhysicsDirectSpaceState3D 
-
+const SUMMON_SEARCH_RADIUS: float = 25.0
 const LOS_LAYER: int = Globals.GROUND_LAYER | Character.LAYER
+
+var attack_cooldown: float = 0.0
+static var space_state: PhysicsDirectSpaceState3D
 
 func _ready() -> void:
 	collision_layer = LAYER
@@ -34,9 +38,27 @@ func _on_map_changed(_rid: RID):
 func navigation_setup():
 	NavigationServer3D.map_changed.connect(_on_map_changed)
 
-func _physics_process(_delta: float) -> void:
+func try_do_damage(target_summon: Summon) -> void:
+	if attack_cooldown <= 0:
+		attack_cooldown = 1.0 / attack_rate
+		var distance: float = global_position.distance_to(target_summon.global_position)
+		if distance <= attack_range:
+			var dir: Vector3 = global_position.direction_to(target_summon.global_position)
+			target_summon.take_damage(attack_damage, dir)
+	
+
+func _physics_process(delta: float) -> void:
+	var target: Vector3 = Vector3.ZERO
+	# Look for target
+	var summons: Array[Node] = get_tree().get_nodes_in_group(Summon.GROUP)
+	var summon: Summon = Utils.get_closest_in_range(global_position, summons, SUMMON_SEARCH_RADIUS)
+	if summon != null:
+		target = summon.global_position
+	
+	if target.is_equal_approx(Vector3.ZERO):
+		return # Nothing near
+	# Try going to target
 	var direction: Vector3 = Vector3.ZERO
-	var target: Vector3 = globals.character.global_position
 	var has_highground: bool = target.y - global_position.y < -0.5
 	
 	if has_highground: # Try direct path
@@ -47,7 +69,7 @@ func _physics_process(_delta: float) -> void:
 		if not result.is_empty() and result.collider is Character:
 			direction = global_position.direction_to(target)
 	if direction == Vector3.ZERO: # Just pathfind
-		agent.target_position = globals.character.global_position
+		agent.target_position = target
 		var destination: Vector3 = agent.get_next_path_position()
 		direction = global_position.direction_to(destination)
 		
@@ -56,7 +78,8 @@ func _physics_process(_delta: float) -> void:
 		velocity.y = 0
 
 	move_and_slide()
-
+	attack_cooldown -= delta
+	try_do_damage(summon)
 
 func get_center() -> Vector3:
 	return col.global_position
