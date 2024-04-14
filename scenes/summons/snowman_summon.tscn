@@ -16,6 +16,7 @@ base_attack_range = 10.0
 base_attack_rate = 2.0
 base_damage = 2
 base_max_health = 10
+type = 1
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, 0)

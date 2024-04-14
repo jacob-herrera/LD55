@@ -10,6 +10,12 @@ class_name Summon
 const LAYER: int = 16
 const GROUP: String = "summons"
 
+enum RangeType { RANGED, MELEE }
+enum Type {
+	WIZARD,
+	SNOWMAN,
+}
+
 @export_category("Base Stats")
 ## Attack range
 @export var base_attack_range: float
@@ -21,8 +27,8 @@ const GROUP: String = "summons"
 @export var base_aoe_range: float
 @export_category("Other")
 @export var aoe_effects: Dictionary
+@export var type: Type
 @export var range_type: RangeType
-enum RangeType { RANGED, MELEE }
 
 var attack_cooldown: float
 

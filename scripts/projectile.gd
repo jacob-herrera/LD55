@@ -13,7 +13,7 @@ enum CanHit {
 
 @export var hitbox: SphereShape3D
 
-const LIFETIME: float = 8.0
+const LIFETIME: float = 4.0
 var lifetime: float = LIFETIME
 
 var space_state: PhysicsDirectSpaceState3D 
