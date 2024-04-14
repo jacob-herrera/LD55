@@ -110,8 +110,9 @@ func _physics_process(delta: float) -> void:
 	var final_basis = dir_basis.rotated(dir_basis.x, rot) # Add jump spin.
 	jump_sprite.global_basis = final_basis
 	
-	var can_jump: bool = coyote_time > 0.0 or is_on_floor()
-	if Controls.get_jump() and can_jump:
+	var grounded: bool = coyote_time > 0.0 or is_on_floor()
+	if Controls.get_jump() and grounded and carrying == null:
+		print(carrying == null)
 		velocity.y = JUMP
 		jumped = true
 		Controls.jump_buffer = 0.0

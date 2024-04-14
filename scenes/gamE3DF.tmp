@@ -1,4 +1,4 @@
-[gd_scene load_steps=103 format=3 uid="uid://dnpi8mksbjqnn"]
+[gd_scene load_steps=101 format=3 uid="uid://dnpi8mksbjqnn"]
 
 [ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map.gd" id="1_fle1t"]
 [ext_resource type="Resource" uid="uid://btwxy5brwdbg4" path="res://fgd/map_settings.tres" id="2_obqiq"]
@@ -27,8 +27,6 @@
 [ext_resource type="AudioStream" uid="uid://bls3hxlr2qynn" path="res://assets/audio/mana_pickup.mp3" id="20_8o20s"]
 [ext_resource type="AudioStream" uid="uid://b1v51p1ns2rxa" path="res://assets/audio/player_footsteps.mp3" id="20_p7t87"]
 [ext_resource type="AudioStream" uid="uid://dh3jc01yu8u1" path="res://assets/audio/player_jump.mp3" id="21_7g1t4"]
-[ext_resource type="AudioStream" uid="uid://cc2q35iu46ygk" path="res://assets/audio/purchase3.mp3" id="25_ybodh"]
-[ext_resource type="AudioStream" uid="uid://dafno5ot5nbi" path="res://assets/audio/swipe.mp3" id="26_emyb1"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_vx7la"]
 _surfaces = [{
@@ -707,7 +705,7 @@ _data = {
 }
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_77h1f"]
-size = Vector3(1.5, 0.5, 1.5)
+size = Vector3(1.5, 5, 1.5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ha2t1"]
 size = Vector3(4, 0.25, 3.5)
@@ -1041,17 +1039,15 @@ bus = &"Effects"
 
 [node name="Footsteps" type="AudioStreamPlayer3D" parent="Character"]
 stream = ExtResource("20_p7t87")
-volume_db = -20.426
 bus = &"Effects"
 
 [node name="Jump" type="AudioStreamPlayer3D" parent="Character"]
 stream = ExtResource("21_7g1t4")
 bus = &"Effects"
 
-[node name="Shop" type="Node" parent="." node_paths=PackedStringArray("cameras", "ShopSounds")]
+[node name="Shop" type="Node" parent="." node_paths=PackedStringArray("cameras")]
 script = ExtResource("15_itd2k")
 cameras = [NodePath("ItemCamera0"), NodePath("ItemCamera1"), NodePath("ItemCamera2"), NodePath("ItemCamera3"), NodePath("ItemCamera4")]
-ShopSounds = [NodePath("PurchaseSound"), NodePath("ShopSwipeSound")]
 
 [node name="Area3D" type="Area3D" parent="Shop"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.75, 0.25, -3.5)
@@ -1059,7 +1055,7 @@ collision_layer = 2
 collision_mask = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Shop/Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.25)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0.25)
 shape = SubResource("BoxShape3D_77h1f")
 
 [node name="ItemCamera0" type="Node3D" parent="Shop"]
@@ -1121,12 +1117,6 @@ tween_parameters = ExtResource("16_uunvf")
 tween_on_load = true
 inactive_update_mode = 0
 camera_3D_resource = null
-
-[node name="PurchaseSound" type="AudioStreamPlayer3D" parent="Shop"]
-stream = ExtResource("25_ybodh")
-
-[node name="ShopSwipeSound" type="AudioStreamPlayer3D" parent="Shop"]
-stream = ExtResource("26_emyb1")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.766044, 0.642788, 0, -0.642788, 0.766044, 0, 2.5, 3)

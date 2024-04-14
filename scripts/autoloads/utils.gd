@@ -1,4 +1,4 @@
-extends Node
+extends Node3D
 class_name Utils
 
 func death_animation(origin: Vector3, dir: Vector3, sprite: Sprite3D, shadow: Decal) -> void:
@@ -17,8 +17,6 @@ func death_animation(origin: Vector3, dir: Vector3, sprite: Sprite3D, shadow: De
 	node_death.global_position = origin
 	sprite_clone.billboard = BaseMaterial3D.BILLBOARD_DISABLED
 	pass
-	
-#func get_char()
 
 static func get_closest_in_range(to: Vector3, nodes: Array[Node], aoe_range: float) -> Node3D:
 	var closest: Node3D
@@ -31,12 +29,14 @@ static func get_closest_in_range(to: Vector3, nodes: Array[Node], aoe_range: flo
 				closest = node3d
 	return closest
 
-
 const HEALTH_BAR_OFFSET: Vector3 = Vector3(0, 0.1, 0)
 static func get_top_of_box(col: CollisionShape3D) -> Vector3:
-	if not (col.shape is BoxShape3D):
-		printerr("Only works for box colliders.")
-		return Vector3.ZERO
-	var box := col.shape as BoxShape3D
-	var y_offset: float = box.size.y / 2
-	return col.global_position + Vector3(0, y_offset, 0) + HEALTH_BAR_OFFSET
+	if col.shape is BoxShape3D:
+		var box := col.shape as BoxShape3D
+		var y_offset: float = box.size.y / 2
+		return col.global_position + Vector3(0, y_offset, 0) + HEALTH_BAR_OFFSET
+	elif col.shape is SphereShape3D:
+		var sphere := col.shape as SphereShape3D
+		var y_offset: float = sphere.radius
+		return col.global_position + Vector3(0, y_offset, 0) + HEALTH_BAR_OFFSET
+	return Vector3.ZERO
