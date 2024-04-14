@@ -121,15 +121,15 @@ func _process(_delta: float):
 	
 var char_was_in_area_last_frame: bool = false
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	var overlap: Array[Node3D] = area.get_overlapping_bodies()
 	var char_is_in_area_this_frame: bool = false
 	
 	for node: Node3D in overlap:
 		if node is Character:
-			var char := node as Character
+			var character := node as Character
 			char_is_in_area_this_frame = true
-			if char.is_on_floor() and char.position.y < 0.3:
+			if character.is_on_floor() and character.position.y < 0.3:
 				enter_shop()
 				
 	#if char_is_in_area_this_frame and not char_was_in_area_last_frame:

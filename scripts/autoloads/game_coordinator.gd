@@ -19,7 +19,7 @@ const PLAYER_SUMMON_DURATION = 6.0
 const HUB_TIME: float = 30.0
 const COMBAT_TIME: float = 60.0
 
-static var room_multi: int = 0
+static var room_multi: float = 0
 
 static var current_room: Room = Room.HUB
 static var current_round: int = 0
@@ -81,4 +81,5 @@ func _process(delta: float) -> void:
 	calc_earnings()
 
 func calc_earnings() -> int:
-	return time * room_multi * current_round
+	# multiply by round? wtf that will scale too fast
+	return round(time * room_multi * float(current_round)) as int

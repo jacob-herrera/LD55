@@ -8,10 +8,10 @@ class_name Enemy
 @onready var agent: NavigationAgent3D = $NavigationAgent3D
 
 @export var health: int
-@export var move_speed: float = 2
-@export var attack_range: float = 1.0
-@export var attack_rate: float = 1.0
-@export var attack_damage: float = 1.0 
+@export var move_speed: float
+@export var attack_range: float
+@export var attack_rate: float
+@export var attack_damage: int
 
 @export var gold_value: int
 

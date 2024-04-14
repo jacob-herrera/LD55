@@ -96,7 +96,7 @@ func do_explode() -> void:
 func do_buff() -> void:
 	# places nearby allies in array named "nearby"
 	var allies: Array[Node] = get_tree().get_nodes_in_group(Summon.GROUP)
-	var nearby: Array[Node]
+	var nearby: Array[Node] = []
 	var pos: Vector3 = global_position
 	for node : Node in allies:
 		var dist: float = pos.distance_to(node.global_position)
