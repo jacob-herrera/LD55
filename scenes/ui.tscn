@@ -197,6 +197,7 @@ text = "QUIT
 (ESC)"
 
 [node name="frozen" type="Label" parent="shop_ui"]
+visible = false
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -212,10 +213,11 @@ theme_override_colors/font_outline_color = Color(0.878431, 0.945098, 1, 1)
 theme_override_constants/outline_size = 8
 theme_override_fonts/font = ExtResource("1_rg5ws")
 theme_override_font_sizes/font_size = 24
-text = "FROZEN"
+text = "FROZEN (UP)"
 horizontal_alignment = 1
 
 [node name="purchased" type="Label" parent="shop_ui"]
+visible = false
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
