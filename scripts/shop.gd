@@ -1,6 +1,7 @@
 extends Node
 @export var cameras: Array[PhantomCamera3D]
-@export var purchaseSound: AudioStreamPlayer3D
+@export var ShopSounds: Array[AudioStreamPlayer3D]
+
 var current_item = 0
 var in_shop = false
 var in_area: bool = false
@@ -53,12 +54,14 @@ func _process(_delta: float):
 		
 		if Input.is_action_just_pressed("ui_right"):
 			cameras[current_item].set_priority(0)
+			ShopSounds[1].play()
 			current_item += 1
 			current_item = current_item % cameras.size()
 			cameras[current_item].set_priority(20)
 			
 		if Input.is_action_just_pressed("ui_left"):
 			cameras[current_item].set_priority(0)
+			ShopSounds[1].play()
 			current_item -= 1
 			if(current_item < 0):
 				current_item += cameras.size()
@@ -73,13 +76,13 @@ func _process(_delta: float):
 			if current_item != cameras.size() - 1:
 				if current_display[current_item][0] != null && Globals.coins - current_display[current_item][1] >= 0:
 					Globals.coins -= current_display[current_item][1]
-					purchaseSound.play()
+					ShopSounds[0].play()
 					current_display[current_item] = [null, 0, false]
 					print(current_display)
 			else:
 				if Globals.coins - rerollPrice >= 0:
 					Globals.coins -= rerollPrice
-					purchaseSound.play()
+					ShopSounds[0].play()
 					reroll(1)
 					print(current_display)
 					
