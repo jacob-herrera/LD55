@@ -19,7 +19,7 @@ const PLAYER_SUMMON_DURATION = 6.0
 const HUB_TIME: float = 30.0
 const COMBAT_TIME: float = 60.0
 
-static var room_multi: float = 0
+static var room_multiplier: float = 0
 
 static var current_room: Room = Room.HUB
 static var current_round: int = 0
@@ -41,6 +41,8 @@ func DEV():
 		goto_room(Room.ROOM_1)
 	if Input.is_action_just_pressed("dev_spawn_enemy"):
 		enemy_manager.spawn_enemy("test", globals.character.global_position)
+	if Input.is_action_just_pressed("dev_spawn_summon"):
+		summon_manager.give_player_summon("wizard")
 		
 func goto_room(target_room: Room) -> void:
 	current_room = target_room
@@ -49,12 +51,12 @@ func goto_room(target_room: Room) -> void:
 			time = HUB_TIME
 			globals.character.global_position = ROOM_HUB_TELE
 			in_hub = true
-			room_multi = 0
+			room_multiplier = 0
 		Room.ROOM_1:
 			time = COMBAT_TIME
 			globals.character.global_position = ROOM_1_TELE
 			in_hub = false
-			room_multi = 1
+			room_multiplier = 1
 	anim_player.play("fade_in")	
 	globals.character.summon_circle.stop_anim()
 	globals.character.camera.tween_parameters.duration = PLAYER_CAMERA_DEFAULT_TWEEN
@@ -82,4 +84,4 @@ func _process(delta: float) -> void:
 
 func calc_earnings() -> int:
 	# multiply by round? wtf that will scale too fast
-	return round(time * room_multi * float(current_round)) as int
+	return round(time * room_multiplier * float(current_round)) as int

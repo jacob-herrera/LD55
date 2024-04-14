@@ -1,6 +1,12 @@
-[gd_scene format=3 uid="uid://cgbt11js81wko"]
+[gd_scene load_steps=2 format=3 uid="uid://cgbt11js81wko"]
+
+[ext_resource type="FontFile" uid="uid://ey5uk5evoi8o" path="res://assets/nes.ttf" id="1_bfwsv"]
 
 [node name="GoldDmgDisplay" type="Label3D"]
+billboard = 1
+texture_filter = 0
 text = "0
 "
-font_size = 64
+font = ExtResource("1_bfwsv")
+font_size = 48
+outline_size = 16

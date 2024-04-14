@@ -22,7 +22,7 @@ func _input(event: InputEvent) -> void:
 		jump_buffer = JUMP_BUFFER
 		
 	elif event.is_action_pressed("summon"):
-		summon_manager.give_player_summon("wizard")
+		pass
 	
 static func get_jump() -> bool:
 	if lock_movement or Pauser.is_paused:

@@ -18,20 +18,22 @@ func death_animation(origin: Vector3, dir: Vector3, sprite: Sprite3D) -> void:
 	
 	pass
 
-func gold_dmg_animation(sprite_loc: Vector3, is_gold: bool, val: int) -> void:
-	var gold_dmg_node: Label3D = gold_dmg_display.instantiate() as Label3D
-	get_tree().current_scene.add_child(gold_dmg_node)
-	gold_dmg_node.text = str(val)
-	gold_dmg_node.global_position = sprite_loc
-	gold_dmg_node.global_position.y += 0.25
+func spawn_number(sprite_loc: Vector3, is_gold: bool, val: int) -> void:
+	var label: Label3D = gold_dmg_display.instantiate() as Label3D
+	get_tree().current_scene.add_child(label)
+	label.global_position = sprite_loc
 	if is_gold:
-		gold_dmg_node.modulate = Color(255, 213, 0)
-
-
-
+		label.global_position.y += 0.4
+		label.text = "$"+str(val)
+		label.modulate = Color("ffff00")
+		label.outline_modulate = Color("7a6700")
+	else:
+		label.text = str(val)
+		label.modulate = Color("ff0000")
+		label.outline_modulate = Color("190000")
 
 	await get_tree().create_timer(0.5).timeout
-	gold_dmg_node.queue_free()
+	label.queue_free()
 
 static func get_closest_in_range(to: Vector3, nodes: Array[Node], aoe_range: float) -> Node3D:
 	var closest: Node3D

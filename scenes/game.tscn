@@ -1024,7 +1024,7 @@ _data = {
 }
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_77h1f"]
-size = Vector3(1.5, 3, 1.5)
+size = Vector3(1.375, 3, 1.375)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ha2t1"]
 size = Vector3(4, 0.25, 3.5)
@@ -1474,7 +1474,7 @@ ground_layer = 1
 camera = NodePath("PhantomCamera3D")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Character"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.375, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
 shape = SubResource("SphereShape3D_ijqfj")
 
 [node name="MainSprite" type="Sprite3D" parent="Character"]
