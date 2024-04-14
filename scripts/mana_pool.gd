@@ -1,6 +1,6 @@
 extends Area3D
 
-@onready var mana_sound = $"ManaPickup"
+@onready var mana_sound: AudioStreamPlayer3D = $"ManaPickup"
 
 const TIME: float = 0.25 # Every one second
 var time: float = 0.0
