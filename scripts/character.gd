@@ -5,6 +5,10 @@ class_name Character
 @onready var jump_sprite: Sprite3D = $JumpSprite
 @onready var anim_player: AnimationPlayer = $AnimationPlayer
 @onready var summon_circle: SummonCircle = $summon_circle
+@onready var summon_pickup: AudioStreamPlayer3D = $SummonPickup
+@onready var summon_place: AudioStreamPlayer3D = $SummonPlace
+@onready var footsteps: AudioStreamPlayer3D = $Footsteps
+@onready var jump: AudioStreamPlayer3D = $Jump
 @export_flags_3d_physics var ground_layer: int
 @export var camera: PhantomCamera3D
 
@@ -93,12 +97,13 @@ func _physics_process(delta: float) -> void:
 		last_direction = Character.vec_to_direction(Controls.get_move_input())
 		anim_player.play("walk_" + DIRECTION_TO_STRING[last_direction])
 		change = needed_accel * delta
+		play_footsteps()
 	else:
 		var needed_accel: Vector3 = -velocity / delta
 		needed_accel = needed_accel.limit_length(STOP_ACCEL)
 		anim_player.play("idle_" + DIRECTION_TO_STRING[last_direction])
 		change = needed_accel * delta
-		
+		footsteps.stop()
 	velocity = velocity + change
 	
 	var dir_basis: Basis = Basis.looking_at(last_heading, Vector3.UP, true)
@@ -111,6 +116,7 @@ func _physics_process(delta: float) -> void:
 		jumped = true
 		Controls.jump_buffer = 0.0
 		coyote_time = 0.0
+		jump.play()
 	else:	
 		if not is_on_floor():
 			coyote_time -= delta
@@ -137,6 +143,7 @@ func do_carry() -> void:
 		var closest: Node3D = Utils.get_closest_in_range(global_position, carriables, 1.0)
 		if Controls.try_pickup() and closest != null:
 			carrying = closest
+			summon_pickup.play()
 	elif carrying != null:
 		carrying.global_position = global_position + Vector3(0, 0.7 ,0)
 		if Controls.try_pickup():
@@ -150,3 +157,8 @@ func do_carry() -> void:
 			if not result.is_empty():
 				carrying.position = result.position
 				carrying = null
+				summon_place.play()
+				
+func play_footsteps() -> void:
+	if !footsteps.playing:
+		footsteps.play()
