@@ -82,7 +82,7 @@ func  _process(delta: float) -> void:
 	rot += delta * JUMP_SPIN_SPEED if jumped else 0.0
 
 func _physics_process(delta: float) -> void:
-	if Pauser.is_paused or Controls.lock_movement: return
+	if Pauser.is_paused: return
 	
 	var change: Vector3
 
@@ -112,7 +112,6 @@ func _physics_process(delta: float) -> void:
 	
 	var grounded: bool = coyote_time > 0.0 or is_on_floor()
 	if Controls.get_jump() and grounded and carrying == null:
-		print(carrying == null)
 		velocity.y = JUMP
 		jumped = true
 		Controls.jump_buffer = 0.0

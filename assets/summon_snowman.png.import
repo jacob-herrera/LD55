@@ -2,21 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://decwujsyhj0qy"
-path.s3tc="res://.godot/imported/icon32.png-7025e2d95a64a3066b7947e1900b4daf.s3tc.ctex"
+uid="uid://c8bllwsof0ql3"
+path="res://.godot/imported/summon_snowman.png-2db9e9440029b331716f3e8a654fc829.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/func_godot/icon32.png"
-dest_files=["res://.godot/imported/icon32.png-7025e2d95a64a3066b7947e1900b4daf.s3tc.ctex"]
+source_file="res://assets/summon_snowman.png"
+dest_files=["res://.godot/imported/summon_snowman.png-2db9e9440029b331716f3e8a654fc829.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

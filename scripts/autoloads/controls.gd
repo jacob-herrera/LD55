@@ -21,8 +21,8 @@ func _input(event: InputEvent) -> void:
 	elif event.is_action_pressed("jump") and not Pauser.is_paused and not lock_movement:
 		jump_buffer = JUMP_BUFFER
 		
-	elif event.is_action_pressed("force_quit"):
-		get_tree().quit()
+	elif event.is_action_pressed("summon"):
+		summon_manager.give_player_summon("wizard")
 	
 static func get_jump() -> bool:
 	if lock_movement or Pauser.is_paused:
