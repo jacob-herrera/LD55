@@ -54,6 +54,7 @@ func _on_area_3d_body_entered(_body: Node3D):
 		in_shop = true
 		Controls.lock_movement = true
 		cameras[0].set_priority(20)
+		current_item = 0
 	
 func _on_area_3d_body_exited(_body: Node3D):
 	in_area = false
