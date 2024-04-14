@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bhkryx6iyvbay"]
+[gd_scene load_steps=7 format=3 uid="uid://bhkryx6iyvbay"]
 
 [ext_resource type="Script" path="res://scripts/autoloads/ui.gd" id="1_jrdqv"]
 [ext_resource type="FontFile" uid="uid://ey5uk5evoi8o" path="res://assets/nes.ttf" id="1_rg5ws"]
+[ext_resource type="Texture2D" uid="uid://xvbaf5ypxiby" path="res://assets/particle.png" id="3_55a6y"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ub2k2"]
 bg_color = Color(0, 0, 0, 1)
@@ -16,6 +17,10 @@ border_width_left = 4
 border_width_top = 4
 border_width_bottom = 4
 border_color = Color(0.145098, 0.211765, 0.8, 1)
+
+[sub_resource type="Curve" id="Curve_2pas6"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [node name="ui" type="Control"]
 layout_mode = 3
@@ -58,10 +63,10 @@ offset_bottom = 23.0
 grow_horizontal = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0.419608, 0.419608, 0.419608, 1)
+theme_override_colors/font_outline_color = Color(0.529412, 0.529412, 0.529412, 1)
 theme_override_constants/outline_size = 8
 theme_override_fonts/font = ExtResource("1_rg5ws")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 48
 text = "60"
 
 [node name="mana_bar" type="ProgressBar" parent="."]
@@ -96,3 +101,113 @@ theme_override_fonts/font = ExtResource("1_rg5ws")
 theme_override_font_sizes/font_size = 24
 text = "FPS:"
 horizontal_alignment = 2
+
+[node name="shop_ui" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="freeze" type="Label" parent="shop_ui"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -180.0
+offset_top = 64.0
+offset_right = 180.0
+offset_bottom = 91.0
+grow_horizontal = 2
+theme_override_colors/font_outline_color = Color(0.529412, 0.529412, 0.529412, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("1_rg5ws")
+theme_override_font_sizes/font_size = 24
+text = "FREEZE (UP)"
+horizontal_alignment = 1
+
+[node name="purchase" type="Label" parent="shop_ui"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -180.0
+offset_top = -91.0
+offset_right = 180.0
+offset_bottom = -64.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_outline_color = Color(0.529412, 0.529412, 0.529412, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("1_rg5ws")
+theme_override_font_sizes/font_size = 24
+text = "PURCHASE (DOWN)"
+horizontal_alignment = 1
+
+[node name="left" type="Label" parent="shop_ui"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -13.5
+offset_right = 360.0
+offset_bottom = 13.5
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0.529412, 0.529412, 0.529412, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("1_rg5ws")
+theme_override_font_sizes/font_size = 24
+text = "<"
+horizontal_alignment = 1
+
+[node name="right" type="Label" parent="shop_ui"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -360.0
+offset_top = -13.5
+offset_bottom = 13.5
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0.529412, 0.529412, 0.529412, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("1_rg5ws")
+theme_override_font_sizes/font_size = 24
+text = ">
+"
+horizontal_alignment = 1
+
+[node name="left2" type="Label" parent="shop_ui"]
+layout_mode = 1
+offset_right = 360.0
+offset_bottom = 27.0
+theme_override_colors/font_outline_color = Color(0.529412, 0.529412, 0.529412, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("1_rg5ws")
+theme_override_font_sizes/font_size = 24
+text = "QUIT
+(ESC)"
+
+[node name="screen_particles" type="CPUParticles2D" parent="."]
+position = Vector2(480, 540)
+emitting = false
+amount = 64
+texture = ExtResource("3_55a6y")
+emission_shape = 3
+emission_rect_extents = Vector2(480, 1)
+direction = Vector2(0, -1)
+spread = 5.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 200.0
+scale_amount_min = 3.0
+scale_amount_max = 3.0
+scale_amount_curve = SubResource("Curve_2pas6")

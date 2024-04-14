@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/pause_menu.gd" id="1_rr6ye"]
 [ext_resource type="FontFile" uid="uid://ey5uk5evoi8o" path="res://assets/nes.ttf" id="2_rutg5"]
-[ext_resource type="PackedScene" uid="uid://b56jbfnwrg5u0" path="res://scenes/volume_slider.tscn" id="3_8ax3d"]
+[ext_resource type="PackedScene" path="res://scenes/volume_slider.tscn" id="3_8ax3d"]
 
 [node name="pause_menu" type="CenterContainer"]
 anchors_preset = 15
@@ -26,7 +26,7 @@ layout_mode = 2
 focus_neighbor_bottom = NodePath("../Settings")
 focus_next = NodePath("../Settings")
 theme_override_fonts/font = ExtResource("2_rutg5")
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 24
 text = "RESUME"
 
 [node name="Settings" type="Button" parent="Main"]
@@ -35,7 +35,7 @@ layout_mode = 2
 focus_neighbor_top = NodePath("../Resume")
 focus_previous = NodePath("../Resume")
 theme_override_fonts/font = ExtResource("2_rutg5")
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 24
 text = "SETTINGS"
 
 [node name="Settings" type="VBoxContainer" parent="."]

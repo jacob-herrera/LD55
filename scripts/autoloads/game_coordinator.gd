@@ -28,6 +28,9 @@ func _process(delta: float) -> void:
 		anim_player.play("fade_out")
 	if time <= PLAYER_SUMMON_DURATION:
 		globals.character.summon_circle.start_anim()
+	if time <= 3:
+		ui.particles_on()
+	
 	
 	if time <= 0:
 		# Reset tween
@@ -44,4 +47,5 @@ func _process(delta: float) -> void:
 				current_round += 1
 		anim_player.play("fade_in")	
 		globals.character.summon_circle.stop_anim()
+		ui.particles_off()
 

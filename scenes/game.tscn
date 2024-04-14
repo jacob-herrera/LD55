@@ -1,4 +1,4 @@
-[gd_scene load_steps=81 format=3 uid="uid://dnpi8mksbjqnn"]
+[gd_scene load_steps=77 format=3 uid="uid://dnpi8mksbjqnn"]
 
 [ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map.gd" id="1_fle1t"]
 [ext_resource type="Resource" uid="uid://btwxy5brwdbg4" path="res://fgd/map_settings.tres" id="2_obqiq"]
@@ -21,11 +21,7 @@
 [ext_resource type="Resource" uid="uid://be15co36abbxx" path="res://assets/cam_tween_shop.tres" id="16_uunvf"]
 [ext_resource type="Script" path="res://scripts/mana_pool.gd" id="17_5wmwc"]
 [ext_resource type="PackedScene" path="res://scenes/summon_circle.tscn" id="17_q38df"]
-[ext_resource type="AudioStream" uid="uid://d1fuxqmu8xp5a" path="res://assets/audio/summon_pickup.mp3" id="18_u3pou"]
-[ext_resource type="AudioStream" uid="uid://cgtdd5x6h26sj" path="res://assets/audio/summon_place_new.mp3" id="19_74t71"]
 [ext_resource type="AudioStream" uid="uid://bls3hxlr2qynn" path="res://assets/audio/mana_pickup.mp3" id="20_8o20s"]
-[ext_resource type="AudioStream" uid="uid://b1v51p1ns2rxa" path="res://assets/audio/player_footsteps.mp3" id="20_77in2"]
-[ext_resource type="AudioStream" uid="uid://dh3jc01yu8u1" path="res://assets/audio/player_jump.mp3" id="21_aof1w"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_pjoy7"]
 _surfaces = [{
@@ -641,7 +637,7 @@ _data = {
 size = Vector3(1.5, 5, 1.5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ha2t1"]
-size = Vector3(3.5, 0.5, 3)
+size = Vector3(4, 0.25, 3.5)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_om2wr"]
 transparency = 1
@@ -895,22 +891,6 @@ camera_3D_resource = ExtResource("16_6jxv8")
 
 [node name="summon_circle" parent="Character" instance=ExtResource("17_q38df")]
 
-[node name="SummonPickup" type="AudioStreamPlayer3D" parent="Character"]
-stream = ExtResource("18_u3pou")
-bus = &"Effects"
-
-[node name="SummonPlace" type="AudioStreamPlayer3D" parent="Character"]
-stream = ExtResource("19_74t71")
-bus = &"Effects"
-
-[node name="Footsteps" type="AudioStreamPlayer3D" parent="Character"]
-stream = ExtResource("20_77in2")
-bus = &"Effects"
-
-[node name="Jump" type="AudioStreamPlayer3D" parent="Character"]
-stream = ExtResource("21_aof1w")
-bus = &"Effects"
-
 [node name="Shop" type="Node" parent="." node_paths=PackedStringArray("cameras")]
 script = ExtResource("15_itd2k")
 cameras = [NodePath("ItemCamera0"), NodePath("ItemCamera1"), NodePath("ItemCamera2"), NodePath("ItemCamera3"), NodePath("ItemCamera4")]
@@ -997,6 +977,7 @@ collision_mask = 4
 script = ExtResource("17_5wmwc")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ManaPool"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.125, 0)
 shape = SubResource("BoxShape3D_ha2t1")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="ManaPool"]
@@ -1021,7 +1002,7 @@ initial_velocity_min = 1.0
 initial_velocity_max = 1.0
 color_ramp = SubResource("Gradient_s0fa4")
 
-[node name="ManaPickup" type="AudioStreamPlayer3D" parent="ManaPool"]
+[node name="mana_pickup_sound" type="AudioStreamPlayer3D" parent="ManaPool"]
 stream = ExtResource("20_8o20s")
 bus = &"Effects"
 
