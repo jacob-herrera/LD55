@@ -56,19 +56,20 @@ func _process(delta: float) -> void:
 		do_buff()
 	if attack_range > 0 && attack_cooldown <= 0: 
 		attack_cooldown = 1.0 / attack_rate
-		do_attack()
+		do_ranged()
 	reset_to_base()
 func get_center() -> Vector3:
 	return col.global_position
-	
-func do_attack() -> void:
+
+# projectile speed must be greater than target speed, else projectile will not hit
+func do_ranged() -> void:
 	var enemies: Array[Node] = get_tree().get_nodes_in_group(Enemy.GROUP)
 	var enemy: Enemy = Utils.get_closest_in_range(global_position, enemies, attack_range)
 	if enemy == null: return
 	var proj: Projectile = projectile.instantiate() as Projectile
 	get_tree().current_scene.add_child(proj)
 	proj.global_position = get_center()
-	proj.dir = get_center().direction_to(enemy.get_center())
+	proj.dir = get_center().direction_to(get_intercept(proj.global_position, proj.speed, enemy.global_position, enemy.velocity))
 	proj.damage = damage
 	
 func do_explode() -> void:
@@ -99,3 +100,15 @@ func do_buff() -> void:
 
 func death() -> void:
 	pass
+	
+func get_intercept(attacker_pos : Vector3,
+					proj_vel : float,
+					target_pos : Vector3,
+					target_vel : Vector3) -> Vector3:
+	var a : float = proj_vel * proj_vel - target_vel.dot(target_vel)
+	var b : float = 2 * target_vel.dot(target_pos-attacker_pos)
+	var c : float = (target_pos - attacker_pos).dot(target_pos - attacker_pos)
+	var time : float = 0.0
+	if proj_vel > target_vel.length():
+		time = (b + sqrt(b * b + 4 * a * c)) / (2 * a)
+	return target_pos + time * target_vel
