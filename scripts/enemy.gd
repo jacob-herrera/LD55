@@ -25,18 +25,19 @@ static var space_state: PhysicsDirectSpaceState3D
 func _ready() -> void:
 	collision_layer = LAYER
 	add_to_group(GROUP)
-	healthbar.initalize(health, col)
+	healthbar.initalize(health, col, false)
 	if space_state == null:
 		space_state = PhysicsServer3D.space_get_direct_state(get_world_3d().space)
-	set_physics_process(false)
-	call_deferred("navigation_setup")
-
-func _on_map_changed(_rid: RID):
-	set_physics_process(true)
-	NavigationServer3D.map_changed.disconnect(_on_map_changed)
-
-func navigation_setup():
-	NavigationServer3D.map_changed.connect(_on_map_changed)
+	agent.velocity_computed.connect(_on_velocity_compute)
+	#set_physics_process(false)
+	#call_deferred("navigation_setup")
+#
+#func _on_map_changed(_rid: RID):
+	#set_physics_process(true)
+	#NavigationServer3D.map_changed.disconnect(_on_map_changed)
+#
+#func navigation_setup():
+	#NavigationServer3D.map_changed.connect(_on_map_changed)
 
 func try_do_damage(target_summon: Summon) -> void:
 	if attack_cooldown <= 0:
@@ -45,6 +46,10 @@ func try_do_damage(target_summon: Summon) -> void:
 		if distance <= attack_range:
 			var dir: Vector3 = global_position.direction_to(target_summon.global_position)
 			target_summon.take_damage(attack_damage, dir)
+	
+func _on_velocity_compute(safe_velocity: Vector3) -> void:
+	velocity = safe_velocity
+	move_and_slide()
 	
 
 func _physics_process(delta: float) -> void:
@@ -55,31 +60,33 @@ func _physics_process(delta: float) -> void:
 	if summon != null:
 		target = summon.global_position
 	
-	if target.is_equal_approx(Vector3.ZERO):
-		return # Nothing near
-	# Try going to target
 	var direction: Vector3 = Vector3.ZERO
-	var has_highground: bool = target.y - global_position.y < -0.5
 	
-	if has_highground: # Try direct path
-		var from: Vector3 = global_position
-		var to: Vector3 = target
-		var query := PhysicsRayQueryParameters3D.create(from, to, LOS_LAYER)
-		var result: Dictionary = space_state.intersect_ray(query)
-		if not result.is_empty() and result.collider is Character:
-			direction = global_position.direction_to(target)
-	if direction == Vector3.ZERO: # Just pathfind
-		agent.target_position = target
-		var destination: Vector3 = agent.get_next_path_position()
-		direction = global_position.direction_to(destination)
+	# If a summon was found in range. 
+	if not target.is_equal_approx(Vector3.ZERO):	
+		# Try going to target
+		var has_highground: bool = target.y - global_position.y < -0.5
 		
-	velocity = Vector3(direction.x * move_speed, velocity.y + GRAVITY, direction.z * move_speed)
+		if has_highground: # Try direct path
+			var from: Vector3 = global_position
+			var to: Vector3 = target
+			var query := PhysicsRayQueryParameters3D.create(from, to, LOS_LAYER)
+			var result: Dictionary = space_state.intersect_ray(query)
+			if not result.is_empty() and result.collider is Character:
+				direction = global_position.direction_to(target)
+		if direction == Vector3.ZERO: # Just pathfind
+			agent.target_position = target
+			var destination: Vector3 = agent.get_next_path_position()
+			direction = global_position.direction_to(destination)
+		
+	var goal_velocity = Vector3(direction.x * move_speed, velocity.y + GRAVITY, direction.z * move_speed)
 	if is_on_floor():
-		velocity.y = 0
-
-	move_and_slide()
-	attack_cooldown -= delta
-	try_do_damage(summon)
+		goal_velocity.y = 0
+	agent.velocity = goal_velocity
+	
+	if summon != null:
+		attack_cooldown -= delta
+		try_do_damage(summon)
 
 func get_center() -> Vector3:
 	return col.global_position

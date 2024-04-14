@@ -50,7 +50,7 @@ func _ready() -> void:
 	health = max_health
 	attack_cooldown = 1.0 / attack_rate
 	
-	healthbar.initalize(max_health, col)
+	healthbar.initalize(max_health, col, true)
 	
 func _process(delta: float) -> void:	
 	attack_cooldown -= delta

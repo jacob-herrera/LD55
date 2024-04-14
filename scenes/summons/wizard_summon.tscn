@@ -1,17 +1,17 @@
 [gd_scene load_steps=7 format=3 uid="uid://cl73yl77jq5j5"]
 
-[ext_resource type="Script" path="res://scripts/summon.gd" id="1_8i4vw"]
-[ext_resource type="Texture2D" uid="uid://djhkf5s85u2eb" path="res://assets/summon_wizard.png" id="2_8hnjw"]
-[ext_resource type="Texture2D" uid="uid://2ljib8g6rii4" path="res://assets/shadow.png" id="3_c4ycb"]
-[ext_resource type="Script" path="res://scripts/carriable.gd" id="4_pshgf"]
-[ext_resource type="PackedScene" uid="uid://bk2528lpxk3ek" path="res://scenes/healthbar.tscn" id="5_i6rcb"]
+[ext_resource type="Script" path="res://scripts/summon.gd" id="1_2v8pu"]
+[ext_resource type="Texture2D" uid="uid://djhkf5s85u2eb" path="res://assets/summon_wizard.png" id="2_wxu1i"]
+[ext_resource type="Texture2D" uid="uid://2ljib8g6rii4" path="res://assets/shadow.png" id="3_v3pjj"]
+[ext_resource type="Script" path="res://scripts/carriable.gd" id="4_g0cmv"]
+[ext_resource type="PackedScene" uid="uid://bk2528lpxk3ek" path="res://scenes/healthbar.tscn" id="5_a0e2b"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_t6qms"]
 size = Vector3(0.5, 1.12292, 0.5)
 
 [node name="wizard_summon" type="AnimatableBody3D"]
 collision_layer = 16
-script = ExtResource("1_8i4vw")
+script = ExtResource("1_2v8pu")
 base_attack_range = 10.0
 base_attack_rate = 2.0
 base_damage = 2
@@ -23,21 +23,21 @@ layers = 16
 pixel_size = 0.04
 billboard = 2
 texture_filter = 0
-texture = ExtResource("2_8hnjw")
+texture = ExtResource("2_wxu1i")
 
 [node name="Shadow" type="Decal" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.75, 0)
 size = Vector3(0.5, 10, 0.5)
-texture_albedo = ExtResource("3_c4ycb")
+texture_albedo = ExtResource("3_v3pjj")
 modulate = Color(1, 1, 1, 0.909804)
 upper_fade = 0.0181113
 lower_fade = 0.0304595
 cull_mask = 1048559
 
 [node name="Carriable" type="Node" parent="."]
-script = ExtResource("4_pshgf")
+script = ExtResource("4_g0cmv")
 
-[node name="healthbar" parent="." instance=ExtResource("5_i6rcb")]
+[node name="healthbar" parent="." instance=ExtResource("5_a0e2b")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.561462, 0)

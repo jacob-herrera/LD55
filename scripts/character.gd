@@ -15,7 +15,7 @@ class_name Character
 const LAYER: int = 4
 
 var carrying: Node3D
-const CARRY_SPEED_SLOW: float = 0.7
+const CARRY_SPEED_SLOW: float = 0.6
 const CARRY_JUMP: float = 8.0
 
 const CHAR_SPEED: float = 5.0

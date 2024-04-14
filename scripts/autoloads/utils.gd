@@ -27,16 +27,23 @@ static func get_closest_in_range(to: Vector3, nodes: Array[Node], aoe_range: flo
 			var dist: float = to.distance_to(node3d.global_position)
 			if dist < aoe_range and dist < closest_distance:
 				closest = node3d
+				closest_distance = dist
 	return closest
 
 const HEALTH_BAR_OFFSET: Vector3 = Vector3(0, 0.1, 0)
 static func get_top_of_box(col: CollisionShape3D) -> Vector3:
 	if col.shape is BoxShape3D:
 		var box := col.shape as BoxShape3D
-		var y_offset: float = box.size.y / 2
+		var y_offset: float = box.size.y / 2.0
 		return col.global_position + Vector3(0, y_offset, 0) + HEALTH_BAR_OFFSET
 	elif col.shape is SphereShape3D:
 		var sphere := col.shape as SphereShape3D
 		var y_offset: float = sphere.radius
 		return col.global_position + Vector3(0, y_offset, 0) + HEALTH_BAR_OFFSET
+	elif col.shape is CapsuleShape3D:
+		var cap := col.shape as CapsuleShape3D
+		var y_offset: float = cap.height / 2.0
+		return col.global_position + Vector3(0, y_offset, 0) + HEALTH_BAR_OFFSET
+		
+	printerr("Shape not supported")
 	return Vector3.ZERO

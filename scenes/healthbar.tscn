@@ -1,17 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://bk2528lpxk3ek"]
+[gd_scene load_steps=5 format=3 uid="uid://bk2528lpxk3ek"]
 
 [ext_resource type="Script" path="res://scripts/healthbar.gd" id="1_otkqk"]
+[ext_resource type="StyleBox" uid="uid://b83vr0lnfp65d" path="res://assets/enemy_healthbar_fill.tres" id="2_gsupx"]
+[ext_resource type="StyleBox" uid="uid://caodfigxyqg8x" path="res://assets/summon_healthbar_fill.tres" id="3_i0qyp"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s5ce3"]
 bg_color = Color(0, 0, 0, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ietn8"]
-bg_color = Color(1, 0, 0, 1)
 
 [node name="healthbar" type="Sprite3D"]
 billboard = 1
 texture_filter = 0
 script = ExtResource("1_otkqk")
+enemy_fill = ExtResource("2_gsupx")
+summon_fill = ExtResource("3_i0qyp")
 
 [node name="SubViewport" type="SubViewport" parent="."]
 transparent_bg = true
@@ -25,6 +26,6 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/outline_size = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_s5ce3")
-theme_override_styles/fill = SubResource("StyleBoxFlat_ietn8")
+theme_override_styles/fill = ExtResource("2_gsupx")
 value = 100.0
 show_percentage = false

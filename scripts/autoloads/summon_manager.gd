@@ -2,8 +2,8 @@ extends Node
 class_name SummonManager
 
 const SUMMON_SCENES: Dictionary = {
-	"wizard": preload("res://summons/wizard_summon.tscn"),
-	"snowman": preload("res://summons/snowman_summon.tscn")
+	"wizard": preload("res://scenes/summons/wizard_summon.tscn"),
+	"snowman": preload("res://scenes/summons/snowman_summon.tscn")
 }
 
 func give_player_summon(summon_name: String) -> void:

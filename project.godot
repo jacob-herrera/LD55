@@ -25,6 +25,7 @@ utils="*res://scripts/autoloads/utils.gd"
 ui="*res://scenes/ui.tscn"
 game_coordinator="*res://scenes/game_coordinator.tscn"
 summon_manager="*res://scripts/autoloads/summon_manager.gd"
+enemy_manager="*res://scripts/autoloads/enemy_manager.gd"
 
 [display]
 
@@ -164,6 +165,11 @@ dev_goto_hub={
 dev_goto_room1={
 "deadzone": 0.5,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":50,"key_label":0,"unicode":50,"echo":false,"script":null)
+]
+}
+dev_spawn_enemy={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":77,"key_label":0,"unicode":109,"echo":false,"script":null)
 ]
 }
 

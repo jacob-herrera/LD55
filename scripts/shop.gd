@@ -2,6 +2,8 @@ extends Node
 @export var cameras: Array[PhantomCamera3D]
 @export var ShopSounds: Array[AudioStreamPlayer]
 
+@onready var area: Area3D = $Area3D
+
 @onready var purchase_SFX: AudioStreamPlayer = $PurchaseSound
 @onready var swipe_SFX: AudioStreamPlayer = $ShopSwipeSound
 @onready var enter_SFX: AudioStreamPlayer = $EnterExitShopSound
@@ -11,7 +13,8 @@ extends Node
 
 var current_item = 0
 var in_shop = false
-var in_area: bool = false
+var debounce: bool = false
+
 var pool = {
  1: {archer = [3, 5], knight = [3, 5], farmer = [1, 10]},
  2: {archer = [3, 5], knight = [3, 5], farmer = [3, 10]},
@@ -20,6 +23,7 @@ var pool = {
 var current_display = []
 var rng = RandomNumberGenerator.new()
 var rerollPrice = 10
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var total = 0;
@@ -113,30 +117,69 @@ func _process(_delta: float):
 		if Input.is_action_just_pressed("ui_cancel"):
 			exit_shop()
 			
-func exit_shop() -> void:
-	for cam: PhantomCamera3D in cameras:
-		cam.set_priority(0)
-	enter_SFX.play()
-	Controls.lock_movement = false
-	in_shop = false
-	ui.shop.visible = false
+
 	
-func _on_area_3d_body_entered(_body: Node3D):
-	if in_area == false:
-		in_area = true
+var char_was_in_area_last_frame: bool = false
+
+func _physics_process(delta: float) -> void:
+	var overlap: Array[Node3D] = area.get_overlapping_bodies()
+	var char_is_in_area_this_frame: bool = false
+	
+	for node: Node3D in overlap:
+		if node is Character:
+			var char := node as Character
+			char_is_in_area_this_frame = true
+			if char.is_on_floor() and char.position.y < 0.3:
+				enter_shop()
+				
+	if char_is_in_area_this_frame and not char_was_in_area_last_frame:
+		print("entered")
+	
+	if not char_is_in_area_this_frame and char_was_in_area_last_frame:
+		if GameCoordinator.current_room != GameCoordinator.Room.HUB:
+			globals.character.camera.tween_parameters.duration = 0
+		exit_shop()
+		debounce = false
+				
+	char_was_in_area_last_frame = char_is_in_area_this_frame
+	
+	
+func enter_shop():
+	if not in_shop and not debounce:
+		debounce = true
 		in_shop = true
 		enter_SFX.play()
 		Controls.lock_movement = true
 		cameras[0].set_priority(20)
 		current_item = 0
 		ui.shop.visible = true
-		
-func _on_area_3d_body_exited(_body: Node3D):
-	in_area = false
+	
+func exit_shop() -> void:
 	if in_shop:
-		if GameCoordinator.current_room != GameCoordinator.Room.HUB:
-			globals.character.camera.tween_parameters.duration = 0
-		exit_shop()
+		for cam: PhantomCamera3D in cameras:
+			cam.set_priority(0)
+		enter_SFX.play()
+		Controls.lock_movement = false
+		in_shop = false
+		ui.shop.visible = false
+	
+#func _on_area_3d_body_entered(body: Node3D):
+	#if in_area == false:
+		#in_area = true
+		#in_shop = true
+		#enter_SFX.play()
+		#Controls.lock_movement = true
+		#cameras[0].set_priority(20)
+		#current_item = 0
+		#ui.shop.visible = true
+		#body.velocity = Vector3(0, 0, 0)
+		#
+#func _on_area_3d_body_exited(_body: Node3D):
+	#in_area = false
+	#if in_shop:
+		#if GameCoordinator.current_room != GameCoordinator.Room.HUB:
+			#globals.character.camera.tween_parameters.duration = 0
+		#exit_shop()
 
 func reroll(roundNum: int) -> void:
 	var total = 0;
