@@ -22,6 +22,8 @@ const LOS_LAYER: int = Globals.GROUND_LAYER | Character.LAYER
 var attack_cooldown: float = 0.0
 static var space_state: PhysicsDirectSpaceState3D
 
+var is_naving: bool = false
+
 func _ready() -> void:
 	collision_layer = LAYER
 	add_to_group(GROUP)
@@ -48,10 +50,10 @@ func try_do_damage(target_summon: Summon) -> void:
 			target_summon.take_damage(attack_damage, dir)
 	
 func _on_velocity_compute(safe_velocity: Vector3) -> void:
-	velocity = safe_velocity
-	move_and_slide()
+	if is_naving:
+		velocity = safe_velocity
+		move_and_slide()
 	
-
 func _physics_process(delta: float) -> void:
 	var target: Vector3 = Vector3.ZERO
 	# Look for target
@@ -74,15 +76,23 @@ func _physics_process(delta: float) -> void:
 			var result: Dictionary = space_state.intersect_ray(query)
 			if not result.is_empty() and result.collider is Character:
 				direction = global_position.direction_to(target)
+			velocity = Vector3(direction.x * move_speed, velocity.y + GRAVITY, direction.z * move_speed)
+			move_and_slide()
+			is_naving = false
+			
 		if direction == Vector3.ZERO: # Just pathfind
 			agent.target_position = target
 			var destination: Vector3 = agent.get_next_path_position()
 			direction = global_position.direction_to(destination)
-		
-	var goal_velocity = Vector3(direction.x * move_speed, velocity.y + GRAVITY, direction.z * move_speed)
-	if is_on_floor():
-		goal_velocity.y = 0
-	agent.velocity = goal_velocity
+			var goal_velocity = Vector3(direction.x * move_speed, velocity.y + GRAVITY, direction.z * move_speed)
+			if is_on_floor():
+				goal_velocity.y = 0
+			agent.velocity = goal_velocity
+			is_naving = true
+	else:
+		velocity = Vector3(0, velocity.y + GRAVITY, 0)
+		move_and_slide()
+		is_naving = false
 	
 	if summon != null:
 		attack_cooldown -= delta

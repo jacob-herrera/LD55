@@ -67,12 +67,12 @@ func get_center() -> Vector3:
 # projectile speed must be greater than target speed, else projectile will not hit
 func do_ranged() -> void:
 	var enemies: Array[Node] = get_tree().get_nodes_in_group(Enemy.GROUP)
-	var enemy: Enemy = Utils.get_closest_in_range(global_position, enemies, attack_range)
+	var enemy: Enemy = Utils.get_closest_in_range(global_position, enemies, attack_range) as Enemy
 	if enemy == null: return
 	var proj: Projectile = projectile.instantiate() as Projectile
 	get_tree().current_scene.add_child(proj)
 	proj.global_position = get_center()
-	proj.dir = get_center().direction_to(get_intercept(proj.global_position, proj.speed, enemy.global_position, enemy.velocity))
+	proj.dir = get_center().direction_to(get_intercept(proj.global_position, proj.speed, enemy.get_center(), enemy.velocity))
 	proj.damage = damage
 	
 func do_explode() -> void:

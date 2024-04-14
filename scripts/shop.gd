@@ -132,8 +132,8 @@ func _physics_process(delta: float) -> void:
 			if char.is_on_floor() and char.position.y < 0.3:
 				enter_shop()
 				
-	if char_is_in_area_this_frame and not char_was_in_area_last_frame:
-		print("entered")
+	#if char_is_in_area_this_frame and not char_was_in_area_last_frame:
+		#print("entered")
 	
 	if not char_is_in_area_this_frame and char_was_in_area_last_frame:
 		if GameCoordinator.current_room != GameCoordinator.Room.HUB:
