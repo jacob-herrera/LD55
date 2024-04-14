@@ -6,6 +6,10 @@ class_name UI
 @onready var time: Label = %timer
 @onready var fps: Label = $FPS
 @onready var shop: Node = $shop_ui
+@onready var freeze: Node = $shop_ui/freeze
+@onready var frozen: Node = $shop_ui/frozen
+@onready var purchase: Node = $shop_ui/purchase
+@onready var purchased: Node = $shop_ui/purchased
 @onready var screeen_particles: CPUParticles2D = $screen_particles
 
 func _process(_delta: float) -> void:

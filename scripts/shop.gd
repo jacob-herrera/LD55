@@ -29,31 +29,58 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float):
 	if in_shop == true:
+		if(current_item == cameras.size() - 1):
+			ui.freeze.visible = false;
+			ui.frozen.visible = false;
+			ui.purchase.visible = true;
+			ui.purchased.visible = false;
+		else:
+			if(current_display[current_item][2]):
+				ui.freeze.visible = false;
+				ui.frozen.visible = true;
+			else:
+				ui.freeze.visible = true;
+				ui.frozen.visible = false;
+				
+			if(current_display[current_item][0] == null):
+				ui.freeze.visible = false;
+				ui.frozen.visible = false;
+				ui.purchase.visible = false;
+				ui.purchased.visible = true;
+			else:
+				ui.purchase.visible = true;
+				ui.purchased.visible = false;
+		
 		if Input.is_action_just_pressed("ui_right"):
 			cameras[current_item].set_priority(0)
 			current_item += 1
 			current_item = current_item % cameras.size()
 			cameras[current_item].set_priority(20)
+			
 		if Input.is_action_just_pressed("ui_left"):
 			cameras[current_item].set_priority(0)
 			current_item -= 1
-			current_item = current_item % cameras.size()
+			if(current_item < 0):
+				current_item += cameras.size()
 			cameras[current_item].set_priority(20)
+			
 		if Input.is_action_just_pressed("ui_up"):
-			if current_item != cameras.size() - 1 && current_display[current_item][0] != "purchased":
+			if current_item != cameras.size() - 1 && current_display[current_item][0] != null:
 				current_display[current_item][2] = !current_display[current_item][2]
 				print(current_display)
+				
 		if Input.is_action_just_pressed("ui_down"):
 			if current_item != cameras.size() - 1:
-				if current_display[current_item][0] != "purchased" && Globals.coins - current_display[current_item][1] >= 0:
+				if current_display[current_item][0] != null && Globals.coins - current_display[current_item][1] >= 0:
 					Globals.coins -= current_display[current_item][1]
-					current_display[current_item] = ["purchased", 0, false]
+					current_display[current_item] = [null, 0, false]
 					print(current_display)
 			else:
 				if Globals.coins - rerollPrice >= 0:
 					Globals.coins -= rerollPrice
 					reroll(1)
 					print(current_display)
+					
 		if Input.is_action_just_pressed("ui_cancel"):
 			exit_shop()
 			
@@ -72,7 +99,7 @@ func _on_area_3d_body_entered(_body: Node3D):
 		cameras[0].set_priority(20)
 		current_item = 0
 		ui.shop.visible = true
-	
+		
 func _on_area_3d_body_exited(_body: Node3D):
 	in_area = false
 	if in_shop:
