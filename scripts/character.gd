@@ -97,7 +97,8 @@ func _physics_process(delta: float) -> void:
 		last_direction = Character.vec_to_direction(Controls.get_move_input())
 		anim_player.play("walk_" + DIRECTION_TO_STRING[last_direction])
 		change = needed_accel * delta
-		play_footsteps()
+		if is_on_floor():	
+			play_footsteps()
 	else:
 		var needed_accel: Vector3 = -velocity / delta
 		needed_accel = needed_accel.limit_length(STOP_ACCEL)
