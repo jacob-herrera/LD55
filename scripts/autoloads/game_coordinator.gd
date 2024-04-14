@@ -29,6 +29,9 @@ static var DEV_timer_paused: bool = false
 
 static var in_hub: bool = true
 
+func _ready() -> void:
+	print_rich("[b]DEV CONTROLS[/b]\n ~ : Pause/Unpause Timer\n 1 : Goto Hub\n 2 : Goto Room 1\n Tab : Spawn wizard\n")
+
 func DEV():
 	if Input.is_action_just_pressed("dev_pause_timer"):
 		DEV_timer_paused = not DEV_timer_paused

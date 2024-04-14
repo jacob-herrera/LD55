@@ -1,6 +1,12 @@
 extends Node
 @export var cameras: Array[PhantomCamera3D]
-@export var ShopSounds: Array[AudioStreamPlayer3D]
+@export var ShopSounds: Array[AudioStreamPlayer]
+
+@onready var purchase_SFX: AudioStreamPlayer = $PurchaseSound
+@onready var swipe_SFX: AudioStreamPlayer = $ShopSwipeSound
+@onready var enter_SFX: AudioStreamPlayer = $EnterExitShopSound
+@onready var freeze_SFX: AudioStreamPlayer = $FreezeSound
+@onready var steam_SFX: AudioStreamPlayer = $SteamSound
 
 var current_item = 0
 var in_shop = false
@@ -67,14 +73,14 @@ func _process(_delta: float):
 		
 		if Input.is_action_just_pressed("ui_right"):
 			cameras[current_item].set_priority(0)
-			ShopSounds[1].play()
+			swipe_SFX.play()
 			current_item += 1
 			current_item = current_item % cameras.size()
 			cameras[current_item].set_priority(20)
 			
 		if Input.is_action_just_pressed("ui_left"):
 			cameras[current_item].set_priority(0)
-			ShopSounds[1].play()
+			swipe_SFX.play()
 			current_item -= 1
 			if(current_item < 0):
 				current_item += cameras.size()
@@ -83,9 +89,9 @@ func _process(_delta: float):
 		if Input.is_action_just_pressed("ui_up"):
 			if current_item != cameras.size() - 1 && current_display[current_item][0] != null:
 				if current_display[current_item][2]:
-					ShopSounds[4].play()
+					steam_SFX.play()
 				else:
-					ShopSounds[3].play()
+					freeze_SFX.play()
 				current_display[current_item][2] = !current_display[current_item][2]
 				print(current_display)
 				
@@ -93,13 +99,13 @@ func _process(_delta: float):
 			if current_item != cameras.size() - 1:
 				if current_display[current_item][0] != null && Globals.coins - current_display[current_item][1] >= 0:
 					Globals.coins -= current_display[current_item][1]
-					ShopSounds[0].play()
+					purchase_SFX.play()
 					current_display[current_item] = [null, 0, false, "", 0, 0]
 					print(current_display)
 			else:
 				if Globals.coins - rerollPrice >= 0:
 					Globals.coins -= rerollPrice
-					ShopSounds[0].play()
+					purchase_SFX.play()
 					reroll(1)
 					print(current_display)
 					
@@ -109,7 +115,7 @@ func _process(_delta: float):
 func exit_shop() -> void:
 	for cam: PhantomCamera3D in cameras:
 		cam.set_priority(0)
-	ShopSounds[2].play()
+	enter_SFX.play()
 	Controls.lock_movement = false
 	in_shop = false
 	ui.shop.visible = false
@@ -118,7 +124,7 @@ func _on_area_3d_body_entered(_body: Node3D):
 	if in_area == false:
 		in_area = true
 		in_shop = true
-		ShopSounds[2].play()
+		enter_SFX.play()
 		Controls.lock_movement = true
 		cameras[0].set_priority(20)
 		current_item = 0
