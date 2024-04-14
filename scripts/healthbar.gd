@@ -1,26 +1,21 @@
 extends Sprite3D
 class_name Healthbar
 
-@onready var subviewport: SubViewport = $SubViewport
-@onready var progress_bar: ProgressBar = $SubViewport/ProgressBar
+@export var enemy_texture: CompressedTexture2D
+@export var summon_texture: CompressedTexture2D
 
-@export var enemy_fill: StyleBoxFlat
-@export var summon_fill: StyleBoxFlat
+var max_value: int
 
-func _ready() -> void:
-	texture = subviewport.get_texture()
-
-func initalize(max_val: int, col: CollisionShape3D, is_summon: bool) -> void:
-	progress_bar.max_value = max_val
-	progress_bar.value = max_val
+func initalize(max_hp: int, col: CollisionShape3D, is_summon: bool) -> void:
+	max_value = max_hp
+	frame = 0
 	global_position = Utils.get_top_of_box(col)
 	if is_summon:
-		progress_bar.add_theme_stylebox_override("fill", summon_fill)
+		texture = summon_texture
 	else:
-		progress_bar.add_theme_stylebox_override("fill", enemy_fill)
+		texture = enemy_texture
 	
-	
-func update(val: int) -> void:
-	progress_bar.value = val
-	#if progress_bar.value <= progress_bar.max_value:
-		#progress_bar.theme
+func update(value: int) -> void:
+	var percent: float = 1.0 - (float(value) / float(max_value))
+	var float_frame: float = percent * vframes
+	frame = clampi(ceil(float_frame), 0, vframes)

@@ -12,28 +12,25 @@ size = Vector3(0.5, 1.12292, 0.5)
 [node name="snowman_summon" type="AnimatableBody3D"]
 collision_layer = 16
 script = ExtResource("1_f0v8i")
-base_attack_range = 10.0
-base_attack_rate = 2.0
 base_damage = 2
 base_max_health = 10
+base_aoe_range = 2.5
 type = 1
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, 0)
-layers = 16
+layers = 2
 pixel_size = 0.04
 billboard = 2
 texture_filter = 0
 texture = ExtResource("2_hsd4l")
 
-[node name="Shadow" type="Decal" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.75, 0)
-size = Vector3(0.5, 10, 0.5)
-texture_albedo = ExtResource("3_xelhb")
-modulate = Color(1, 1, 1, 0.909804)
-upper_fade = 0.0181113
-lower_fade = 0.0304595
-cull_mask = 1048559
+[node name="Shadow" type="Sprite3D" parent="."]
+transform = Transform3D(3, 0, 0, 0, -1.31134e-07, -3, 0, 3, -1.31134e-07, 0, 0.01, 0)
+layers = 4
+modulate = Color(1, 1, 1, 0.74902)
+texture_filter = 0
+texture = ExtResource("3_xelhb")
 
 [node name="Carriable" type="Node" parent="."]
 script = ExtResource("4_1jwp6")

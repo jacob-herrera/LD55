@@ -2,7 +2,7 @@ extends AnimatableBody3D
 class_name Summon
 
 @onready var sprite: Sprite3D = $Sprite3D
-@onready var shadow: Decal = $Shadow
+@onready var shadow: Sprite3D = $Shadow
 @onready var projectile: PackedScene = preload("res://scenes/projectile.tscn")
 @onready var col: CollisionShape3D = $CollisionShape3D
 @onready var healthbar: Healthbar = $healthbar
@@ -32,7 +32,11 @@ enum Type {
 
 var attack_cooldown: float
 
-var health: int
+var health: int:
+	set(new_value):
+		health = clampi(new_value, 0, max_health)
+		if is_instance_valid(healthbar):
+			healthbar.update(new_value)
 
 var attack_range: float
 var attack_rate: float
@@ -110,9 +114,8 @@ func do_buff() -> void:
 
 func take_damage(damage_taking: int, damage_dir: Vector3) -> void:
 	health -= damage_taking
-	healthbar.update(health)
 	if health <= 0:
-		utils.death_animation(global_position, damage_dir, sprite, shadow)
+		utils.death_animation(global_position, damage_dir, sprite)
 		queue_free()
 
 func death() -> void:

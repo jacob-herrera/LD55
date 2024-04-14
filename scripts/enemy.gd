@@ -3,11 +3,11 @@ class_name Enemy
 
 @onready var col: CollisionShape3D = $CollisionShape3D
 @onready var sprite: Sprite3D = $Sprite3D
-@onready var shadow: Decal = $Shadow
+@onready var shadow: Sprite3D = $Shadow
 @onready var healthbar: Healthbar = $healthbar
 @onready var agent: NavigationAgent3D = $NavigationAgent3D
 
-@export var health: int
+@export var max_health: int
 @export var move_speed: float
 @export var attack_range: float
 @export var attack_rate: float
@@ -21,14 +21,20 @@ const GRAVITY: float = -1
 const SUMMON_SEARCH_RADIUS: float = 25.0
 const LOS_LAYER: int = Globals.GROUND_LAYER | Character.LAYER
 
-var attack_cooldown: float = 0.0
 static var space_state: PhysicsDirectSpaceState3D
+var attack_cooldown: float = 0.0
+var health: int:
+	set(new_value):
+		health = clampi(new_value, 0, max_health)
+		if is_instance_valid(healthbar):
+			healthbar.update(new_value)
 
 var is_naving: bool = false
 
 func _ready() -> void:
 	collision_layer = LAYER
 	add_to_group(GROUP)
+	health = max_health
 	healthbar.initalize(health, col, false)
 	if space_state == null:
 		space_state = PhysicsServer3D.space_get_direct_state(get_world_3d().space)
@@ -107,10 +113,10 @@ func take_damage(damage_taking: int, damage_dir: Vector3) -> void:
 	health -= damage_taking
 	if health > 0:
 		utils.gold_dmg_animation(sprite.global_position, false, damage_taking)
-	healthbar.update(health)
+	
 	if health <= 0:
 		Globals.coins += gold_value
-		utils.death_animation(global_position, damage_dir, sprite, shadow)
+		utils.death_animation(global_position, damage_dir, sprite)
 		utils.gold_dmg_animation(sprite.global_position, true, gold_value)
 		queue_free()
 	

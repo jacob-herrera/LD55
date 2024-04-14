@@ -175,6 +175,10 @@ dev_spawn_enemy={
 
 [layer_names]
 
+3d_render/layer_1="World"
+3d_render/layer_2="Sprites"
+3d_render/layer_3="Shadow"
+3d_render/layer_4="Decals"
 3d_physics/layer_1="Ground"
 3d_physics/layer_2="Triggers"
 3d_physics/layer_3="Player"

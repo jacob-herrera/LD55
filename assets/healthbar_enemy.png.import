@@ -2,21 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://2ljib8g6rii4"
-path.s3tc="res://.godot/imported/shadow.png-fa649b8bf20b5924dee4fa3287dfd1b8.s3tc.ctex"
+uid="uid://biefcef8qliiy"
+path="res://.godot/imported/healthbar_enemy.png-c5620827a8597bf58635794790a3a6be.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/shadow.png"
-dest_files=["res://.godot/imported/shadow.png-fa649b8bf20b5924dee4fa3287dfd1b8.s3tc.ctex"]
+source_file="res://assets/healthbar_enemy.png"
+dest_files=["res://.godot/imported/healthbar_enemy.png-c5620827a8597bf58635794790a3a6be.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

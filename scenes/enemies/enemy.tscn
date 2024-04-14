@@ -14,12 +14,16 @@ collision_layer = 8
 collision_mask = 9
 floor_constant_speed = true
 script = ExtResource("1_iar1l")
-health = 10
+max_health = 10
+move_speed = 2.0
+attack_range = 1.0
+attack_rate = 1.0
+attack_damage = 1
 gold_value = 5
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.295127, 0)
-layers = 16
+layers = 2
 flip_h = true
 modulate = Color(1, 0.541176, 0.541176, 1)
 pixel_size = 0.004
@@ -27,17 +31,8 @@ billboard = 1
 texture_filter = 0
 texture = ExtResource("2_sh2n6")
 
-[node name="Shadow" type="Decal" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.75, 0)
-size = Vector3(0.5, 10, 0.5)
-texture_albedo = ExtResource("3_ovrun")
-modulate = Color(1, 1, 1, 0.909804)
-upper_fade = 0.0181113
-lower_fade = 0.0304595
-cull_mask = 1048559
-
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.290588, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
 shape = SubResource("CapsuleShape3D_foljy")
 
 [node name="healthbar" parent="." instance=ExtResource("5_nhedk")]
@@ -46,3 +41,10 @@ shape = SubResource("CapsuleShape3D_foljy")
 path_desired_distance = 0.3
 avoidance_enabled = true
 radius = 0.25
+
+[node name="Shadow" type="Sprite3D" parent="."]
+transform = Transform3D(3, 0, 0, 0, -1.31134e-07, -3, 0, 3, -1.31134e-07, 0, 0.01, 0)
+layers = 4
+modulate = Color(1, 1, 1, 0.74902)
+texture_filter = 0
+texture = ExtResource("3_ovrun")

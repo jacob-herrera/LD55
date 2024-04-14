@@ -1,31 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://bk2528lpxk3ek"]
+[gd_scene load_steps=4 format=3 uid="uid://bk2528lpxk3ek"]
 
+[ext_resource type="Texture2D" uid="uid://biefcef8qliiy" path="res://assets/healthbar_enemy.png" id="1_mothg"]
 [ext_resource type="Script" path="res://scripts/healthbar.gd" id="1_otkqk"]
-[ext_resource type="StyleBox" uid="uid://b83vr0lnfp65d" path="res://assets/enemy_healthbar_fill.tres" id="2_gsupx"]
-[ext_resource type="StyleBox" uid="uid://caodfigxyqg8x" path="res://assets/summon_healthbar_fill.tres" id="3_i0qyp"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s5ce3"]
-bg_color = Color(0, 0, 0, 1)
+[ext_resource type="Texture2D" uid="uid://3e4a416clfic" path="res://assets/healthbar_summon.png" id="3_y56he"]
 
 [node name="healthbar" type="Sprite3D"]
+layers = 2
+pixel_size = 0.05
 billboard = 1
 texture_filter = 0
+texture = ExtResource("1_mothg")
+vframes = 17
 script = ExtResource("1_otkqk")
-enemy_fill = ExtResource("2_gsupx")
-summon_fill = ExtResource("3_i0qyp")
-
-[node name="SubViewport" type="SubViewport" parent="."]
-transparent_bg = true
-size = Vector2i(64, 8)
-
-[node name="ProgressBar" type="ProgressBar" parent="SubViewport"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/outline_size = 2
-theme_override_styles/background = SubResource("StyleBoxFlat_s5ce3")
-theme_override_styles/fill = ExtResource("2_gsupx")
-value = 100.0
-show_percentage = false
+enemy_texture = ExtResource("1_mothg")
+summon_texture = ExtResource("3_y56he")

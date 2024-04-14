@@ -12,27 +12,18 @@ size = Vector3(0.5, 1.12292, 0.5)
 [node name="wizard_summon" type="AnimatableBody3D"]
 collision_layer = 16
 script = ExtResource("1_2v8pu")
-base_attack_range = 10.0
+base_attack_range = 5.0
 base_attack_rate = 2.0
-base_damage = 2
+base_damage = 1
 base_max_health = 10
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, 0)
-layers = 16
+layers = 2
 pixel_size = 0.04
 billboard = 2
 texture_filter = 0
 texture = ExtResource("2_wxu1i")
-
-[node name="Shadow" type="Decal" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.75, 0)
-size = Vector3(0.5, 10, 0.5)
-texture_albedo = ExtResource("3_v3pjj")
-modulate = Color(1, 1, 1, 0.909804)
-upper_fade = 0.0181113
-lower_fade = 0.0304595
-cull_mask = 1048559
 
 [node name="Carriable" type="Node" parent="."]
 script = ExtResource("4_g0cmv")
@@ -42,3 +33,10 @@ script = ExtResource("4_g0cmv")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.561462, 0)
 shape = SubResource("BoxShape3D_t6qms")
+
+[node name="Shadow" type="Sprite3D" parent="."]
+transform = Transform3D(3, 0, 0, 0, -1.31134e-07, -3, 0, 3, -1.31134e-07, 0, 0.01, 0)
+layers = 4
+modulate = Color(1, 1, 1, 0.74902)
+texture_filter = 0
+texture = ExtResource("3_v3pjj")
