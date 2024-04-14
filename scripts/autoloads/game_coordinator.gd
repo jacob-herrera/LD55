@@ -19,11 +19,15 @@ const PLAYER_SUMMON_DURATION = 6.0
 const HUB_TIME: float = 30.0
 const COMBAT_TIME: float = 60.0
 
+const ROOM_MULTI_TEMP: float = 2.0 #REPLACE THIS WHEN ROOM MULTIPLIERS CALCS ARE SET UP
+
 static var current_room: Room = Room.HUB
 static var current_round: int = 0
 static var time: float = HUB_TIME
 
 static var DEV_timer_paused: bool = false
+
+var earnings: float = 0
 
 func DEV():
 	if Input.is_action_just_pressed("dev_pause_timer"):
@@ -65,5 +69,8 @@ func _process(delta: float) -> void:
 				goto_room(Room.ROOM_1)
 			Room.ROOM_1:
 				goto_room(Room.HUB)
+	calc_earnings()
 
-
+func calc_earnings() -> void:
+	earnings = time * ROOM_MULTI_TEMP
+	#print(earnings)
