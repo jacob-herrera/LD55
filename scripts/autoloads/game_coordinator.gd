@@ -22,19 +22,19 @@ static var state: GameState = GameState.HUB
 static var current_round: int = 0
 static var time: float = HUB_TIME
 
+static var DEV_timer_paused: bool = false
+
 func _process(delta: float) -> void:
-	time -= delta
+	if DEV_timer_paused == false:
+		time -= delta
 	if time <= FADE_DURATION:
 		anim_player.play("fade_out")
 	if time <= PLAYER_SUMMON_DURATION:
 		globals.character.summon_circle.start_anim()
 	if time <= 3:
 		ui.particles_on()
-	
-	
 	if time <= 0:
 		# Reset tween
-		globals.character.camera.tween_parameters.duration = PLAYER_CAMERA_DEFAULT_TWEEN
 		match state:
 			GameState.HUB:
 				state = GameState.COMBAT
@@ -47,5 +47,6 @@ func _process(delta: float) -> void:
 				current_round += 1
 		anim_player.play("fade_in")	
 		globals.character.summon_circle.stop_anim()
+		globals.character.camera.tween_parameters.duration = PLAYER_CAMERA_DEFAULT_TWEEN
 		ui.particles_off()
 
