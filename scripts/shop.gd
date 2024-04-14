@@ -5,27 +5,27 @@ var current_item = 0
 var in_shop = false
 var in_area: bool = false
 var pool = {
- 1: {archer = 3, knight = 3, farmer = 1},
- 2: {archer = 3, knight = 3, farmer = 3},
- 3: {archer = 1, knight = 1, farmer = 2, wizard = 2}
+ 1: {archer = [3, 5], knight = [3, 5], farmer = [1, 10]},
+ 2: {archer = [3, 5], knight = [3, 5], farmer = [3, 10]},
+ 3: {archer = [1, 5], knight = [1, 5], farmer = [2, 10], wizard = [2, 15]}
 }
 var current_display = []
 var rng = RandomNumberGenerator.new()
+var rerollPrice = 10
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var total = 0;
 	for val in pool[1].values():
-		total += val
+		total += val[0]
 	for i in range(cameras.size() - 1):
 		var idx = rng.randi_range(1, total)
 		var curRange = 0
 		for key in pool[1].keys():
-			curRange += pool[1][key]
+			curRange += pool[1][key][0]
 			if idx <= curRange:
-				current_display.append([key, false])
+				current_display.append([key, pool[1][key][1], false])
 				break
-		
-
+	print(current_display)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float):
 	if in_shop == true:
@@ -39,6 +39,21 @@ func _process(_delta: float):
 			current_item -= 1
 			current_item = current_item % cameras.size()
 			cameras[current_item].set_priority(20)
+		if Input.is_action_just_pressed("ui_up"):
+			if current_item != cameras.size() - 1 && current_display[current_item][0] != "purchased":
+				current_display[current_item][2] = !current_display[current_item][2]
+				print(current_display)
+		if Input.is_action_just_pressed("ui_down"):
+			if current_item != cameras.size() - 1:
+				if current_display[current_item][0] != "purchased" && Globals.coins - current_display[current_item][1] >= 0:
+					Globals.coins -= current_display[current_item][1]
+					current_display[current_item] = ["purchased", 0, false]
+					print(current_display)
+			else:
+				if Globals.coins - rerollPrice >= 0:
+					Globals.coins -= rerollPrice
+					reroll(1)
+					print(current_display)
 		if Input.is_action_just_pressed("ui_cancel"):
 			exit_shop()
 			
@@ -66,15 +81,16 @@ func _on_area_3d_body_exited(_body: Node3D):
 func reroll(roundNum: int) -> void:
 	var total = 0;
 	for val in pool[roundNum].values():
-		total += val
+		total += val[0]
 	for i in range(current_display.size()):
-		if(current_display[i][1] == true):
+		if(current_display[i][2] == true):
 			continue
 		var idx = rng.randi_range(1, total)
 		var curRange = 0
 		for key in pool[roundNum].keys():
-			curRange += pool[roundNum][key]
+			curRange += pool[roundNum][key][0]
 			if idx <= curRange:
 				current_display[i][0] = key
+				current_display[i][1] = pool[roundNum][key][1]
 				break
 	
