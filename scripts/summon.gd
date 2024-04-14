@@ -71,6 +71,18 @@ func do_attack() -> void:
 	proj.dir = get_center().direction_to(enemy.get_center())
 	proj.damage = damage
 	
+func do_explode() -> void:
+	var enemies: Array[Node] = get_tree().get_nodes_in_group(Enemy.GROUP)
+	var enemy: Enemy = Utils.get_closest_in_range(global_position, enemies, attack_range)
+	if global_position.distance_to(enemy.global_position) < 1:
+		# play trigger sound
+		
+		# wait one second
+		await get_tree().create_timer(0.5).timeout
+		# remove sprite from scene and play exploision sound
+		death()
+		# damage all enemeis in a radius
+	
 func do_buff() -> void:
 	# places nearby allies in array named "nearby"
 	var allies: Array[Node] = get_tree().get_nodes_in_group(Summon.GROUP)
@@ -84,3 +96,6 @@ func do_buff() -> void:
 	# iterate through array of nearby allies to change stats
 	for node : Node in nearby:
 		node.damage += 30
+
+func death() -> void:
+	pass
