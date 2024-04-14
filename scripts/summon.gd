@@ -50,15 +50,14 @@ func _ready() -> void:
 	
 	healthbar.initalize(max_health, col)
 	
-func _process(delta: float) -> void:
-	reset_to_base()
+func _process(delta: float) -> void:	
 	attack_cooldown -= delta
 	if aoe_range > 0:
 		do_buff()
 	if attack_range > 0 && attack_cooldown <= 0: 
 		attack_cooldown = 1.0 / attack_rate
 		do_attack()
-	
+	reset_to_base()
 func get_center() -> Vector3:
 	return col.global_position
 	
@@ -73,14 +72,15 @@ func do_attack() -> void:
 	proj.damage = damage
 	
 func do_buff() -> void:
+	# places nearby allies in array named "nearby"
 	var allies: Array[Node] = get_tree().get_nodes_in_group(Summon.GROUP)
-	var nearby: Array[Summon]
-	for node: Node in allies:
-		var node3d := node as Node3D
-		var dist: float = global_position.distance_to(node3d.global_position)
-		if dist < aoe_range:
+	var nearby: Array[Node]
+	var pos: Vector3 = global_position
+	for node : Node in allies:
+		var dist: float = pos.distance_to(node.global_position)
+		if dist > 0 && dist < aoe_range:
 			nearby.append(node)
-	# summon currently also buffs itself, so must set summon's attack rate to 0
-	
-	for summ in nearby:
-		summ.damage += 30
+		
+	# iterate through array of nearby allies to change stats
+	for node : Node in nearby:
+		node.damage += 30
