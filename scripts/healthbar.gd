@@ -18,4 +18,4 @@ func initalize(max_hp: int, col: CollisionShape3D, is_summon: bool) -> void:
 func update(value: int) -> void:
 	var percent: float = 1.0 - (float(value) / float(max_value))
 	var float_frame: float = percent * vframes
-	frame = clampi(ceil(float_frame), 0, vframes)
+	frame = clampi(ceil(float_frame), 0, vframes - 1)

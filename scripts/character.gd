@@ -157,7 +157,6 @@ func do_carry() -> void:
 		if carrying is Summon:
 			var summon: Summon = carrying as Summon
 			if summon.attack_range > 0:
-				print("here")
 				attack_range.visible = true
 				attack_range.size = Vector3(summon.attack_range*2,10,summon.attack_range*2)
 			if summon.aoe_range > 0:
