@@ -62,6 +62,7 @@ func exit_shop() -> void:
 		cam.set_priority(0)
 	Controls.lock_movement = false
 	in_shop = false
+	ui.shop.visible = false
 	
 func _on_area_3d_body_entered(_body: Node3D):
 	if in_area == false:
@@ -70,6 +71,7 @@ func _on_area_3d_body_entered(_body: Node3D):
 		Controls.lock_movement = true
 		cameras[0].set_priority(20)
 		current_item = 0
+		ui.shop.visible = true
 	
 func _on_area_3d_body_exited(_body: Node3D):
 	in_area = false
