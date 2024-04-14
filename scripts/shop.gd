@@ -24,13 +24,18 @@ func _ready():
 		for key in pool[1].keys():
 			curRange += pool[1][key][0]
 			if idx <= curRange:
-				current_display.append([key, pool[1][key][1], false])
+				current_display.append([key, pool[1][key][1], false, "lorem ipsum", 1, 1])
 				break
 	print(current_display)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float):
 	if in_shop == true:
+		
 		if(current_item == cameras.size() - 1):
+			ui.description.text = "Reroll"
+			ui.dps.text = ""
+			ui.health.text = "$" + str(rerollPrice)
+			ui.cost.text = ""
 			ui.freeze.visible = false;
 			ui.frozen.visible = false;
 			ui.purchase.visible = true;
@@ -44,11 +49,19 @@ func _process(_delta: float):
 				ui.frozen.visible = false;
 				
 			if(current_display[current_item][0] == null):
+				ui.description.text = ""
+				ui.dps.text = ""
+				ui.health.text = ""
+				ui.cost.text = ""
 				ui.freeze.visible = false;
 				ui.frozen.visible = false;
 				ui.purchase.visible = false;
 				ui.purchased.visible = true;
 			else:
+				ui.description.text = str(current_display[current_item][3])
+				ui.dps.text = "DPS:" + str(current_display[current_item][4])
+				ui.health.text = "HP:" + str(current_display[current_item][5])
+				ui.cost.text = "$" + str(current_display[current_item][1])
 				ui.purchase.visible = true;
 				ui.purchased.visible = false;
 		
@@ -69,6 +82,10 @@ func _process(_delta: float):
 			
 		if Input.is_action_just_pressed("ui_up"):
 			if current_item != cameras.size() - 1 && current_display[current_item][0] != null:
+				if current_display[current_item][2]:
+					ShopSounds[4].play()
+				else:
+					ShopSounds[3].play()
 				current_display[current_item][2] = !current_display[current_item][2]
 				print(current_display)
 				
@@ -77,7 +94,7 @@ func _process(_delta: float):
 				if current_display[current_item][0] != null && Globals.coins - current_display[current_item][1] >= 0:
 					Globals.coins -= current_display[current_item][1]
 					ShopSounds[0].play()
-					current_display[current_item] = [null, 0, false]
+					current_display[current_item] = [null, 0, false, "", 0, 0]
 					print(current_display)
 			else:
 				if Globals.coins - rerollPrice >= 0:
@@ -92,6 +109,7 @@ func _process(_delta: float):
 func exit_shop() -> void:
 	for cam: PhantomCamera3D in cameras:
 		cam.set_priority(0)
+	ShopSounds[2].play()
 	Controls.lock_movement = false
 	in_shop = false
 	ui.shop.visible = false
@@ -100,6 +118,7 @@ func _on_area_3d_body_entered(_body: Node3D):
 	if in_area == false:
 		in_area = true
 		in_shop = true
+		ShopSounds[2].play()
 		Controls.lock_movement = true
 		cameras[0].set_priority(20)
 		current_item = 0
@@ -124,7 +143,6 @@ func reroll(roundNum: int) -> void:
 		for key in pool[roundNum].keys():
 			curRange += pool[roundNum][key][0]
 			if idx <= curRange:
-				current_display[i][0] = key
-				current_display[i][1] = pool[roundNum][key][1]
+				current_display[i] = [key, pool[roundNum][key][1], false, "lorem ipsum", 1, 1]
 				break
 	

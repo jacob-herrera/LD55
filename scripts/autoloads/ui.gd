@@ -10,6 +10,10 @@ class_name UI
 @onready var frozen: Node = $shop_ui/frozen
 @onready var purchase: Node = $shop_ui/purchase
 @onready var purchased: Node = $shop_ui/purchased
+@onready var description: Node = $shop_ui/description
+@onready var dps: Node = $shop_ui/DPS
+@onready var health: Node = $shop_ui/health
+@onready var cost: Node = $shop_ui/cost
 @onready var screeen_particles: CPUParticles2D = $screen_particles
 
 func _process(_delta: float) -> void:
