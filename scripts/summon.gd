@@ -66,7 +66,6 @@ func do_attack() -> void:
 	var enemies: Array[Node] = get_tree().get_nodes_in_group(Enemy.GROUP)
 	var enemy: Enemy = Utils.get_closest_in_range(global_position, enemies, attack_range)
 	if enemy == null: return
-	print(damage)
 	var proj: Projectile = projectile.instantiate() as Projectile
 	get_tree().current_scene.add_child(proj)
 	proj.global_position = get_center()
@@ -75,7 +74,6 @@ func do_attack() -> void:
 	
 func do_buff() -> void:
 	var allies: Array[Node] = get_tree().get_nodes_in_group(Summon.GROUP)
-
 	var nearby: Array[Summon]
 	for node: Node in allies:
 		var node3d := node as Node3D
@@ -84,5 +82,5 @@ func do_buff() -> void:
 			nearby.append(node)
 	# summon currently also buffs itself, so must set summon's attack rate to 0
 	
-	for summ: Summon in nearby:
+	for summ in nearby:
 		summ.damage += 30

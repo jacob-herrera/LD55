@@ -7,6 +7,7 @@ extends Node
 @onready var enter_SFX: AudioStreamPlayer = $EnterExitShopSound
 @onready var freeze_SFX: AudioStreamPlayer = $FreezeSound
 @onready var steam_SFX: AudioStreamPlayer = $SteamSound
+@onready var dice_SFX: AudioStreamPlayer = $DiceRollSound
 
 var current_item = 0
 var in_shop = false
@@ -105,7 +106,7 @@ func _process(_delta: float):
 			else:
 				if Globals.coins - rerollPrice >= 0:
 					Globals.coins -= rerollPrice
-					purchase_SFX.play()
+					dice_SFX.play()
 					reroll(1)
 					print(current_display)
 					
