@@ -1,6 +1,8 @@
 extends Node3D
 class_name Utils
 
+var gold_dmg_display: PackedScene = preload("res://scenes/gold_dmg_display.tscn") 
+
 func death_animation(origin: Vector3, dir: Vector3, sprite: Sprite3D, shadow: Decal) -> void:
 	var node_death: Node3D = Node3D.new()
 	node_death.set_script(load("res://scripts/ragdoll_projectile.gd"))
@@ -16,7 +18,20 @@ func death_animation(origin: Vector3, dir: Vector3, sprite: Sprite3D, shadow: De
 	shadow_clone.position = shadow.position
 	node_death.global_position = origin
 	sprite_clone.billboard = BaseMaterial3D.BILLBOARD_DISABLED
+	
 	pass
+
+func gold_dmg_animation(sprite_loc: Vector3, is_gold: bool, val: int) -> void:
+	var gold_dmg_node: Label3D = gold_dmg_display.instantiate() as Label3D
+	get_tree().current_scene.add_child(gold_dmg_node)
+	gold_dmg_node.text = str(val)
+	gold_dmg_node.global_position = sprite_loc
+	gold_dmg_node.global_position.y += 0.25
+	if is_gold:
+		gold_dmg_node.modulate = Color(255, 213, 0)
+	print(gold_dmg_node.global_position)
+	await get_tree().create_timer(0.5).timeout
+	gold_dmg_node.queue_free()
 
 static func get_closest_in_range(to: Vector3, nodes: Array[Node], aoe_range: float) -> Node3D:
 	var closest: Node3D

@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cgbt11js81wko"]
+
+[node name="GoldDmgDisplay" type="Label3D"]
+text = "0
+"
+font_size = 64
