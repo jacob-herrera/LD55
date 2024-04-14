@@ -51,8 +51,11 @@ func _ready() -> void:
 	healthbar.initalize(max_health, col)
 	
 func _process(delta: float) -> void:
+	reset_to_base()
 	attack_cooldown -= delta
-	if attack_cooldown <= 0: 
+	if aoe_range > 0:
+		do_buff()
+	if attack_range > 0 && attack_cooldown <= 0: 
 		attack_cooldown = 1.0 / attack_rate
 		do_attack()
 	
@@ -63,14 +66,23 @@ func do_attack() -> void:
 	var enemies: Array[Node] = get_tree().get_nodes_in_group(Enemy.GROUP)
 	var enemy: Enemy = Utils.get_closest_in_range(global_position, enemies, attack_range)
 	if enemy == null: return
+	print(damage)
 	var proj: Projectile = projectile.instantiate() as Projectile
 	get_tree().current_scene.add_child(proj)
 	proj.global_position = get_center()
 	proj.dir = get_center().direction_to(enemy.get_center())
 	proj.damage = damage
 	
+func do_buff() -> void:
+	var allies: Array[Node] = get_tree().get_nodes_in_group(Summon.GROUP)
 
+	var nearby: Array[Summon]
+	for node: Node in allies:
+		var node3d := node as Node3D
+		var dist: float = global_position.distance_to(node3d.global_position)
+		if dist < aoe_range:
+			nearby.append(node)
+	# summon currently also buffs itself, so must set summon's attack rate to 0
 	
-	
-
-	
+	for summ: Summon in nearby:
+		summ.damage += 30
