@@ -1,4 +1,4 @@
-[gd_scene load_steps=85 format=3 uid="uid://dnpi8mksbjqnn"]
+[gd_scene load_steps=86 format=3 uid="uid://dnpi8mksbjqnn"]
 
 [ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map.gd" id="1_fle1t"]
 [ext_resource type="Resource" uid="uid://btwxy5brwdbg4" path="res://fgd/map_settings.tres" id="2_obqiq"]
@@ -21,6 +21,7 @@
 [ext_resource type="Resource" uid="uid://be15co36abbxx" path="res://assets/cam_tween_shop.tres" id="16_uunvf"]
 [ext_resource type="Script" path="res://scripts/mana_pool.gd" id="17_5wmwc"]
 [ext_resource type="PackedScene" path="res://scenes/summon_circle.tscn" id="17_q38df"]
+[ext_resource type="AudioStream" uid="uid://dyg4t4nair6l8" path="res://assets/audio/player_teleport.mp3" id="18_25tfw"]
 [ext_resource type="AudioStream" uid="uid://d1fuxqmu8xp5a" path="res://assets/audio/summon_pickup.mp3" id="18_j0qpv"]
 [ext_resource type="AudioStream" uid="uid://cgtdd5x6h26sj" path="res://assets/audio/summon_place_new.mp3" id="19_pgqx0"]
 [ext_resource type="AudioStream" uid="uid://bls3hxlr2qynn" path="res://assets/audio/mana_pickup.mp3" id="20_8o20s"]
@@ -913,6 +914,10 @@ inactive_update_mode = 0
 camera_3D_resource = ExtResource("16_6jxv8")
 
 [node name="summon_circle" parent="Character" instance=ExtResource("17_q38df")]
+
+[node name="Teleport" type="AudioStreamPlayer3D" parent="Character/summon_circle"]
+stream = ExtResource("18_25tfw")
+bus = &"Effects"
 
 [node name="SummonPickup" type="AudioStreamPlayer3D" parent="Character"]
 stream = ExtResource("18_j0qpv")
