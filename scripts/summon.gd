@@ -17,7 +17,7 @@ enum Type {
 }
 
 @export_category("Base Stats")
-## Attack range (RADIUS)
+## Attack range
 @export var base_attack_range: float
 ## Attacks per second
 @export var base_attack_rate: float
@@ -31,7 +31,9 @@ enum Type {
 @export var range_type: RangeType
 
 var attack_cooldown: float
+
 var health: int
+
 var attack_range: float
 var attack_rate: float
 var damage: int

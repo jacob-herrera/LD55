@@ -3,10 +3,7 @@ class_name Character
 
 @onready var main_sprite: Sprite3D = $MainSprite
 @onready var jump_sprite: Sprite3D = $JumpSprite
-@onready var aoe_range: Sprite3D = $AOERange
-@onready var attack_range: Sprite3D = $AttackRange
-
-
+@onready var range_sprite: Sprite3D = $RangeSprite
 @onready var anim_player: AnimationPlayer = $AnimationPlayer
 @onready var summon_circle: SummonCircle = $summon_circle
 @onready var summon_pickup: AudioStreamPlayer3D = $SummonPickup
@@ -144,8 +141,7 @@ func _physics_process(delta: float) -> void:
 		
 func do_carry() -> void:
 	if carrying == null:
-		aoe_range.visible = false
-		attack_range.visible = false
+		range_sprite.visible = false
 		var carriables: Array[Node] = get_tree().get_nodes_in_group(Carriable.GROUP)
 		var closest: Node3D = Utils.get_closest_in_range(global_position, carriables, 1.0)
 		if Controls.try_pickup() and closest != null:
@@ -153,14 +149,8 @@ func do_carry() -> void:
 			summon_pickup.play()
 	elif carrying != null:
 		carrying.global_position = global_position + Vector3(0, 0.7 ,0)
-		if carrying is Summon:
-			var summon := carrying as Summon
-			if summon.aoe_range > 0:
-				aoe_range.visible = true			
-				aoe_range.scale = Vector3(summon.aoe_range*2,1,summon.aoe_range*2)
-			if summon.attack_range > 0:
-				attack_range.visible = true
-				attack_range.scale = Vector3(summon.attack_range*2,1,summon.attack_range*2)
+		if carrying.type == Summon.Type.SNOWMAN:
+			range_sprite.visible = true			
 		if Controls.try_pickup():
 			# raycast to floor
 			var space_rid := get_world_3d().space
