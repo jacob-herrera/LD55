@@ -13,3 +13,6 @@ func spawn_enemy(enemy_name: String, pos: Vector3) -> void:
 	var enemy: Enemy = scene.instantiate() as Enemy
 	get_tree().current_scene.add_child(enemy)
 	enemy.global_position = pos
+
+func remove_enemy() -> void:
+	get_tree().call_group("Enemy", "die")

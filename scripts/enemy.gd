@@ -70,6 +70,8 @@ func _physics_process(delta: float) -> void:
 	var summon: Summon = Utils.get_closest_in_range(global_position, summons, SUMMON_SEARCH_RADIUS)
 	if summon != null:
 		target = summon.global_position
+	else:
+		target = globals.character.global_position
 	
 	var direction: Vector3 = Vector3.ZERO
 	
@@ -121,5 +123,7 @@ func take_damage(damage_taking: int, damage_dir: Vector3) -> void:
 		Globals.coins += gold_value
 		utils.death_animation(global_position, damage_dir, sprite)
 		utils.spawn_number(get_top(), true, gold_value)
-		queue_free()
-	
+		die()
+
+func die():
+	queue_free()

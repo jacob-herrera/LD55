@@ -24,6 +24,7 @@ const COMBAT_TIME: float = 30.0
 static var room_multiplier: float = 0
 
 static var current_room: Room = Room.HUB
+static var num_enemies: int = 3
 static var current_round: int = 0
 static var time: float = HUB_TIME
 
@@ -80,13 +81,20 @@ func spawn_enemy_in_current_room() -> void:
 	enemy_manager.spawn_enemy("test", rand_pos)
 	
 func goto_room(target_room: Room) -> void:
+	# extra call to remove enemy for dev teleporting
+	if current_room != Room.HUB:
+		enemy_manager.remove_enemy()
 	current_room = target_room
 	match target_room:
 		Room.HUB:
 			time = HUB_TIME
-		_:
+		_:			
 			time = COMBAT_TIME
 			current_round += 1
+			for i in range(num_enemies):
+				spawn_enemy_in_current_room()
+			# extra call to increment num_enemies for dev teleporting
+			num_enemies += 1
 			
 	globals.character.global_position = room_data[target_room].player_spawn
 	anim_player.play("fade_in")	
@@ -113,7 +121,9 @@ func _process(delta: float) -> void:
 				print(room)
 				goto_room(room)
 			_:
+				enemy_manager.remove_enemy
 				goto_room(Room.HUB)
+				num_enemies += 1
 	calc_earnings()
 
 func calc_earnings() -> int:
