@@ -15,6 +15,7 @@ class_name UI
 @onready var dps: Node = $shop_ui/DPS
 @onready var health: Node = $shop_ui/health
 @onready var cost: Node = $shop_ui/cost
+@onready var reroll_cost: Node = $shop_ui/rerollCost
 @onready var screeen_particles: CPUParticles2D = $screen_particles
 @onready var current_round: Label = %round
 @onready var summon_ui: Panel = $summon_ui 
