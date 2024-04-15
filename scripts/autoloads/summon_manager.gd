@@ -3,7 +3,9 @@ class_name SummonManager
 
 const SUMMON_SCENES: Dictionary = {
 	"wizard": preload("res://scenes/summons/wizard_summon.tscn"),
-	"snowman": preload("res://scenes/summons/snowman_summon.tscn")
+	"snowman": preload("res://scenes/summons/snowman_summon.tscn"),
+	"cleric": preload("res://scenes/summons/cleric_summon.tscn"),
+	"shield": preload("res://scenes/summons/shield_summon.tscn")
 }
 
 var temp_preview: PackedScene = preload("res://scenes/temp_preview.tscn")

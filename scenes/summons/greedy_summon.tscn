@@ -1,0 +1,53 @@
+[gd_scene load_steps=9 format=3 uid="uid://cdo4urp5idpg1"]
+
+[ext_resource type="Script" path="res://scripts/summon.gd" id="1_dvuiq"]
+[ext_resource type="Texture2D" uid="uid://djhkf5s85u2eb" path="res://assets/summon_wizard.png" id="2_4e535"]
+[ext_resource type="Script" path="res://scripts/carriable.gd" id="3_k4sfo"]
+[ext_resource type="PackedScene" uid="uid://bk2528lpxk3ek" path="res://scenes/healthbar.tscn" id="4_h1k8o"]
+[ext_resource type="Texture2D" uid="uid://2ljib8g6rii4" path="res://assets/shadow.png" id="5_cne4q"]
+[ext_resource type="AudioStream" uid="uid://f0t4iidnaqa6" path="res://assets/audio/summon_damaged.mp3" id="6_2vkuo"]
+[ext_resource type="AudioStream" uid="uid://dxgq4ttkwo0o2" path="res://assets/audio/summon_killed.mp3" id="7_u22i8"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_t6qms"]
+size = Vector3(0.5, 1.12292, 0.5)
+
+[node name="greedy_summon" type="AnimatableBody3D"]
+collision_layer = 16
+script = ExtResource("1_dvuiq")
+base_attack_range = 5.0
+base_attack_rate = 2.0
+base_damage = 1
+base_max_health = 10
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, 0)
+layers = 2
+pixel_size = 0.04
+billboard = 2
+texture_filter = 0
+texture = ExtResource("2_4e535")
+
+[node name="Carriable" type="Node" parent="."]
+script = ExtResource("3_k4sfo")
+
+[node name="healthbar" parent="." instance=ExtResource("4_h1k8o")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.561462, 0)
+shape = SubResource("BoxShape3D_t6qms")
+
+[node name="Shadow" type="Sprite3D" parent="."]
+transform = Transform3D(3, 0, 0, 0, -1.31134e-07, -3, 0, 3, -1.31134e-07, 0, 0.01, 0)
+layers = 4
+modulate = Color(1, 1, 1, 0.74902)
+texture_filter = 0
+texture = ExtResource("5_cne4q")
+
+[node name="Hurt" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("6_2vkuo")
+max_polyphony = 4
+bus = &"Effects"
+
+[node name="Killed" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("7_u22i8")
+bus = &"Effects"

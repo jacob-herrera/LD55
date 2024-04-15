@@ -8,6 +8,7 @@ enum CanHit {
 
 @export var fireball_texture: CompressedTexture2D
 @export var snowball_texture: CompressedTexture2D
+@export var arrow_texture: CompressedTexture2D
 @export var trying_to_hit: CanHit
 @export var dir: Vector3
 @export var speed: float = 10.0 # Default to 10 units per second

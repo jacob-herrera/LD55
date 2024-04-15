@@ -1,0 +1,56 @@
+[gd_scene load_steps=9 format=3 uid="uid://f2y6e3bwmrcr"]
+
+[ext_resource type="Script" path="res://scripts/summon.gd" id="1_aem7j"]
+[ext_resource type="Texture2D" uid="uid://c8bllwsof0ql3" path="res://assets/summon_snowman.png" id="2_l75gf"]
+[ext_resource type="Texture2D" uid="uid://2ljib8g6rii4" path="res://assets/shadow.png" id="3_vibng"]
+[ext_resource type="Script" path="res://scripts/carriable.gd" id="4_d2ng7"]
+[ext_resource type="PackedScene" uid="uid://bk2528lpxk3ek" path="res://scenes/healthbar.tscn" id="5_s62xr"]
+[ext_resource type="AudioStream" uid="uid://f0t4iidnaqa6" path="res://assets/audio/summon_damaged.mp3" id="6_04n4f"]
+[ext_resource type="AudioStream" uid="uid://dxgq4ttkwo0o2" path="res://assets/audio/summon_killed.mp3" id="7_hqmci"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_t6qms"]
+size = Vector3(0.5, 1.12292, 0.5)
+
+[node name="cleric_summon" type="AnimatableBody3D"]
+collision_layer = 16
+script = ExtResource("1_aem7j")
+base_damage = 2
+base_max_health = 10
+base_aoe_range = 2.5
+aoe_effects = {
+"damage": 2
+}
+type = 1
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, 0)
+layers = 2
+pixel_size = 0.04
+billboard = 2
+texture_filter = 0
+texture = ExtResource("2_l75gf")
+
+[node name="Shadow" type="Sprite3D" parent="."]
+transform = Transform3D(3, 0, 0, 0, -1.31134e-07, -3, 0, 3, -1.31134e-07, 0, 0.01, 0)
+layers = 4
+modulate = Color(1, 1, 1, 0.74902)
+texture_filter = 0
+texture = ExtResource("3_vibng")
+
+[node name="Carriable" type="Node" parent="."]
+script = ExtResource("4_d2ng7")
+
+[node name="healthbar" parent="." instance=ExtResource("5_s62xr")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.561462, 0)
+shape = SubResource("BoxShape3D_t6qms")
+
+[node name="Hurt" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("6_04n4f")
+bus = &"Effects"
+
+[node name="Killed" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("7_hqmci")
+max_polyphony = 4
+bus = &"Effects"

@@ -16,6 +16,14 @@ enum RangeType { RANGED, MELEE }
 enum Type {
 	WIZARD,
 	SNOWMAN,
+	ARCHER,
+	BARD,
+	CLERIC,
+	CLOCKHEAD, 
+	GREEDY,
+	KNIGHT,
+	RABBIT,
+	SHIELD,
 }
 
 const TYPE_TO_STRING: Dictionary = {
