@@ -138,6 +138,8 @@ func _process(delta: float) -> void:
 		
 	
 	enemy_manager.recalc_remaining_enemies()
+	if current_room != Room.HUB && enemy_manager.current_room_remaining_enemies == 0 && time > PLAYER_SUMMON_DURATION:
+		time = PLAYER_SUMMON_DURATION
 	
 	if time <= 0:
 		match current_room:
