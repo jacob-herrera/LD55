@@ -390,7 +390,7 @@ grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_kimud")
 
 [node name="Button" type="SubViewportContainer" parent="summon_ui"]
-modulate = Color(1, 1, 1, 0.501961)
+modulate = Color(1, 1, 1, 0.25098)
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 0
 offset_left = 8.0
@@ -409,7 +409,8 @@ transform = Transform3D(1, 0, 0, 0, 0.906308, 0.422618, 0, -0.422618, 0.906308, 
 fov = 40.0
 far = 20.0
 
-[node name="Button2" type="SubViewportContainer" parent="summon_ui"]
+[node name="middle_container" type="SubViewportContainer" parent="summon_ui"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 1
 anchors_preset = 8
@@ -424,19 +425,19 @@ offset_bottom = 64.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="SubViewport" type="SubViewport" parent="summon_ui/Button2"]
+[node name="SubViewport" type="SubViewport" parent="summon_ui/middle_container"]
 handle_input_locally = false
 size = Vector2i(128, 128)
 render_target_update_mode = 0
 
-[node name="preview2" type="Camera3D" parent="summon_ui/Button2/SubViewport"]
+[node name="preview2" type="Camera3D" parent="summon_ui/middle_container/SubViewport"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 0.906308, 0.422618, 0, -0.422618, 0.906308, 0, 0, 0)
 fov = 40.0
 far = 20.0
 
 [node name="Button3" type="SubViewportContainer" parent="summon_ui"]
-modulate = Color(1, 1, 1, 0.501961)
+modulate = Color(1, 1, 1, 0.25098)
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 1
 anchors_preset = 1
