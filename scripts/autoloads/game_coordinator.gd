@@ -59,7 +59,10 @@ func DEV():
 	if Input.is_action_just_pressed("dev_goto_room3"):
 		goto_room(Room.ROOM_3)
 	if Input.is_action_just_pressed("dev_spawn_enemy"):
-		enemy_manager.spawn_enemy("test", globals.character.global_position)
+		if current_room != Room.HUB:
+			spawn_enemy_in_current_room()
+		else:
+			enemy_manager.spawn_enemy("test", globals.character.global_position)
 	if Input.is_action_just_pressed("dev_spawn_summon"):
 		summon_manager.give_player_summon("wizard")
 		
@@ -71,6 +74,10 @@ static func register_room(node: Node3D, room: Room) -> void:
 			room_data[room].player_spawn = marker.global_position
 		elif marker.name.begins_with("EnemySpawn"):
 			room_data[room].enemy_spawns.append(marker.global_position)
+	
+func spawn_enemy_in_current_room() -> void:
+	var rand_pos: Vector3 = room_data[current_room].enemy_spawns.pick_random()
+	enemy_manager.spawn_enemy("test", rand_pos)
 	
 func goto_room(target_room: Room) -> void:
 	current_room = target_room
