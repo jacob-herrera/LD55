@@ -8,7 +8,6 @@
 radius = 0.2
 
 [node name="Projectile" type="Sprite3D"]
-modulate = Color(1, 0.552941, 0.388235, 1)
 pixel_size = 0.04
 billboard = 1
 texture_filter = 0
