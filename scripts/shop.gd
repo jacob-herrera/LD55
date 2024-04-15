@@ -16,13 +16,21 @@ var in_shop = false
 var debounce: bool = false
 
 var pool = {
- 1: {archer = [3, 5], knight = [3, 5], farmer = [1, 10]},
- 2: {archer = [3, 5], knight = [3, 5], farmer = [3, 10]},
- 3: {archer = [1, 5], knight = [1, 5], farmer = [2, 10], wizard = [2, 15]}
+	1: {0: [3, 5], 1: [1, 10]},
+	2: {0: [2, 5], 1: [2, 10]},
 }
+
+var pedestal_locaction = {
+	0: Vector3(-4.5, 0.5, -5.5),
+	1: Vector3(-3, 0.5, -5.5),
+	2: Vector3(-1.5, 0.5, -5.5),
+	3: Vector3(0, 0.5, -5.5),
+}
+
 var current_display = []
 var rng = RandomNumberGenerator.new()
 var rerollPrice = 10
+var preview_arr = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -35,7 +43,11 @@ func _ready():
 		for key in pool[1].keys():
 			curRange += pool[1][key][0]
 			if idx <= curRange:
-				current_display.append([key, pool[1][key][1], false, "lorem ipsum", 1, 1])
+				current_display.append([Summon.TYPE_TO_STRING[key], pool[1][key][1], false, "lorem ipsum", 1, 1])
+				var preview: Node3D = summon_manager.get_preview_of_summon(key)
+				self.add_child(preview)
+				preview.global_position = pedestal_locaction[i]
+				preview_arr.append(preview)
 				break
 	print(current_display)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -110,6 +122,7 @@ func _process(_delta: float):
 					Globals.coins -= current_display[current_item][1]
 					purchase_SFX.play()
 					current_display[current_item] = [null, 0, false, "", 0, 0]
+					preview_arr[current_item].queue_free()
 					print(current_display)
 			else:
 				if Globals.coins - rerollPrice >= 0:
@@ -196,11 +209,17 @@ func reroll(roundNum: int) -> void:
 	for i in range(current_display.size()):
 		if(current_display[i][2] == true):
 			continue
+		if preview_arr[i] != null:
+			preview_arr[i].queue_free()
 		var idx = rng.randi_range(1, total)
 		var curRange = 0
 		for key in pool[roundNum].keys():
 			curRange += pool[roundNum][key][0]
 			if idx <= curRange:
-				current_display[i] = [key, pool[roundNum][key][1], false, "lorem ipsum", 1, 1]
+				current_display[i] = [Summon.TYPE_TO_STRING[key], pool[roundNum][key][1], false, "lorem ipsum", 1, 1]
+				var preview: Node3D = summon_manager.get_preview_of_summon(key)
+				self.add_child(preview)
+				preview.global_position = pedestal_locaction[i]
+				preview_arr[i] = preview
 				break
 	
