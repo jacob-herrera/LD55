@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bhkryx6iyvbay"]
+[gd_scene load_steps=12 format=3 uid="uid://bhkryx6iyvbay"]
 
 [ext_resource type="Script" path="res://scripts/autoloads/ui.gd" id="1_jrdqv"]
 [ext_resource type="FontFile" uid="uid://ey5uk5evoi8o" path="res://assets/nes.ttf" id="1_rg5ws"]
@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://dafno5ot5nbi" path="res://assets/audio/swipe.mp3" id="4_e6ab6"]
 [ext_resource type="AudioStream" uid="uid://b20mpeoqvfmfa" path="res://assets/audio/open_preview.mp3" id="5_gm12l"]
 [ext_resource type="AudioStream" uid="uid://de70lofhcg7fo" path="res://assets/audio/close_preview.mp3" id="6_ulsur"]
+[ext_resource type="Texture2D" uid="uid://baahi8fbu5g6g" path="res://assets/temp_char.png" id="7_f7jju"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ub2k2"]
 bg_color = Color(0, 0, 0, 1)
@@ -34,7 +35,7 @@ border_width_top = 4
 border_width_right = 4
 border_color = Color(0.219608, 0.219608, 0.219608, 1)
 
-[node name="ui" type="Control"]
+[node name="ui" type="Control" groups=["UI"]]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -533,3 +534,26 @@ stream = ExtResource("6_ulsur")
 volume_db = 5.571
 max_polyphony = 4
 bus = &"Effects"
+
+[node name="Lives" type="Node2D" parent="."]
+
+[node name="Life_1" type="Sprite2D" parent="Lives"]
+position = Vector2(932, 64)
+scale = Vector2(3, 3)
+texture = ExtResource("7_f7jju")
+region_enabled = true
+region_rect = Rect2(0, 0, 15.2037, 16.5394)
+
+[node name="Life_2" type="Sprite2D" parent="Lives"]
+position = Vector2(881, 64)
+scale = Vector2(3, 3)
+texture = ExtResource("7_f7jju")
+region_enabled = true
+region_rect = Rect2(0, 0, 15.2037, 16.5394)
+
+[node name="Life_3" type="Sprite2D" parent="Lives"]
+position = Vector2(830, 64)
+scale = Vector2(3, 3)
+texture = ExtResource("7_f7jju")
+region_enabled = true
+region_rect = Rect2(0, 0, 15.2037, 16.5394)

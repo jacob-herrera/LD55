@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://dpkroy6d47sog"]
+
+[ext_resource type="Script" path="res://scenes/gameover.gd" id="1_k5m6s"]
+[ext_resource type="FontFile" uid="uid://ey5uk5evoi8o" path="res://assets/nes.ttf" id="2_v4i8s"]
+
+[node name="gameover" type="CanvasLayer"]
+script = ExtResource("1_k5m6s")
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 272.0
+offset_top = 224.0
+offset_right = -544.0
+offset_bottom = -293.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(3, 3)
+theme_override_fonts/font = ExtResource("2_v4i8s")
+text = "Game Over"
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -97,9 +97,10 @@ func spawn_enemy_in_current_room() -> void:
 	enemy_manager.spawn_enemy("test", rand_pos)
 	
 func goto_room(target_room: Room) -> void:
-	# extra call to remove enemy for dev teleporting
+	# extra call to remove and check enemis for dev teleporting
 	if current_room != Room.HUB:
-		enemy_manager.remove_enemy()
+		enemy_manager.check_enemies()
+		enemy_manager.remove_enemies()
 	current_room = target_room
 	match target_room:
 		Room.HUB:
@@ -136,7 +137,7 @@ func _process(delta: float) -> void:
 				var room: Room = randi_range(1,3) as Room
 				goto_room(room)
 			_:
-				enemy_manager.remove_enemy
+				enemy_manager.remove_enemies
 				goto_room(Room.HUB)
 				num_enemies += 1
 	calc_earnings()

@@ -25,6 +25,9 @@ class_name UI
 @onready var swipe: AudioStreamPlayer = $summon_ui/Swipe
 @onready var open: AudioStreamPlayer = $summon_ui/Open
 @onready var close: AudioStreamPlayer = $summon_ui/Close
+@onready var life_1: Sprite2D = $Lives/Life_1
+@onready var life_2: Sprite2D = $Lives/Life_2
+@onready var life_3: Sprite2D = $Lives/Life_3
 
 @onready var middle_container: SubViewportContainer = %middle_container
 @onready var summon_left_arrow: Label = %summon_left_arrow
@@ -36,7 +39,7 @@ const OOB: Vector3 = Vector3(0, -100, 0)
 var summons: Array[Summon] = []
 var selected: int
 var selection_max: int
-
+	
 func _process(_delta: float) -> void:
 	coins_label.text = "$" + str(Globals.coins)
 	earnings.text = "REWARD $" +str(game_coordinator.calc_earnings())
@@ -46,6 +49,14 @@ func _process(_delta: float) -> void:
 	fps.text = "FPS:" + str(Engine.get_frames_per_second())
 	current_round.text = "ROUND:" + str(GameCoordinator.current_round)
 	toggle_earnings()
+	
+	if globals.lives == 2:
+		life_3.hide()
+	if globals.lives == 1:
+		life_2.hide()
+	if globals.lives == 0:
+		get_tree().call_group("UI", "clear")
+		get_tree().change_scene_to_file("res://scenes/gameover.tscn")
 	
 	if Input.is_action_just_pressed("ui_right"):
 		selected += 1
@@ -156,3 +167,6 @@ func toggle_earnings() -> void:
 func play_swipe() -> void:
 	if summon_ui.visible:
 		swipe.play()
+		
+func clear() -> void:
+	queue_free()
