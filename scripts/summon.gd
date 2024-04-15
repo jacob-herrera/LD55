@@ -87,6 +87,7 @@ func do_ranged() -> void:
 	var enemy: Enemy = Utils.get_closest_in_range(global_position, enemies, attack_range) as Enemy
 	if enemy == null: return
 	var proj: Projectile = projectile.instantiate() as Projectile
+	proj.initalize(type)
 	get_tree().current_scene.add_child(proj)
 	proj.global_position = get_center()
 	proj.dir = get_center().direction_to(get_intercept(proj.global_position, proj.speed, enemy.get_center(), enemy.velocity))
