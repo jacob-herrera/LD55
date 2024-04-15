@@ -1,0 +1,14 @@
+[remap]
+
+importer="func_godot.map"
+type="Resource"
+uid="uid://db1ji5nryfpc0"
+path="res://.godot/imported/game.9.map-d63d1fbf8d3cbf36795c570cc24e70e8.tres"
+
+[deps]
+
+source_file="res://trenchbroom/autosave/game.9.map"
+dest_files=["res://.godot/imported/game.9.map-d63d1fbf8d3cbf36795c570cc24e70e8.tres"]
+
+[params]
+
