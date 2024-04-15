@@ -6,6 +6,8 @@ static var current_room_remaining_enemies: int = 0
 
 const ENEMY_SCENES: Dictionary = {
 	"test": preload("res://scenes/enemies/enemy.tscn"),
+	"basic": preload("res://scenes/enemies/basic.tscn"),
+	"strong": preload("res://scenes/enemies/strong.tscn")
 }
 
 func spawn_enemy(enemy_name: String, pos: Vector3) -> void:

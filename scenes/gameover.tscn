@@ -1,7 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://dpkroy6d47sog"]
+[gd_scene load_steps=5 format=3 uid="uid://dpkroy6d47sog"]
 
-[ext_resource type="Script" path="res://scenes/gameover.gd" id="1_k5m6s"]
+[ext_resource type="Script" path="res://scripts/gameover.gd" id="1_k5m6s"]
 [ext_resource type="FontFile" uid="uid://ey5uk5evoi8o" path="res://assets/nes.ttf" id="2_v4i8s"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_tmyi4"]
+device = -1
+pressed = true
+keycode = 32
+unicode = 32
+
+[sub_resource type="Shortcut" id="Shortcut_o3egc"]
+events = [SubResource("InputEventKey_tmyi4")]
 
 [node name="gameover" type="CanvasLayer"]
 script = ExtResource("1_k5m6s")
@@ -21,3 +30,16 @@ theme_override_fonts/font = ExtResource("2_v4i8s")
 text = "Game Over"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="retry" type="Button" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 400.0
+offset_top = 336.0
+offset_right = -399.0
+offset_bottom = -173.0
+shortcut = SubResource("Shortcut_o3egc")
+text = "Press space to retry"
+
+[connection signal="pressed" from="retry" to="." method="_on_retry_pressed"]

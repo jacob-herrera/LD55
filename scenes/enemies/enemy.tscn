@@ -23,7 +23,7 @@ attack_damage = 1
 gold_value = 5
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.295127, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
 layers = 2
 flip_h = true
 modulate = Color(1, 0.541176, 0.541176, 1)

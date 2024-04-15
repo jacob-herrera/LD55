@@ -157,8 +157,8 @@ func check_lives() -> void:
 		life_2.hide()
 	if globals.lives == 0:
 		life_1.hide()
-		#get_tree().call_group("UI", "clear")
-		#get_tree().change_scene_to_file("res://scenes/gameover.tscn")
+		ui.visible = false
+		get_tree().change_scene_to_file("res://scenes/gameover.tscn")
 	
 func exit_summon_ui() -> void:
 	Globals.is_in_summon_ui = false

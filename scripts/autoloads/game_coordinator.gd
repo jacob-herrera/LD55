@@ -27,6 +27,7 @@ static var current_room: Room = Room.HUB
 static var num_enemies: int = 3
 static var current_round: int = 0
 static var time: float = HUB_TIME
+static var enemy_order: Array = ["basic", "basic", "basic", "strong"]
 
 static var DEV_timer_paused: bool = false
 
@@ -93,8 +94,9 @@ static func register_room(node: Node3D, room: Room) -> void:
 			room_data[room].enemy_spawns.append(marker.global_position)
 
 func spawn_enemy_in_current_room() -> void:
-	var rand_pos: Vector3 = room_data[current_room].enemy_spawns.pick_random()
-	enemy_manager.spawn_enemy("test", rand_pos)
+	for i in range(num_enemies):
+		var rand_pos: Vector3 = room_data[current_room].enemy_spawns.pick_random()
+		enemy_manager.spawn_enemy(enemy_order[i % enemy_order.size()], rand_pos)	
 	
 func goto_room(target_room: Room) -> void:
 	# extra call to remove and check enemis for dev teleporting
@@ -112,8 +114,7 @@ func goto_room(target_room: Room) -> void:
 			EnemyManager.current_room_max_enemies = num_enemies
 			EnemyManager.current_room_remaining_enemies = num_enemies
 			enemy_manager.remove_enemies()
-			for i in range(num_enemies):
-				spawn_enemy_in_current_room()
+			spawn_enemy_in_current_room()
 	
 	globals.character.global_position = room_data[target_room].player_spawn
 	anim_player.play("fade_in")	
