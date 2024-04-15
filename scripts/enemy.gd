@@ -6,6 +6,7 @@ class_name Enemy
 @onready var shadow: Sprite3D = $Shadow
 @onready var healthbar: Healthbar = $healthbar
 @onready var agent: NavigationAgent3D = $NavigationAgent3D
+@onready var hurt: AudioStreamPlayer3D = $Hurt
 
 @export var max_health: int
 @export var move_speed: float
@@ -113,6 +114,7 @@ func take_damage(damage_taking: int, damage_dir: Vector3) -> void:
 	health -= damage_taking
 	var top: Vector3 = Utils.get_top_of_box(col)
 	utils.spawn_number(top, false, damage_taking)
+	hurt.play()
 	if health <= 0:
 		Globals.coins += gold_value
 		utils.death_animation(global_position, damage_dir, sprite)

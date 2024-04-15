@@ -49,4 +49,5 @@ bus = &"Effects"
 
 [node name="Killed" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("7_7qubf")
+max_polyphony = 4
 bus = &"Effects"

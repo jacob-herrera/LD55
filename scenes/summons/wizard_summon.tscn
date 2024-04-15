@@ -45,6 +45,7 @@ texture = ExtResource("3_v3pjj")
 
 [node name="Hurt" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("6_a63ox")
+max_polyphony = 4
 bus = &"Effects"
 
 [node name="Killed" type="AudioStreamPlayer3D" parent="."]

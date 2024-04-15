@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://cifn30ouagfjp"]
+[gd_scene load_steps=7 format=3 uid="uid://cifn30ouagfjp"]
 
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_iar1l"]
 [ext_resource type="Texture2D" uid="uid://dl247yikdxjdm" path="res://icon.svg" id="2_sh2n6"]
 [ext_resource type="Texture2D" uid="uid://2ljib8g6rii4" path="res://assets/shadow.png" id="3_ovrun"]
 [ext_resource type="PackedScene" uid="uid://bk2528lpxk3ek" path="res://scenes/healthbar.tscn" id="5_nhedk"]
+[ext_resource type="AudioStream" uid="uid://ckh8f20j56bri" path="res://assets/audio/enemy_damaged.mp3" id="5_qjigg"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_foljy"]
 radius = 0.125
@@ -48,3 +49,8 @@ layers = 4
 modulate = Color(1, 1, 1, 0.74902)
 texture_filter = 0
 texture = ExtResource("3_ovrun")
+
+[node name="Hurt" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("5_qjigg")
+max_polyphony = 4
+bus = &"Effects"
