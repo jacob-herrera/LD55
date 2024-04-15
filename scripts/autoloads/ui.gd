@@ -19,6 +19,16 @@ class_name UI
 @onready var screeen_particles: CPUParticles2D = $screen_particles
 @onready var current_round: Label = %round
 @onready var summon_ui: Panel = $summon_ui 
+@onready var preview1: Camera3D = %preview1
+@onready var preview2: Camera3D = %preview2
+@onready var preview3: Camera3D = %preview3
+
+const PREVIEW_OFFSET: Vector3 = Vector3(0, 1, 2)
+const OOB: Vector3 = Vector3(0, -100, 0)
+
+var summons: Array[Summon] = []
+var selected: int
+var selection_max: int
 
 func _process(_delta: float) -> void:
 	coins_label.text = "$" + str(Globals.coins)
@@ -30,10 +40,61 @@ func _process(_delta: float) -> void:
 	current_round.text = "ROUND:" + str(GameCoordinator.current_round)
 	toggle_earnings()
 	
+	if Input.is_action_just_pressed("ui_right"):
+		selected += 1
+		selected = clampi(selected, 0, selection_max)
+		preview_summons()
+	if Input.is_action_just_pressed("ui_left"):
+		selected -= 1
+		selected = clampi(selected, 0, selection_max)
+		preview_summons()
+		
 func enter_summon_ui() -> void:
+	Controls.lock_movement = true
+	Globals.is_in_summon_ui = true
+	
 	summon_ui.visible = true
+
+	summons.clear()
+	for node: Node in get_tree().get_nodes_in_group(Summon.GROUP):
+		if not node is Summon: printerr("wtf"); continue
+		var summon := node as Summon
+		summons.append(summon)
+	selection_max = summons.size() - 1
+	
+	preview_summons()
+	
+		
+func preview_summons() -> void:
+	var selected_summon: Summon = null
+	var previous_summon: Summon = null
+	var next_summon: Summon = null
+	
+	if selected - 1 >= 0:
+		previous_summon = summons[selected - 1]
+	if selected + 1 < summons.size():
+		next_summon = summons[selected + 1]
+	if not summons.is_empty():
+		selected_summon = summons[selected]
+		
+	if is_instance_valid(previous_summon):
+		preview1.global_position = previous_summon.get_center() + PREVIEW_OFFSET
+	else:
+		preview1.global_position = OOB
+		
+	if is_instance_valid(selected_summon):
+		preview2.position = selected_summon.get_center() + PREVIEW_OFFSET
+	else:
+		preview2.global_position = OOB
+		
+	if is_instance_valid(next_summon):
+		preview3.position = next_summon.get_center() + PREVIEW_OFFSET
+	else:
+		preview3.global_position = OOB
 	
 func exit_summon_ui() -> void:
+	Globals.is_in_summon_ui = false
+	Controls.lock_movement = false
 	summon_ui.visible = false
 
 func particles_on() -> void:

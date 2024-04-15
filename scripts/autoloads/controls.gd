@@ -4,7 +4,7 @@ class_name Controls
 const JUMP_BUFFER: float = 4.0 / 60.0 # 4 Frame jump buffer window.
 static var jump_buffer: float = 0.0
 static var lock_movement: bool = false
-static var is_in_summon_ui: bool = false
+
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -20,22 +20,17 @@ func _input(event: InputEvent) -> void:
 			else:
 				pauser.unpause()
 		else:
-			if is_in_summon_ui:
-				is_in_summon_ui = false
+			if Globals.is_in_summon_ui:
 				ui.exit_summon_ui()
-				lock_movement = false
 
 	elif event.is_action_pressed("jump") and not Pauser.is_paused and not lock_movement:
 		jump_buffer = JUMP_BUFFER
 		
-	elif event.is_action_pressed("summon"):
-		is_in_summon_ui = not is_in_summon_ui
-		if is_in_summon_ui:
+	elif event.is_action_pressed("summon") and not Pauser.is_paused and not Globals.is_in_shop:
+		if not Globals.is_in_summon_ui:
 			ui.enter_summon_ui()
-			lock_movement = true
 		else:
 			ui.exit_summon_ui()
-			lock_movement = false
 	
 static func get_jump() -> bool:
 	if lock_movement or Pauser.is_paused:

@@ -153,7 +153,10 @@ func enter_shop():
 		debounce = true
 		in_shop = true
 		enter_SFX.play()
+		if Globals.is_in_summon_ui:
+			ui.exit_summon_ui()
 		Controls.lock_movement = true
+		Globals.is_in_shop = true
 		cameras[0].set_priority(20)
 		current_item = 0
 		ui.shop.visible = true
@@ -164,6 +167,7 @@ func exit_shop() -> void:
 			cam.set_priority(0)
 		enter_SFX.play()
 		Controls.lock_movement = false
+		Globals.is_in_shop = false
 		in_shop = false
 		ui.shop.visible = false
 	
