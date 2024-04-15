@@ -45,8 +45,10 @@ func _process(_delta: float):
 		if(current_item == cameras.size() - 1):
 			ui.description.text = "Reroll"
 			ui.dps.text = ""
-			ui.health.text = "$" + str(rerollPrice)
+			ui.health.text = ""
 			ui.cost.text = ""
+			ui.reroll_cost.text = "$" + str(rerollPrice)
+			
 			ui.freeze.visible = false;
 			ui.frozen.visible = false;
 			ui.purchase.visible = true;
@@ -64,6 +66,7 @@ func _process(_delta: float):
 				ui.dps.text = ""
 				ui.health.text = ""
 				ui.cost.text = ""
+				ui.reroll_cost.text = ""
 				ui.freeze.visible = false;
 				ui.frozen.visible = false;
 				ui.purchase.visible = false;
@@ -73,6 +76,7 @@ func _process(_delta: float):
 				ui.dps.text = "DPS:" + str(current_display[current_item][4])
 				ui.health.text = "HP:" + str(current_display[current_item][5])
 				ui.cost.text = "$" + str(current_display[current_item][1])
+				ui.reroll_cost.text = ""
 				ui.purchase.visible = true;
 				ui.purchased.visible = false;
 		
