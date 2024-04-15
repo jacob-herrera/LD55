@@ -11,7 +11,6 @@ var shouldReplay = true
 
 func _ready() -> void:
 	collision_mask = Character.LAYER | Summon.LAYER
-	mana_sound.set_loop(true)
 
 var was_in_area_last_frame: bool = false
 
