@@ -14,7 +14,7 @@ size = Vector3(0.5, 1.12292, 0.5)
 [node name="shield_summon" type="AnimatableBody3D"]
 collision_layer = 16
 script = ExtResource("1_bdvas")
-base_max_health = 50
+base_max_health = 20
 type = 9
 range_type = 1
 

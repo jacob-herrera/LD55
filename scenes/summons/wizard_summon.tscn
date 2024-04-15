@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://cl73yl77jq5j5"]
+[gd_scene load_steps=10 format=3 uid="uid://cl73yl77jq5j5"]
 
 [ext_resource type="Script" path="res://scripts/summon.gd" id="1_2v8pu"]
+[ext_resource type="Texture2D" uid="uid://m8jaw00wfihc" path="res://assets/fireball.png" id="2_055ni"]
 [ext_resource type="Texture2D" uid="uid://djhkf5s85u2eb" path="res://assets/summon_wizard.png" id="2_wxu1i"]
 [ext_resource type="Texture2D" uid="uid://2ljib8g6rii4" path="res://assets/shadow.png" id="3_v3pjj"]
 [ext_resource type="Script" path="res://scripts/carriable.gd" id="4_g0cmv"]
@@ -14,6 +15,7 @@ size = Vector3(0.5, 1.12292, 0.5)
 [node name="wizard_summon" type="AnimatableBody3D"]
 collision_layer = 16
 script = ExtResource("1_2v8pu")
+projectile_texture = ExtResource("2_055ni")
 base_attack_range = 5.0
 base_attack_rate = 2.0
 base_damage = 1

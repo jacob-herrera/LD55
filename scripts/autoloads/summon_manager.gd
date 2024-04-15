@@ -2,6 +2,12 @@ extends Node
 class_name SummonManager
 
 const SUMMON_SCENES: Dictionary = {
+	Summon.Type.RABBIT: preload("res://scenes/summons/rabbit_summon.tscn"),
+	Summon.Type.KNIGHT: preload("res://scenes/summons/knight_summon.tscn"),
+	Summon.Type.GREEDY: preload("res://scenes/summons/greedy_summon.tscn"),
+	Summon.Type.CLOCKHEAD: preload("res://scenes/summons/clockhead_summon.tscn"),
+	Summon.Type.BARD: preload("res://scenes/summons/bard_summon.tscn"),
+	Summon.Type.ARCHER: preload("res://scenes/summons/archer_summon.tscn"),
 	Summon.Type.WIZARD: preload("res://scenes/summons/wizard_summon.tscn"),
 	Summon.Type.SNOWMAN: preload("res://scenes/summons/snowman_summon.tscn"),
 	Summon.Type.CLERIC: preload("res://scenes/summons/cleric_summon.tscn"),

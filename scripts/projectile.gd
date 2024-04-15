@@ -6,9 +6,6 @@ enum CanHit {
 	SUMMON,
 }
 
-@export var fireball_texture: CompressedTexture2D
-@export var snowball_texture: CompressedTexture2D
-@export var arrow_texture: CompressedTexture2D
 @export var trying_to_hit: CanHit
 @export var dir: Vector3
 @export var speed: float = 10.0 # Default to 10 units per second
@@ -24,11 +21,9 @@ var space_state: PhysicsDirectSpaceState3D
 func _ready() -> void:
 	space_state = PhysicsServer3D.space_get_direct_state(get_world_3d().space)
 	
-func initalize(value : int) -> void:
-	if value == 1:
-		texture = snowball_texture
-	else:
-		texture = fireball_texture
+func initalize(proj_texture: CompressedTexture2D)  -> void:
+		texture = proj_texture
+	
 	
 
 func _process(delta: float) -> void:

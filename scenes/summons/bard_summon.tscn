@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://bhwl13qu7bmd4"]
 
 [ext_resource type="Script" path="res://scripts/summon.gd" id="1_ek3xr"]
-[ext_resource type="Texture2D" uid="uid://c8bllwsof0ql3" path="res://assets/summon_snowman.png" id="2_sqo1s"]
+[ext_resource type="Texture2D" uid="uid://bva0k7ivrd4f8" path="res://assets/summon_bard.png" id="2_usi7c"]
 [ext_resource type="Texture2D" uid="uid://2ljib8g6rii4" path="res://assets/shadow.png" id="3_vp6ek"]
 [ext_resource type="Script" path="res://scripts/carriable.gd" id="4_7mesc"]
 [ext_resource type="PackedScene" uid="uid://bk2528lpxk3ek" path="res://scenes/healthbar.tscn" id="5_860j8"]
@@ -14,13 +14,12 @@ size = Vector3(0.5, 1.12292, 0.5)
 [node name="bard_summon" type="AnimatableBody3D"]
 collision_layer = 16
 script = ExtResource("1_ek3xr")
-base_damage = 2
 base_max_health = 10
 base_aoe_range = 2.5
 aoe_effects = {
 "damage": 2
 }
-type = 1
+type = 3
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, 0)
@@ -28,7 +27,7 @@ layers = 2
 pixel_size = 0.04
 billboard = 2
 texture_filter = 0
-texture = ExtResource("2_sqo1s")
+texture = ExtResource("2_usi7c")
 
 [node name="Shadow" type="Sprite3D" parent="."]
 transform = Transform3D(3, 0, 0, 0, -1.31134e-07, -3, 0, 3, -1.31134e-07, 0, 0.01, 0)
