@@ -22,6 +22,9 @@ class_name UI
 @onready var preview1: Camera3D = %preview1
 @onready var preview2: Camera3D = %preview2
 @onready var preview3: Camera3D = %preview3
+@onready var swipe: AudioStreamPlayer = $summon_ui/Swipe
+@onready var open: AudioStreamPlayer = $summon_ui/Open
+@onready var close: AudioStreamPlayer = $summon_ui/Close
 
 @onready var summon_left_arrow: Label = %summon_left_arrow
 @onready var summon_right_arrow: Label = %summon_right_arrow
@@ -46,10 +49,12 @@ func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("ui_right"):
 		selected += 1
 		selected = clampi(selected, 0, selection_max)
+		play_swipe()
 		preview_summons()
 	if Input.is_action_just_pressed("ui_left"):
 		selected -= 1
 		selected = clampi(selected, 0, selection_max)
+		play_swipe()
 		preview_summons()
 	if Globals.is_in_summon_ui and Input.is_action_just_pressed("primary_action"):
 		summon_selected()
@@ -82,6 +87,7 @@ func enter_summon_ui() -> void:
 		var summon := node as Summon
 		summons.append(summon)
 	selection_max = summons.size() - 1
+	open.play()
 	
 	preview_summons()
 	
@@ -121,6 +127,8 @@ func exit_summon_ui() -> void:
 	Globals.is_in_summon_ui = false
 	Controls.lock_movement = false
 	summon_ui.visible = false
+	if is_instance_valid(globals.character.carrying):
+		close.play()
 
 func particles_on() -> void:
 	screeen_particles.emitting = true
@@ -136,3 +144,7 @@ func toggle_earnings() -> void:
 		earnings.visible = false
 	else:
 		earnings.visible = true
+		
+func play_swipe() -> void:
+	if summon_ui.visible:
+		swipe.play()

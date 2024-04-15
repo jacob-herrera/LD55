@@ -18,8 +18,9 @@ func _process(delta: float) -> void:
 		var bodies: Array[Node3D] = get_overlapping_bodies()
 		is_in_pool = false
 		for body: Node3D in bodies:
-			if body is Character && Globals.mana < Globals.max_mana:
-				Globals.mana += 1
+			if body is Character:
+				if Globals.mana < Globals.max_mana:
+					Globals.mana += 1
 				is_in_pool = true
 			elif body is Summon:
 				var summon: Summon = body as Summon
