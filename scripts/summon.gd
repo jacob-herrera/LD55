@@ -96,7 +96,6 @@ func do_explode() -> void:
 		# wait one second
 		await get_tree().create_timer(0.5).timeout
 		# remove sprite from scene and play exploision sound
-		death()
 		# damage all enemeis in a radius
 	
 func do_buff() -> void:
@@ -111,7 +110,7 @@ func do_buff() -> void:
 		
 	# iterate through array of nearby allies to change stats
 	for node : Node in nearby:
-		node["damage"] += 30
+		node[aoe_effects.keys()[0]] += aoe_effects.values()[0]
 
 
 func take_damage(damage_taking: int, damage_dir: Vector3) -> void:
@@ -123,8 +122,6 @@ func take_damage(damage_taking: int, damage_dir: Vector3) -> void:
 		utils.death_animation(global_position, damage_dir, sprite)
 		queue_free()
 
-func death() -> void:
-	pass
 	
 func get_intercept(attacker_pos : Vector3,
 					proj_vel : float,
