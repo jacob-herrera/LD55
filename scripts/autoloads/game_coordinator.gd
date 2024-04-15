@@ -98,21 +98,23 @@ func spawn_enemy_in_current_room() -> void:
 	
 func goto_room(target_room: Room) -> void:
 	# extra call to remove and check enemis for dev teleporting
-	if current_room != Room.HUB:
-		enemy_manager.check_enemies()
-		enemy_manager.remove_enemies()
 	current_room = target_room
 	match target_room:
 		Room.HUB:
 			time = HUB_TIME
+			enemy_manager.check_enemies()
+			enemy_manager.remove_enemies()
 		_:			
 			time = COMBAT_TIME
 			current_round += 1
-			for i in range(num_enemies):
-				spawn_enemy_in_current_room()
 			# extra call to increment num_enemies for dev teleporting
 			num_enemies += 1
-			
+			EnemyManager.current_room_max_enemies = num_enemies
+			EnemyManager.current_room_remaining_enemies = num_enemies
+			enemy_manager.remove_enemies()
+			for i in range(num_enemies):
+				spawn_enemy_in_current_room()
+	
 	globals.character.global_position = room_data[target_room].player_spawn
 	anim_player.play("fade_in")	
 	globals.character.summon_circle.stop_anim()
@@ -140,7 +142,10 @@ func _process(delta: float) -> void:
 				enemy_manager.remove_enemies()
 				goto_room(Room.HUB)
 				num_enemies += 1
+				
 	calc_earnings()
+	enemy_manager.recalc_remaining_enemies()
+	
 
 func calc_earnings() -> int:
 	# multiply by round? wtf that will scale too fast

@@ -29,7 +29,7 @@ class_name UI
 @onready var life_1: Sprite2D = $Lives/Life_1
 @onready var life_2: Sprite2D = $Lives/Life_2
 @onready var life_3: Sprite2D = $Lives/Life_3
-
+@onready var remaining: Label = %remaining
 @onready var middle_container: SubViewportContainer = %middle_container
 @onready var summon_left_arrow: Label = %summon_left_arrow
 @onready var summon_right_arrow: Label = %summon_right_arrow
@@ -49,9 +49,18 @@ func _process(_delta: float) -> void:
 	time.text = str(ceil(GameCoordinator.time))
 	fps.text = "FPS:" + str(Engine.get_frames_per_second())
 	current_round.text = "ROUND:" + str(GameCoordinator.current_round)
+	remaining.text = str(EnemyManager.current_room_remaining_enemies) \
+	+ "/" + str(EnemyManager.current_room_max_enemies)
 	check_lives()	
-	toggle_earnings()
 	
+	if GameCoordinator.current_room == GameCoordinator.Room.HUB:
+		earnings.visible = false
+		wave_outcome.visible = true
+		remaining.visible = false
+	else:
+		earnings.visible = true
+		wave_outcome.visible = false
+		remaining.visible = true
 	
 	if Input.is_action_just_pressed("ui_right"):
 		selected += 1
@@ -98,9 +107,6 @@ func enter_summon_ui() -> void:
 		summons.append(summon)
 	selection_max = summons.size() - 1
 	open.play()
-	
-	#if Globals.mana < 10:
-		
 	
 	selected = 0
 	preview_summons()
@@ -168,16 +174,8 @@ func particles_on() -> void:
 func particles_off() -> void:
 	screeen_particles.restart()
 	screeen_particles.emitting = false
-	#screeen_particles.visible = false
 	
-func toggle_earnings() -> void:
-	if GameCoordinator.current_room == GameCoordinator.Room.HUB:
-		earnings.visible = false
-		wave_outcome.visible = true
-	else:
-		earnings.visible = true
-		wave_outcome.visible = false
-		
+
 func play_swipe() -> void:
 	if summon_ui.visible:
 		swipe.play()

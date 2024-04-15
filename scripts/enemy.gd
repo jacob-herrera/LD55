@@ -123,7 +123,5 @@ func take_damage(damage_taking: int, damage_dir: Vector3) -> void:
 		Globals.coins += gold_value
 		utils.death_animation(global_position, damage_dir, sprite)
 		utils.spawn_number(get_top(), true, gold_value)
-		die()
+		queue_free()
 
-func die():
-	queue_free()
