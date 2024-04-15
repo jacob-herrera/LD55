@@ -18,8 +18,8 @@ const PLAYER_CAMERA_DEFAULT_TWEEN: float = 0.5
 const FADE_DURATION: float = 10.0 / 30.0
 const PLAYER_SUMMON_DURATION = 6.0
 
-const HUB_TIME: float = 10.0
-const COMBAT_TIME: float = 10.0
+const HUB_TIME: float = 60.0
+const COMBAT_TIME: float = 60.0
 
 static var room_multiplier: float = 0
 
@@ -106,6 +106,7 @@ func goto_room(target_room: Room) -> void:
 			time = HUB_TIME
 			enemy_manager.check_enemies()
 			enemy_manager.remove_enemies()
+			ui.wave_player.play("fade_away")
 		_:			
 			time = COMBAT_TIME
 			current_round += 1
@@ -121,7 +122,8 @@ func goto_room(target_room: Room) -> void:
 	globals.character.summon_circle.stop_anim()
 	globals.character.camera.tween_parameters.duration = PLAYER_CAMERA_DEFAULT_TWEEN
 	ui.particles_off()
-
+	
+	
 func _process(delta: float) -> void:
 	DEV()
 	

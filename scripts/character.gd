@@ -7,7 +7,6 @@ class_name Character
 @onready var attack_range: Decal = $AttackRange
 @onready var aoe_range: Decal = $AOERange
 
-
 @onready var anim_player: AnimationPlayer = $AnimationPlayer
 @onready var summon_circle: SummonCircle = $summon_circle
 @onready var summon_pickup: AudioStreamPlayer3D = $SummonPickup

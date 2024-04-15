@@ -20,12 +20,12 @@ var pool = {
 	2: {0: [2, 5], 1: [2, 10]},
 }
 
-var pedestal_locaction = {
-	0: Vector3(-4.5, 0.5, -5.5),
-	1: Vector3(-3, 0.5, -5.5),
-	2: Vector3(-1.5, 0.5, -5.5),
-	3: Vector3(0, 0.5, -5.5),
-}
+var pedestal_locaction: Array[Vector3] = [
+	Vector3(-4.5, 0.5, -5.5),
+	Vector3(-3, 0.5, -5.5),
+	Vector3(-1.5, 0.5, -5.5),
+	Vector3(0, 0.5, -5.5),
+]
 
 var current_display = []
 var rng = RandomNumberGenerator.new()
@@ -34,6 +34,8 @@ var preview_arr = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	ui.freeze_button.pressed.connect(_freeze_button_pressed)
+	ui.purchase_button.pressed.connect(_purchase_button_pressed)
 	var total = 0;
 	for val in pool[1].values():
 		total += val[0]
@@ -61,17 +63,17 @@ func _process(_delta: float):
 			ui.cost.text = ""
 			ui.reroll_cost.text = "$" + str(rerollPrice)
 			
-			ui.freeze.visible = false;
-			ui.frozen.visible = false;
-			ui.purchase.visible = true;
-			ui.purchased.visible = false;
+			#ui.freeze.visible = false;
+			#ui.frozen.visible = false;
+			#ui.purchase.visible = true;
+			#ui.purchased.visible = false;
 		else:
-			if(current_display[current_item][2]):
-				ui.freeze.visible = false;
-				ui.frozen.visible = true;
-			else:
-				ui.freeze.visible = true;
-				ui.frozen.visible = false;
+			#if(current_display[current_item][2]):
+				#ui.freeze.visible = false;
+				#ui.frozen.visible = true;
+			#else:
+				#ui.freeze.visible = true;
+				#ui.frozen.visible = false;
 				
 			if(current_display[current_item][0] == null):
 				ui.description.text = ""
@@ -79,27 +81,29 @@ func _process(_delta: float):
 				ui.health.text = ""
 				ui.cost.text = ""
 				ui.reroll_cost.text = ""
-				ui.freeze.visible = false;
-				ui.frozen.visible = false;
-				ui.purchase.visible = false;
-				ui.purchased.visible = true;
+				#ui.freeze.visible = false;
+				#ui.frozen.visible = false;
+				#ui.purchase.visible = false;
+				#ui.purchased.visible = true;
 			else:
 				ui.description.text = str(current_display[current_item][3])
 				ui.dps.text = "DPS:" + str(current_display[current_item][4])
 				ui.health.text = "HP:" + str(current_display[current_item][5])
 				ui.cost.text = "$" + str(current_display[current_item][1])
 				ui.reroll_cost.text = ""
-				ui.purchase.visible = true;
-				ui.purchased.visible = false;
+				#ui.purchase.visible = true;
+				#ui.purchased.visible = false;
 		
-		if Input.is_action_just_pressed("ui_right"):
+		if Input.is_action_just_pressed("ui_right") \
+		and UI.shop_selecting_buttons == false:
 			cameras[current_item].set_priority(0)
 			swipe_SFX.play()
 			current_item += 1
 			current_item = current_item % cameras.size()
 			cameras[current_item].set_priority(20)
 			
-		if Input.is_action_just_pressed("ui_left"):
+		if Input.is_action_just_pressed("ui_left") \
+		and UI.shop_selecting_buttons == false:
 			cameras[current_item].set_priority(0)
 			swipe_SFX.play()
 			current_item -= 1
@@ -107,33 +111,54 @@ func _process(_delta: float):
 				current_item += cameras.size()
 			cameras[current_item].set_priority(20)
 			
-		if Input.is_action_just_pressed("ui_up"):
-			if current_item != cameras.size() - 1 && current_display[current_item][0] != null:
-				if current_display[current_item][2]:
-					steam_SFX.play()
-				else:
-					freeze_SFX.play()
-				current_display[current_item][2] = !current_display[current_item][2]
-				print(current_display)
+		if (Input.is_action_just_pressed("ui_up") or \
+			Input.is_action_just_pressed("ui_accept")) \
+			and UI.shop_selecting_buttons == false:
+			ui.focus_buttons()
+			ui.open.play()
+			#if current_item != cameras.size() - 1 && current_display[current_item][0] != null:
+				#if current_display[current_item][2]:
+					#steam_SFX.play()
+				#else:
+					#freeze_SFX.play()
+				#current_display[current_item][2] = !current_display[current_item][2]
+				#print(current_display)
 				
 		if Input.is_action_just_pressed("ui_down"):
-			if current_item != cameras.size() - 1:
-				if current_display[current_item][0] != null && Globals.coins - current_display[current_item][1] >= 0:
-					Globals.coins -= current_display[current_item][1]
-					purchase_SFX.play()
-					current_display[current_item] = [null, 0, false, "", 0, 0]
-					preview_arr[current_item].queue_free()
-					print(current_display)
+			if UI.shop_selecting_buttons == true:
+				ui.unfocus_button()
+				ui.close.play()
 			else:
-				if Globals.coins - rerollPrice >= 0:
-					Globals.coins -= rerollPrice
-					dice_SFX.play()
-					reroll(1)
-					print(current_display)
+				exit_shop()
+			#if current_item != cameras.size() - 1:
+				#if current_display[current_item][0] != null && Globals.coins - current_display[current_item][1] >= 0:
+					#Globals.coins -= current_display[current_item][1]
+					#purchase_SFX.play()
+					#current_display[current_item] = [null, 0, false, "", 0, 0]
+					#preview_arr[current_item].queue_free()
+					#print(current_display)
+			#else:
+				#if Globals.coins - rerollPrice >= 0:
+					#Globals.coins -= rerollPrice
+					#dice_SFX.play()
+					#reroll(1)
+					#print(current_display)
 					
 		if Input.is_action_just_pressed("ui_cancel"):
-			exit_shop()
+			if UI.shop_selecting_buttons == true:
+				ui.unfocus_button()
+			else:
+				exit_shop()
 			
+
+
+func _purchase_button_pressed() -> void:
+	print("purchase")
+
+func _freeze_button_pressed() -> void:
+	print("Freeze")
+
+
 
 	
 var char_was_in_area_last_frame: bool = false
@@ -174,6 +199,8 @@ func enter_shop():
 		cameras[0].set_priority(20)
 		current_item = 0
 		ui.shop.visible = true
+		ui.unfocus_button()
+		
 	
 func exit_shop() -> void:
 	if in_shop:
@@ -184,6 +211,7 @@ func exit_shop() -> void:
 		Globals.is_in_shop = false
 		in_shop = false
 		ui.shop.visible = false
+		ui.unfocus_button()
 	
 #func _on_area_3d_body_entered(body: Node3D):
 	#if in_area == false:

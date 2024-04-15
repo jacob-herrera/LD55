@@ -6,12 +6,10 @@ class_name UI
 @onready var time: Label = %timer
 @onready var fps: Label = $FPS
 @onready var wave_outcome: Label = $outcome
+@onready var wave_player: AnimationPlayer = $outcome/AnimationPlayer
 @onready var earnings: Label = %earnings
 @onready var shop: Node = $shop_ui
-@onready var freeze: Node = $shop_ui/freeze
-@onready var frozen: Node = $shop_ui/frozen
-@onready var purchase: Node = $shop_ui/purchase
-@onready var purchased: Node = $shop_ui/purchased
+
 @onready var description: Node = $shop_ui/description
 @onready var dps: Node = $shop_ui/DPS
 @onready var health: Node = $shop_ui/health
@@ -33,6 +31,15 @@ class_name UI
 @onready var middle_container: SubViewportContainer = %middle_container
 @onready var summon_left_arrow: Label = %summon_left_arrow
 @onready var summon_right_arrow: Label = %summon_right_arrow
+@onready var shop_left: Label = $shop_ui/shop_left
+@onready var shop_right: Label = $shop_ui/shop_right
+
+
+@onready var purchase_button: Button = %purchase_button
+@onready var freeze_button: Button = %freeze_button
+@onready var buttons_container: HBoxContainer = %buttons_container
+
+static var shop_selecting_buttons: bool = false
 
 const PREVIEW_OFFSET: Vector3 = Vector3(0, 1, 2)
 const OOB: Vector3 = Vector3(0, -100, 0)
@@ -55,11 +62,11 @@ func _process(_delta: float) -> void:
 	
 	if GameCoordinator.current_room == GameCoordinator.Room.HUB:
 		earnings.visible = false
-		wave_outcome.visible = true
+		#wave_outcome.visible = true
 		remaining.visible = false
 	else:
 		earnings.visible = true
-		wave_outcome.visible = false
+		#wave_outcome.visible = false
 		remaining.visible = true
 	
 	if Input.is_action_just_pressed("ui_right"):
@@ -111,6 +118,20 @@ func enter_summon_ui() -> void:
 	selected = 0
 	preview_summons()
 	
+func focus_buttons() -> void:
+	shop_selecting_buttons = true
+	purchase_button.grab_focus()
+	shop_left.visible = false
+	shop_right.visible = false
+	buttons_container.modulate = Color.WHITE
+		
+func unfocus_button() -> void:
+	shop_selecting_buttons = false
+	purchase_button.release_focus()
+	freeze_button.release_focus()
+	shop_left.visible = true
+	shop_right.visible = true
+	buttons_container.modulate = Color(0.9,0.9,0.9)
 		
 func preview_summons() -> void:
 	var selected_summon: Summon = null
@@ -145,11 +166,13 @@ func preview_summons() -> void:
 
 func check_lives() -> void:
 	if globals.last_outcome == 1:
-		wave_outcome.modulate = Color(0,255,0)
+		wave_outcome.add_theme_color_override("font_color", Color(0,255,0))
 		wave_outcome.text = "Wave Cleared!"
 	if globals.last_outcome == 2:
-		wave_outcome.modulate = Color(255,0,0)
+		wave_outcome.add_theme_color_override("font_color", Color(255,0,0))
 		wave_outcome.text = "Wave Failed!"
+		
+		
 	
 	if globals.lives == 2:		
 		life_3.hide()
@@ -158,7 +181,8 @@ func check_lives() -> void:
 	if globals.lives == 0:
 		life_1.hide()
 		ui.visible = false
-		get_tree().change_scene_to_file("res://scenes/gameover.tscn")
+		print("TODO GAMEOVER")
+		#get_tree().change_scene_to_file("res://scenes/gameover.tscn")
 	
 func exit_summon_ui() -> void:
 	Globals.is_in_summon_ui = false
