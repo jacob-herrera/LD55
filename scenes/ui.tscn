@@ -557,3 +557,17 @@ scale = Vector2(3, 3)
 texture = ExtResource("7_f7jju")
 region_enabled = true
 region_rect = Rect2(0, 0, 15.2037, 16.5394)
+
+[node name="outcome" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 368.0
+offset_top = 40.0
+offset_right = -366.0
+offset_bottom = -435.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("1_rg5ws")
+horizontal_alignment = 1
+vertical_alignment = 1

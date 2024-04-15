@@ -5,6 +5,7 @@ class_name UI
 @onready var mana_bar: ProgressBar = %mana_bar
 @onready var time: Label = %timer
 @onready var fps: Label = $FPS
+@onready var wave_outcome: Label = $outcome
 @onready var earnings: Label = %earnings
 @onready var shop: Node = $shop_ui
 @onready var freeze: Node = $shop_ui/freeze
@@ -48,15 +49,9 @@ func _process(_delta: float) -> void:
 	time.text = str(ceil(GameCoordinator.time))
 	fps.text = "FPS:" + str(Engine.get_frames_per_second())
 	current_round.text = "ROUND:" + str(GameCoordinator.current_round)
+	check_lives()	
 	toggle_earnings()
 	
-	if globals.lives == 2:
-		life_3.hide()
-	if globals.lives == 1:
-		life_2.hide()
-	if globals.lives == 0:
-		get_tree().call_group("UI", "clear")
-		get_tree().change_scene_to_file("res://scenes/gameover.tscn")
 	
 	if Input.is_action_just_pressed("ui_right"):
 		selected += 1
@@ -141,6 +136,22 @@ func preview_summons() -> void:
 	else:
 		preview3.global_position = OOB
 		summon_right_arrow.visible = false
+
+func check_lives() -> void:
+	if globals.last_outcome == 1:
+		wave_outcome.modulate = Color(0,255,0)
+		wave_outcome.text = "Wave Cleared!"
+	if globals.last_outcome == 2:
+		wave_outcome.modulate = Color(255,0,0)
+		wave_outcome.text = "Wave Failed!"
+	
+	if globals.lives == 2:		
+		life_3.hide()
+	if globals.lives == 1:
+		life_2.hide()
+	if globals.lives == 0:
+		get_tree().call_group("UI", "clear")
+		get_tree().change_scene_to_file("res://scenes/gameover.tscn")
 	
 func exit_summon_ui() -> void:
 	Globals.is_in_summon_ui = false
@@ -161,8 +172,10 @@ func particles_off() -> void:
 func toggle_earnings() -> void:
 	if GameCoordinator.current_room == GameCoordinator.Room.HUB:
 		earnings.visible = false
+		wave_outcome.visible = true
 	else:
 		earnings.visible = true
+		wave_outcome.visible = false
 		
 func play_swipe() -> void:
 	if summon_ui.visible:
