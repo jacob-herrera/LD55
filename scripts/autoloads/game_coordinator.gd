@@ -29,7 +29,7 @@ static var room_multiplier: float = 0
 signal goto_hub
 
 static var current_room: Room = Room.HUB
-static var num_enemies: int = 3
+static var num_enemies: int = 1
 static var current_round: int = 0
 static var time: float = HUB_TIME
 static var enemy_order: Array = ["basic", "basic", "basic", "strong"]
@@ -170,7 +170,6 @@ func _process(delta: float) -> void:
 				print("here", wave_cleared)
 				if wave_cleared == false:
 					ui.wave_player.play("fade_away")
-				num_enemies += 1
 				
 	
 	
