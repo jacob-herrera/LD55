@@ -6,6 +6,8 @@ class_name Summon
 @onready var projectile: PackedScene = preload("res://scenes/projectile.tscn")
 @onready var col: CollisionShape3D = $CollisionShape3D
 @onready var healthbar: Healthbar = $healthbar
+@onready var hurt: AudioStreamPlayer3D = $Hurt
+@onready var killed: AudioStreamPlayer3D = $Killed
 
 const LAYER: int = 16
 const GROUP: String = "summons"
@@ -114,7 +116,10 @@ func do_buff() -> void:
 
 func take_damage(damage_taking: int, damage_dir: Vector3) -> void:
 	health -= damage_taking
+	hurt.play()
 	if health <= 0:
+		print("is kill")
+		killed.play()
 		utils.death_animation(global_position, damage_dir, sprite)
 		queue_free()
 

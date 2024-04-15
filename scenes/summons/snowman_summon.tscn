@@ -1,10 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://cyq5jt2re2dc5"]
+[gd_scene load_steps=9 format=3 uid="uid://cyq5jt2re2dc5"]
 
 [ext_resource type="Script" path="res://scripts/summon.gd" id="1_f0v8i"]
 [ext_resource type="Texture2D" uid="uid://c8bllwsof0ql3" path="res://assets/summon_snowman.png" id="2_hsd4l"]
 [ext_resource type="Texture2D" uid="uid://2ljib8g6rii4" path="res://assets/shadow.png" id="3_xelhb"]
 [ext_resource type="Script" path="res://scripts/carriable.gd" id="4_1jwp6"]
 [ext_resource type="PackedScene" uid="uid://bk2528lpxk3ek" path="res://scenes/healthbar.tscn" id="5_exyuv"]
+[ext_resource type="AudioStream" uid="uid://f0t4iidnaqa6" path="res://assets/audio/summon_damaged.mp3" id="6_83ck0"]
+[ext_resource type="AudioStream" uid="uid://dxgq4ttkwo0o2" path="res://assets/audio/summon_killed.mp3" id="7_7qubf"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_t6qms"]
 size = Vector3(0.5, 1.12292, 0.5)
@@ -40,3 +42,11 @@ script = ExtResource("4_1jwp6")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.561462, 0)
 shape = SubResource("BoxShape3D_t6qms")
+
+[node name="Hurt" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("6_83ck0")
+bus = &"Effects"
+
+[node name="Killed" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("7_7qubf")
+bus = &"Effects"
