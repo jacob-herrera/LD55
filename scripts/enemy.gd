@@ -8,6 +8,8 @@ class_name Enemy
 @onready var agent: NavigationAgent3D = $NavigationAgent3D
 @onready var hurt: AudioStreamPlayer3D = $Hurt
 
+@export var healthbar_offset: float
+
 @export var max_health: int
 @export var move_speed: float
 @export var attack_range: float
@@ -36,7 +38,8 @@ func _ready() -> void:
 	collision_layer = LAYER
 	add_to_group(GROUP)
 	health = max_health
-	healthbar.initalize(health, col, false)
+	var top: Vector3 = Utils.get_top_of_box(col) + Vector3(0, healthbar_offset, 0)
+	healthbar.initalize(health, top, false)
 	if space_state == null:
 		space_state = PhysicsServer3D.space_get_direct_state(get_world_3d().space)
 	agent.velocity_computed.connect(_on_velocity_compute)

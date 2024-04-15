@@ -3,20 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://is6ql4sf2dor"
-path.s3tc="res://.godot/imported/enemy_basic.png-c8b2343111598f598f032d81ddeb4caa.s3tc.ctex"
+path="res://.godot/imported/enemy_basic.png-c8b2343111598f598f032d81ddeb4caa.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://assets/enemy_basic.png"
-dest_files=["res://.godot/imported/enemy_basic.png-c8b2343111598f598f032d81ddeb4caa.s3tc.ctex"]
+dest_files=["res://.godot/imported/enemy_basic.png-c8b2343111598f598f032d81ddeb4caa.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

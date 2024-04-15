@@ -39,6 +39,8 @@ const TYPE_TO_STRING: Dictionary = {
 	Type.SHIELD: "shield"
 }
 
+@export var healthbar_offset: float
+
 @export_category("Base Stats")
 ## Attack range
 @export var base_attack_range: float
@@ -81,7 +83,8 @@ func _ready() -> void:
 	reset_to_base()
 	health = max_health
 	attack_cooldown = 1.0 / attack_rate
-	healthbar.initalize(max_health, col, true)
+	var top: Vector3 = Utils.get_top_of_box(col) + Vector3(0, healthbar_offset, 0)
+	healthbar.initalize(max_health, top, true)
 	
 func get_center() -> Vector3:
 	return col.global_position

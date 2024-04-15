@@ -6,10 +6,11 @@ class_name Healthbar
 
 var max_value: int
 
-func initalize(max_hp: int, col: CollisionShape3D, is_summon: bool) -> void:
+func initalize(max_hp: int, pos: Vector3, is_summon: bool) -> void:
 	max_value = max_hp
 	frame = 0
-	global_position = Utils.get_top_of_box(col)
+	global_position = pos
+	
 	if is_summon:
 		texture = summon_texture
 	else:

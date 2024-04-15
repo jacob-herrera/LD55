@@ -39,14 +39,14 @@ func _ready() -> void:
 			#get_tree().current_scene.add_child(preview_node)
 			#preview_node.global_position = Vector3(0,0,0)
  	
-func spawn_summon(summon: Summon.Type) -> Summon:
-	var summon_name: String = Summon.TYPE_TO_STRING[summon]
-	if not SUMMON_SCENES.has(summon_name):
-		printerr("invalid summon name: ", summon_name)
+func spawn_summon(summon_type: Summon.Type) -> Summon:
+	#var summon_name: String = Summon.TYPE_TO_STRING[summon]
+	if not SUMMON_SCENES.has(summon_type):
+		printerr("invalid")
 		return
 	if is_instance_valid(globals.character.carrying):
 		globals.character.carrying.queue_free()
-	var scene: PackedScene = SUMMON_SCENES.get(summon_name)
+	var scene: PackedScene = SUMMON_SCENES.get(summon_type)
 	return scene.instantiate() as Summon
 
 func _process(delta: float) -> void:

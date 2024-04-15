@@ -18,7 +18,7 @@ func stop_anim() -> void:
 	sprite.visible = false
 
 func play_teleport() -> void:
-	await get_tree().create_timer(2).timeout
+	#await get_tree().create_timer(2).timeout
 	if !teleport.playing && sprite.visible:
 		teleport.play()
 	
