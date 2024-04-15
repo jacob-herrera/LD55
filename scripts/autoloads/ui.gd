@@ -47,6 +47,9 @@ const OOB: Vector3 = Vector3(0, -100, 0)
 var summons: Array[Summon] = []
 var selected: int
 var selection_max: int
+
+func _ready() -> void:
+	shop.visible = false
 	
 func _process(_delta: float) -> void:
 	coins_label.text = "$" + str(Globals.coins)
