@@ -17,6 +17,7 @@ class_name UI
 @onready var cost: Node = $shop_ui/cost
 @onready var screeen_particles: CPUParticles2D = $screen_particles
 @onready var current_round: Label = %round
+@onready var summon_ui: Panel = $summon_ui 
 
 func _process(_delta: float) -> void:
 	coins_label.text = "$" + str(Globals.coins)
@@ -27,6 +28,12 @@ func _process(_delta: float) -> void:
 	fps.text = "FPS:" + str(Engine.get_frames_per_second())
 	current_round.text = "ROUND:" + str(GameCoordinator.current_round)
 	toggle_earnings()
+	
+func enter_summon_ui() -> void:
+	summon_ui.visible = true
+	
+func exit_summon_ui() -> void:
+	summon_ui.visible = false
 
 func particles_on() -> void:
 	screeen_particles.emitting = true
