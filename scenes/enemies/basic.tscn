@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://bc0fln0kbduq"]
+[gd_scene load_steps=8 format=3 uid="uid://bfcql0ildgb8"]
 
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_yjh42"]
 [ext_resource type="Texture2D" uid="uid://is6ql4sf2dor" path="res://assets/enemy_basic.png" id="2_840fq"]
 [ext_resource type="PackedScene" uid="uid://bk2528lpxk3ek" path="res://scenes/healthbar.tscn" id="3_crucc"]
 [ext_resource type="Texture2D" uid="uid://2ljib8g6rii4" path="res://assets/shadow.png" id="4_pqfud"]
 [ext_resource type="AudioStream" uid="uid://ckh8f20j56bri" path="res://assets/audio/enemy_damaged.mp3" id="5_vqegc"]
+[ext_resource type="AudioStream" uid="uid://cc2q35iu46ygk" path="res://assets/audio/drop_coins.mp3" id="6_jx80y"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_yvkac"]
 radius = 0.25
@@ -55,3 +56,6 @@ texture = ExtResource("4_pqfud")
 stream = ExtResource("5_vqegc")
 max_polyphony = 4
 bus = &"Effects"
+
+[node name="DropCoins" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("6_jx80y")
