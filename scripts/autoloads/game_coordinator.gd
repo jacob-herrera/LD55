@@ -74,7 +74,7 @@ static func register_room(node: Node3D, room: Room) -> void:
 			room_data[room].player_spawn = marker.global_position
 		elif marker.name.begins_with("EnemySpawn"):
 			room_data[room].enemy_spawns.append(marker.global_position)
-	
+
 func spawn_enemy_in_current_room() -> void:
 	var rand_pos: Vector3 = room_data[current_room].enemy_spawns.pick_random()
 	enemy_manager.spawn_enemy("test", rand_pos)

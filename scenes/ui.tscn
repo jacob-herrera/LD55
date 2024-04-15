@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bhkryx6iyvbay"]
+[gd_scene load_steps=8 format=3 uid="uid://bhkryx6iyvbay"]
 
 [ext_resource type="Script" path="res://scripts/autoloads/ui.gd" id="1_jrdqv"]
 [ext_resource type="FontFile" uid="uid://ey5uk5evoi8o" path="res://assets/nes.ttf" id="1_rg5ws"]
@@ -23,6 +23,13 @@ border_color = Color(0.145098, 0.211765, 0.8, 1)
 [sub_resource type="Curve" id="Curve_2pas6"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kimud"]
+bg_color = Color(0.286275, 0.286275, 0.286275, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_color = Color(0.219608, 0.219608, 0.219608, 1)
 
 [node name="ui" type="Control"]
 layout_mode = 3
@@ -343,3 +350,18 @@ initial_velocity_max = 200.0
 scale_amount_min = 3.0
 scale_amount_max = 3.0
 scale_amount_curve = SubResource("Curve_2pas6")
+
+[node name="summon_ui" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -256.0
+offset_top = -128.0
+offset_right = 256.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_kimud")
