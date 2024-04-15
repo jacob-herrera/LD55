@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://qwgtilwib4r6"]
+
+[ext_resource type="Texture2D" uid="uid://djhkf5s85u2eb" path="res://assets/summon_wizard.png" id="2_hbxm7"]
+[ext_resource type="Texture2D" uid="uid://2ljib8g6rii4" path="res://assets/shadow.png" id="5_xbshe"]
+
+[node name="temp_preview" type="Node3D"]
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, 0)
+layers = 2
+pixel_size = 0.04
+billboard = 2
+texture_filter = 0
+texture = ExtResource("2_hbxm7")
+
+[node name="Shadow" type="Sprite3D" parent="."]
+transform = Transform3D(3, 0, 0, 0, -1.31134e-07, -3, 0, 3, -1.31134e-07, 0, 0.01, 0)
+layers = 4
+modulate = Color(1, 1, 1, 0.74902)
+texture_filter = 0
+texture = ExtResource("5_xbshe")
