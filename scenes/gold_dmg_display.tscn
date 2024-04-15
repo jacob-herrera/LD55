@@ -5,6 +5,8 @@
 [node name="GoldDmgDisplay" type="Label3D"]
 billboard = 1
 texture_filter = 0
+render_priority = 2
+outline_render_priority = 1
 text = "0
 "
 font = ExtResource("1_bfwsv")

@@ -16,14 +16,16 @@ class_name UI
 @onready var health: Node = $shop_ui/health
 @onready var cost: Node = $shop_ui/cost
 @onready var screeen_particles: CPUParticles2D = $screen_particles
+@onready var current_round: Label = %round
 
 func _process(_delta: float) -> void:
 	coins_label.text = "$" + str(Globals.coins)
-	earnings.text = str(game_coordinator.calc_earnings())
+	earnings.text = "REWARD $" +str(game_coordinator.calc_earnings())
 	mana_bar.value = Globals.mana
 	mana_bar.max_value = Globals.max_mana
 	time.text = str(ceil(GameCoordinator.time))
 	fps.text = "FPS:" + str(Engine.get_frames_per_second())
+	current_round.text = "ROUND:" + str(GameCoordinator.current_round)
 	toggle_earnings()
 
 func particles_on() -> void:
