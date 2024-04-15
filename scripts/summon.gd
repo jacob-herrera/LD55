@@ -18,6 +18,11 @@ enum Type {
 	SNOWMAN,
 }
 
+const TYPE_TO_STRING: Dictionary = {
+	Type.WIZARD: "wizard",
+	Type.SNOWMAN: "snowman",
+}
+
 @export_category("Base Stats")
 ## Attack range
 @export var base_attack_range: float
