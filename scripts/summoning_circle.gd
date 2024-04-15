@@ -11,14 +11,14 @@ func _ready() -> void:
 func start_anim() -> void:
 	sprite.visible = true
 	anim_player.play("summon_spin")
-	play_teleport()
+	teleport.play()
 
 func stop_anim() -> void:
 	anim_player.play("RESET")
 	sprite.visible = false
 
-func play_teleport() -> void:
-	await get_tree().create_timer(0.01).timeout
-	if !teleport.playing && sprite.visible:
-		teleport.play()
+#func play_teleport() -> void:
+	##await get_tree().create_timer(0.01).timeout
+	#if !teleport.playing && sprite.visible:
+		#teleport.play()
 	

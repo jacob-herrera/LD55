@@ -176,14 +176,12 @@ func preview_summons() -> void:
 		summon_right_arrow.visible = false
 
 func check_lives() -> void:
-	if globals.last_outcome == 1:
+	if GameCoordinator.wave_cleared == true:
 		wave_outcome.add_theme_color_override("font_color", Color(0,255,0))
 		wave_outcome.text = "Wave Cleared!"
-	if globals.last_outcome == 2:
+	else:
 		wave_outcome.add_theme_color_override("font_color", Color(255,0,0))
 		wave_outcome.text = "Wave Failed!"
-		
-		
 	
 	if globals.lives == 2:		
 		life_3.hide()

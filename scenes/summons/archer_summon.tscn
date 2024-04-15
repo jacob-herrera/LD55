@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://cxoweugle8uci"]
+[gd_scene load_steps=10 format=3 uid="uid://cxoweugle8uci"]
 
 [ext_resource type="Script" path="res://scripts/summon.gd" id="1_7ivf2"]
+[ext_resource type="Texture2D" uid="uid://b0mnmcupsbxcn" path="res://assets/arrow.png" id="2_wtvbb"]
 [ext_resource type="Texture2D" uid="uid://cln7irybph7x3" path="res://assets/summon_archer.png" id="2_xsuln"]
 [ext_resource type="Script" path="res://scripts/carriable.gd" id="3_v8y0a"]
 [ext_resource type="PackedScene" uid="uid://bk2528lpxk3ek" path="res://scenes/healthbar.tscn" id="4_l2vn0"]
@@ -14,10 +15,12 @@ size = Vector3(0.5, 1.12292, 0.5)
 [node name="archer_summon" type="AnimatableBody3D"]
 collision_layer = 16
 script = ExtResource("1_7ivf2")
-base_attack_range = 10.0
-base_attack_rate = 3.0
+projectile_texture = ExtResource("2_wtvbb")
+base_attack_range = 7.0
+base_attack_rate = 2.0
 base_damage = 1
 base_max_health = 10
+type = 2
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, 0)

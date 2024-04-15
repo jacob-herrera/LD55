@@ -1,8 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://8pij03wn56ho"]
+[gd_scene load_steps=3 format=3 uid="uid://8pij03wn56ho"]
 
-[ext_resource type="Texture2D" uid="uid://m8jaw00wfihc" path="res://assets/fireball.png" id="2_6mnve"]
 [ext_resource type="Script" path="res://scripts/projectile.gd" id="2_ecl1a"]
-[ext_resource type="Texture2D" uid="uid://bya6c5qvsm4v0" path="res://assets/snowball.png" id="3_auiuf"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_2pfa0"]
 radius = 0.2
@@ -12,6 +10,4 @@ pixel_size = 0.04
 billboard = 1
 texture_filter = 0
 script = ExtResource("2_ecl1a")
-fireball_texture = ExtResource("2_6mnve")
-snowball_texture = ExtResource("3_auiuf")
 hitbox = SubResource("SphereShape3D_2pfa0")

@@ -9,6 +9,7 @@ class_name Summon
 @onready var hurt: AudioStreamPlayer3D = $Hurt
 @onready var killed: AudioStreamPlayer3D = $Killed
 
+
 const LAYER: int = 16
 const GROUP: String = "summons"
 
@@ -40,7 +41,7 @@ const TYPE_TO_STRING: Dictionary = {
 }
 
 @export var healthbar_offset: float
-
+@export var projectile_texture: CompressedTexture2D
 @export_category("Base Stats")
 ## Attack range
 @export var base_attack_range: float
@@ -101,8 +102,8 @@ func do_ranged() -> void:
 	var enemy: Enemy = Utils.get_closest_in_range(global_position, enemies, attack_range) as Enemy
 	if enemy == null: return
 	var proj: Projectile = projectile.instantiate() as Projectile
-	proj.initalize(type)
 	get_tree().current_scene.add_child(proj)
+	proj.initalize(projectile_texture)
 	proj.global_position = get_center()
 	proj.dir = get_center().direction_to(get_intercept(proj.global_position, proj.speed, enemy.get_center(), enemy.velocity))
 	proj.damage = damage
