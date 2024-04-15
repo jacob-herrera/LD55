@@ -29,6 +29,14 @@ enum Type {
 const TYPE_TO_STRING: Dictionary = {
 	Type.WIZARD: "wizard",
 	Type.SNOWMAN: "snowman",
+	Type.ARCHER: "archer",
+	Type.BARD: "bard",
+	Type.CLERIC: "cleric",
+	Type.CLOCKHEAD: "clockhead",
+	Type.GREEDY: "greey",
+	Type.KNIGHT: "knight",
+	Type.RABBIT: "rabbit",
+	Type.SHIELD: "shield"
 }
 
 @export_category("Base Stats")
