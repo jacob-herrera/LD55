@@ -90,6 +90,7 @@ func do_ranged() -> void:
 	var enemy: Enemy = Utils.get_closest_in_range(global_position, enemies, attack_range) as Enemy
 	if enemy == null: return
 	var proj: Projectile = projectile.instantiate() as Projectile
+	proj.initalize(type)
 	get_tree().current_scene.add_child(proj)
 	proj.global_position = get_center()
 	proj.dir = get_center().direction_to(get_intercept(proj.global_position, proj.speed, enemy.get_center(), enemy.velocity))
@@ -104,7 +105,6 @@ func do_explode() -> void:
 		# wait one second
 		await get_tree().create_timer(0.5).timeout
 		# remove sprite from scene and play exploision sound
-		death()
 		# damage all enemeis in a radius
 	
 func do_buff() -> void:
@@ -119,7 +119,7 @@ func do_buff() -> void:
 		
 	# iterate through array of nearby allies to change stats
 	for node : Node in nearby:
-		node["damage"] += 30
+		node[aoe_effects.keys()[0]] += aoe_effects.values()[0]
 
 
 func take_damage(damage_taking: int, damage_dir: Vector3) -> void:
@@ -130,8 +130,6 @@ func take_damage(damage_taking: int, damage_dir: Vector3) -> void:
 		utils.death_animation(global_position, damage_dir, sprite)
 		queue_free()
 
-func death() -> void:
-	pass
 	
 func get_intercept(attacker_pos : Vector3,
 					proj_vel : float,
