@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bhkryx6iyvbay"]
+[gd_scene load_steps=18 format=3 uid="uid://bhkryx6iyvbay"]
 
 [ext_resource type="Script" path="res://scripts/autoloads/ui.gd" id="1_jrdqv"]
 [ext_resource type="FontFile" uid="uid://ey5uk5evoi8o" path="res://assets/nes.ttf" id="1_rg5ws"]
@@ -8,6 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://b20mpeoqvfmfa" path="res://assets/audio/open_preview.mp3" id="5_gm12l"]
 [ext_resource type="AudioStream" uid="uid://de70lofhcg7fo" path="res://assets/audio/close_preview.mp3" id="6_ulsur"]
 [ext_resource type="Texture2D" uid="uid://baahi8fbu5g6g" path="res://assets/temp_char.png" id="7_f7jju"]
+[ext_resource type="AudioStream" uid="uid://bccp7rst0qx7i" path="res://assets/audio/murp.mp3" id="8_4brbd"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ub2k2"]
 bg_color = Color(0, 0, 0, 1)
@@ -586,6 +587,11 @@ bus = &"Effects"
 [node name="Close" type="AudioStreamPlayer" parent="summon_ui"]
 stream = ExtResource("6_ulsur")
 volume_db = 5.571
+max_polyphony = 4
+bus = &"Effects"
+
+[node name="Not Enough Mana" type="AudioStreamPlayer" parent="summon_ui"]
+stream = ExtResource("8_4brbd")
 max_polyphony = 4
 bus = &"Effects"
 

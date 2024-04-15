@@ -24,6 +24,7 @@ class_name UI
 @onready var swipe: AudioStreamPlayer = $summon_ui/Swipe
 @onready var open: AudioStreamPlayer = $summon_ui/Open
 @onready var close: AudioStreamPlayer = $summon_ui/Close
+@onready var murp: AudioStreamPlayer = $"summon_ui/Not Enough Mana"
 @onready var life_1: Sprite2D = $Lives/Life_1
 @onready var life_2: Sprite2D = $Lives/Life_2
 @onready var life_3: Sprite2D = $Lives/Life_3
@@ -102,7 +103,7 @@ func summon_selected() -> void:
 		game_coordinator.anim_player.play("fade_in")
 		exit_summon_ui()
 	else:
-		print("@ARMAN : TODO NOT ENOUGH MANA SOUND")
+		murp.play()
 		pass
 		
 func enter_summon_ui() -> void:
