@@ -18,12 +18,13 @@ func _process(delta: float) -> void:
 		var bodies: Array[Node3D] = get_overlapping_bodies()
 		is_in_pool = false
 		for body: Node3D in bodies:
-			if body is Character:
+			if body is Character && Globals.mana < Globals.max_mana:
 				Globals.mana += 1
 				is_in_pool = true
 			elif body is Summon:
 				var summon: Summon = body as Summon
-				summon.health += 1
+				if summon.health < summon.max_health:
+					summon.health += 1
 		if is_in_pool:
 			if !was_in_pool:
 				enter_sound.play()
@@ -34,5 +35,5 @@ func _process(delta: float) -> void:
 			was_in_pool = false
 
 func play_mana() -> void:
-	if !mana_sound.playing:
+	if !mana_sound.playing &&  Globals.mana != Globals.max_mana:
 		mana_sound.play()
