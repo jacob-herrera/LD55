@@ -1,4 +1,4 @@
-[gd_scene load_steps=188 format=3 uid="uid://dnpi8mksbjqnn"]
+[gd_scene load_steps=189 format=3 uid="uid://dnpi8mksbjqnn"]
 
 [ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map.gd" id="1_fle1t"]
 [ext_resource type="Resource" uid="uid://btwxy5brwdbg4" path="res://fgd/map_settings.tres" id="2_obqiq"]
@@ -37,6 +37,7 @@
 [ext_resource type="PackedScene" uid="uid://cyq5jt2re2dc5" path="res://scenes/summons/snowman_summon.tscn" id="29_lxb8g"]
 [ext_resource type="AudioStream" uid="uid://crxk7ol62je8l" path="res://assets/audio/enter_pool.mp3" id="35_awl5c"]
 [ext_resource type="Script" path="res://scripts/register_room.gd" id="35_vhw7u"]
+[ext_resource type="Texture2D" uid="uid://b3ohjdpj1b2uy" path="res://assets/highlight_arrow.png" id="38_48ava"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_bvcnj"]
 _surfaces = [{
@@ -1733,3 +1734,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 47.5, 0, 5.5)
 
 [node name="EnemySpawn2" type="Marker3D" parent="SpawnsRoom3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 47.5, 3, -5.5)
+
+[node name="HighlightArrow" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.75, 0)
+pixel_size = 0.02
+billboard = 2
+texture_filter = 0
+texture = ExtResource("38_48ava")

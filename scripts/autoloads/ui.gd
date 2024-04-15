@@ -26,6 +26,7 @@ class_name UI
 @onready var open: AudioStreamPlayer = $summon_ui/Open
 @onready var close: AudioStreamPlayer = $summon_ui/Close
 
+@onready var middle_container: SubViewportContainer = %middle_container
 @onready var summon_left_arrow: Label = %summon_left_arrow
 @onready var summon_right_arrow: Label = %summon_right_arrow
 
@@ -48,31 +49,34 @@ func _process(_delta: float) -> void:
 	
 	if Input.is_action_just_pressed("ui_right"):
 		selected += 1
-		selected = clampi(selected, 0, selection_max)
-		play_swipe()
-		preview_summons()
+		if selected > selection_max:
+			selected = clampi(selected, 0, selection_max)
+		else:
+			play_swipe()
+			preview_summons()
 	if Input.is_action_just_pressed("ui_left"):
 		selected -= 1
-		selected = clampi(selected, 0, selection_max)
-		play_swipe()
-		preview_summons()
+		if selected < 0:
+			selected = clampi(selected, 0, selection_max)
+		else:
+			play_swipe()
+			preview_summons()
+			
 	if Globals.is_in_summon_ui and Input.is_action_just_pressed("primary_action"):
 		summon_selected()
 		
 func summon_selected() -> void:
 	if summons.is_empty():
 		return
-	if Globals.mana >= 10:
-		Globals.mana -= 10
+	var selected_summon: Summon = summons[selected]
+	if Globals.mana >= Globals.SUMMON_MANA_COST and is_instance_valid(selected_summon):
+		Globals.mana -= Globals.SUMMON_MANA_COST
 		globals.character.drop_current_carry()
+		globals.character.carrying = selected_summon
+		game_coordinator.anim_player.play("fade_in")
 		exit_summon_ui()
-		var selected_summon: Summon = summons[selected]
-		if is_instance_valid(selected_summon):
-			globals.character.carrying = selected_summon
-			game_coordinator.anim_player.play("fade_in")
-			globals.mana -= 10
 	else:
-		# TODO NOT ENOUGH MANA SOUND
+		print("@ARMAN : TODO NOT ENOUGH MANA SOUND")
 		pass
 		
 func enter_summon_ui() -> void:
@@ -89,6 +93,10 @@ func enter_summon_ui() -> void:
 	selection_max = summons.size() - 1
 	open.play()
 	
+	#if Globals.mana < 10:
+		
+	
+	selected = 0
 	preview_summons()
 	
 		
@@ -127,7 +135,7 @@ func exit_summon_ui() -> void:
 	Globals.is_in_summon_ui = false
 	Controls.lock_movement = false
 	summon_ui.visible = false
-	if is_instance_valid(globals.character.carrying):
+	if not is_instance_valid(globals.character.carrying):
 		close.play()
 
 func particles_on() -> void:

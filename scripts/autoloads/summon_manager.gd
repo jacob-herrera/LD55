@@ -8,7 +8,7 @@ const SUMMON_SCENES: Dictionary = {
 
 var temp_preview: PackedScene = preload("res://scenes/temp_preview.tscn")
 
-func get_preview_of_summon(summon: Summon.Type) -> Node3D:
+func get_preview_of_summon(_summon: Summon.Type) -> Node3D:
 	return temp_preview.instantiate() as Node3D
 
 func give_player_summon(summon_name: String) -> void:

@@ -81,6 +81,9 @@ func _process(delta: float) -> void:
 func get_center() -> Vector3:
 	return col.global_position
 
+func get_top() -> Vector3:
+	return Utils.get_top_of_box(col)
+
 # projectile speed must be greater than target speed, else projectile will not hit
 func do_ranged() -> void:
 	var enemies: Array[Node] = get_tree().get_nodes_in_group(Enemy.GROUP)

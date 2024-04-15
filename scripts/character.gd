@@ -170,10 +170,16 @@ func do_carry() -> void:
 		attack_range.visible = false
 		var carriables: Array[Node] = get_tree().get_nodes_in_group(Carriable.GROUP)
 		var closest: Node3D = Utils.get_closest_in_range(global_position, carriables, 1.0)
-		if Controls.try_pickup() and closest != null:
-			carrying = closest
-			summon_pickup.play()
+		if is_instance_valid(closest):		
+			globals.set_highlight_pos(closest.get_top() + Vector3(0, 0.25, 0 ))
+			if Controls.try_pickup():
+				carrying = closest
+				summon_pickup.play()
+		else:
+			globals.set_highlight_pos(Vector3(0, -10, -10))
+
 	else:
+		globals.set_highlight_pos(Vector3(0, -10, 0))
 		carrying.global_position = global_position + Vector3(0, 0.7 ,0)
 		if carrying is Summon:
 			var summon: Summon = carrying as Summon
