@@ -218,6 +218,53 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
+[node name="HBoxContainer" type="HBoxContainer" parent="shop_ui"]
+custom_minimum_size = Vector2(512, 32)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 64
+alignment = 1
+
+[node name="cost" type="Label" parent="shop_ui/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_colors/font_outline_color = Color(0.478431, 0.403922, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("1_rg5ws")
+theme_override_font_sizes/font_size = 24
+text = "$100"
+
+[node name="health" type="Label" parent="shop_ui/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0.0980392, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("1_rg5ws")
+theme_override_font_sizes/font_size = 24
+text = "hp:1"
+horizontal_alignment = 1
+
+[node name="DPS" type="Label" parent="shop_ui/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0.529412, 0.529412, 0.529412, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("1_rg5ws")
+theme_override_font_sizes/font_size = 24
+text = "abc"
+horizontal_alignment = 2
+
 [node name="shop_left" type="Label" parent="shop_ui"]
 layout_mode = 1
 anchors_preset = 4
@@ -254,7 +301,8 @@ text = ">
 "
 horizontal_alignment = 1
 
-[node name="description" type="Label" parent="shop_ui"]
+[node name="shop_name" type="Label" parent="shop_ui"]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -266,69 +314,51 @@ offset_right = -230.0
 offset_bottom = -78.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_colors/font_outline_color = Color(0.529412, 0.529412, 0.529412, 1)
-theme_override_constants/outline_size = 8
+theme_override_colors/font_outline_color = Color(0.172549, 0.172549, 0.172549, 1)
+theme_override_constants/outline_size = 16
 theme_override_fonts/font = ExtResource("1_rg5ws")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 32
+text = "\"NAME\""
 horizontal_alignment = 1
 
-[node name="DPS" type="Label" parent="shop_ui"]
+[node name="shop_desc" type="Label" parent="shop_ui"]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -205.0
-offset_top = -65.0
-offset_right = -105.0
-offset_bottom = -38.0
+offset_left = -144.0
+offset_top = -69.0
+offset_right = 144.0
+offset_bottom = -42.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_colors/font_outline_color = Color(0.529412, 0.529412, 0.529412, 1)
-theme_override_constants/outline_size = 8
+theme_override_colors/font_outline_color = Color(0.415686, 0.415686, 0.415686, 1)
+theme_override_constants/outline_size = 16
 theme_override_fonts/font = ExtResource("1_rg5ws")
 theme_override_font_sizes/font_size = 24
-horizontal_alignment = 1
+text = "A SHORT DESC"
+horizontal_alignment = 2
 
-[node name="health" type="Label" parent="shop_ui"]
+[node name="space" type="Label" parent="shop_ui"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.501961)
 layout_mode = 1
-anchors_preset = 7
+anchors_preset = 5
 anchor_left = 0.5
-anchor_top = 1.0
 anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -50.0
-offset_top = -65.0
-offset_right = 50.0
-offset_bottom = -38.0
+offset_left = -144.0
+offset_top = 104.0
+offset_right = 144.0
+offset_bottom = 131.0
 grow_horizontal = 2
-grow_vertical = 0
-theme_override_colors/font_color = Color(1, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0.0980392, 0, 0, 1)
-theme_override_constants/outline_size = 8
+theme_override_colors/font_outline_color = Color(0.415686, 0.415686, 0.415686, 1)
+theme_override_constants/outline_size = 6
 theme_override_fonts/font = ExtResource("1_rg5ws")
-theme_override_font_sizes/font_size = 24
-horizontal_alignment = 1
-
-[node name="cost" type="Label" parent="shop_ui"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = 105.0
-offset_top = -65.0
-offset_right = 205.0
-offset_bottom = -38.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_colors/font_color = Color(1, 1, 0, 1)
-theme_override_colors/font_outline_color = Color(0.478431, 0.403922, 0, 1)
-theme_override_constants/outline_size = 8
-theme_override_fonts/font = ExtResource("1_rg5ws")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 16
+text = "[Space]"
 horizontal_alignment = 1
 
 [node name="rerollCost" type="Label" parent="shop_ui"]
@@ -339,9 +369,8 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -50.0
-offset_top = -65.0
+offset_top = -32.0
 offset_right = 50.0
-offset_bottom = -38.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_colors/font_color = Color(1, 1, 0, 1)
@@ -349,6 +378,7 @@ theme_override_colors/font_outline_color = Color(0.478431, 0.403922, 0, 1)
 theme_override_constants/outline_size = 8
 theme_override_fonts/font = ExtResource("1_rg5ws")
 theme_override_font_sizes/font_size = 24
+text = "$10"
 horizontal_alignment = 1
 
 [node name="buttons_container" type="HBoxContainer" parent="shop_ui"]

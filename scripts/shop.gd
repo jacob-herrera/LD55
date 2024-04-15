@@ -85,7 +85,8 @@ func _ready():
 		display_data.dps = -1
 		display_data.cost = -1
 		display_data.health = -1
-		display_data.text = "ERROR"
+		display_data.desc = "ERROR"
+		display_data.name = "ERROR"
 		display_data.type = Summon.Type.WIZARD
 		display_data.preview = null
 		slots.append(display_data)
@@ -118,7 +119,8 @@ func _process(_delta: float):
 				
 		ui.purchase_button.modulate = Color.WHITE
 		if is_selecting_reroll:
-			ui.description.text = "Reroll"
+			ui.shop_name.text = "Reroll"
+			ui.shop_desc.text = "REROLL UNFROZEN SUMMONS FOR SALE"
 			ui.dps.text = ""
 			ui.health.text = ""
 			ui.cost.text = ""
@@ -133,7 +135,8 @@ func _process(_delta: float):
 			is_slot_empty = slots[current_item].is_purchased
 			
 			if is_slot_empty:
-				ui.description.text = ""
+				ui.shop_desc.text = ""
+				ui.shop_name.text = ""
 				ui.dps.text = ""
 				ui.health.text = ""
 				ui.cost.text = ""
@@ -142,7 +145,8 @@ func _process(_delta: float):
 				ui.purchase_button.visible = false
 				ui.middle_selection.visible = false
 			else:
-				ui.description.text = slots[current_item].text
+				ui.shop_name.text = slots[current_item].name
+				ui.shop_desc.text = slots[current_item].desc
 				ui.dps.text = "DPS:" + str(slots[current_item].dps)
 				ui.health.text = "HP:" + str(slots[current_item].health)
 				ui.cost.text = "$" + str(slots[current_item].cost)
@@ -314,13 +318,15 @@ func reroll() -> void:
 			
 		var random_weight: int = rng.randi_range(0, total_weight-1)
 		var summon_type: Summon.Type = distribution[random_weight]
+		var shop_data: Dictionary = summon_manager.get_shop_data(summon_type)
 		slots[index].is_frozen = false
 		slots[index].is_purchased = false
 		slots[index].is_reroll = false
-		slots[index].dps = 10
-		slots[index].cost = 10
-		slots[index].health = 10
-		slots[index].text = Summon.TYPE_TO_STRING[summon_type]
+		slots[index].dps = shop_data.dps
+		slots[index].cost = shop_data.cost
+		slots[index].health = shop_data.health
+		slots[index].name = shop_data.name + " SUMMON"
+		slots[index].desc = shop_data.desc
 		slots[index].type = summon_type
 		var preview: Node3D = summon_manager.get_preview_of_summon(summon_type)
 		add_child(preview)

@@ -9,11 +9,16 @@ const SUMMON_SCENES: Dictionary = {
 }
 
 var summon_preview_cache: Dictionary = {}
+var summon_shop_display_data: Dictionary = {}
+
 
 var temp_preview: PackedScene = preload("res://scenes/temp_preview.tscn")
 
 func get_preview_of_summon(summon_type: Summon.Type) -> Node3D:
 	return summon_preview_cache[summon_type].duplicate()
+
+func get_shop_data(summon_type: Summon.Type) -> Dictionary:
+	return summon_shop_display_data[summon_type]
 
 func give_player_summon(summon_type: Summon.Type) -> void:
 	var summon: Summon = spawn_summon(summon_type)
@@ -26,6 +31,7 @@ func _ready() -> void:
 		var temp_node: Node = scene.instantiate()
 		if temp_node is Summon:
 			var summon := temp_node as Summon
+			# Preview
 			var sprite: Sprite3D = summon.find_child("Sprite3D")
 			var shadow: Sprite3D = summon.find_child("Shadow")
 			var dupe_sprite = sprite.duplicate()
@@ -33,11 +39,21 @@ func _ready() -> void:
 			var preview_node: Node3D = Node3D.new()
 			preview_node.add_child(dupe_sprite)
 			preview_node.add_child(dupe_shadow)
-			summon.free()
 			preview_node.name = Summon.TYPE_TO_STRING[summon_type] + "_preview_cache"
+			# Shop Data
+			var shop_data: Dictionary = {}
+			
+			var dps: float = float(summon.base_damage) * float(summon.base_attack_rate)
+			shop_data.dps = floor(dps)
+			shop_data.cost = summon.price
+			shop_data.health = summon.base_max_health
+			shop_data.desc = summon.desc
+			shop_data.name = Summon.TYPE_TO_STRING[summon_type]
+			# Cache
 			summon_preview_cache[summon_type] = preview_node
-			#get_tree().current_scene.add_child(preview_node)
-			#preview_node.global_position = Vector3(0,0,0)
+			summon_shop_display_data[summon_type] = shop_data
+			# Free this temp summon
+			summon.free()
  	
 func spawn_summon(summon_type: Summon.Type) -> Summon:
 	#var summon_name: String = Summon.TYPE_TO_STRING[summon]

@@ -54,6 +54,9 @@ const TYPE_TO_STRING: Dictionary = {
 @export var aoe_effects: Dictionary
 @export var type: Type
 @export var range_type: RangeType
+@export_category("Shop")
+@export var price: int
+@export var desc: String
 
 var attack_cooldown: float
 
