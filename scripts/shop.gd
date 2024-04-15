@@ -241,6 +241,7 @@ func _freeze_button_pressed() -> void:
 			freeze_SFX.stop()
 			visible_freeze(current_item, false)
 		else:
+			ui.unfocus_button()
 			freeze_SFX.play()
 			steam_SFX.stop()
 			visible_freeze(current_item, true)
