@@ -7,6 +7,8 @@ class_name GameCoordinator
 enum Room {
 	HUB,
 	ROOM_1,
+	ROOM_2,
+	ROOM_3
 }
 
 const ROOM_HUB_TELE := Vector3(0,0,0)
@@ -27,7 +29,20 @@ static var time: float = HUB_TIME
 
 static var DEV_timer_paused: bool = false
 
-static var in_hub: bool = true
+static var room_data: Dictionary = {
+	Room.HUB: {
+		player_spawn = Vector3(0, 0, 0)
+	},
+	Room.ROOM_1: {
+		enemy_spawns = []
+	},
+	Room.ROOM_2: {
+		enemy_spawns = []
+	},
+	Room.ROOM_3: {
+		enemy_spawns = []
+	},
+} 
 
 func _ready() -> void:
 	print_rich("[b]DEV CONTROLS[/b]\n ~ : Pause/Unpause Timer\n 1 : Goto Hub\n 2 : Goto Room 1\n Tab : Spawn wizard\n M : Spawn enemy\n")
@@ -39,24 +54,35 @@ func DEV():
 		goto_room(Room.HUB)
 	if Input.is_action_just_pressed("dev_goto_room1"):
 		goto_room(Room.ROOM_1)
+	if Input.is_action_just_pressed("dev_goto_room2"):
+		goto_room(Room.ROOM_2)
+	if Input.is_action_just_pressed("dev_goto_room3"):
+		goto_room(Room.ROOM_3)
 	if Input.is_action_just_pressed("dev_spawn_enemy"):
 		enemy_manager.spawn_enemy("test", globals.character.global_position)
 	if Input.is_action_just_pressed("dev_spawn_summon"):
 		summon_manager.give_player_summon("wizard")
 		
+static func register_room(node: Node3D, room: Room) -> void:
+	for p: Node in node.get_children():	
+		if not (p is Marker3D): continue
+		var marker: Marker3D = p as Marker3D
+		if marker.name.begins_with("PlayerSpawn"):
+			room_data[room].player_spawn = marker.global_position
+		elif marker.name.begins_with("EnemySpawn"):
+			room_data[room].enemy_spawns.append(marker.global_position)
+	
 func goto_room(target_room: Room) -> void:
 	current_room = target_room
 	match target_room:
 		Room.HUB:
 			time = HUB_TIME
-			globals.character.global_position = ROOM_HUB_TELE
-			in_hub = true
 			room_multiplier = 0
 		Room.ROOM_1:
 			time = COMBAT_TIME
-			globals.character.global_position = ROOM_1_TELE
-			in_hub = false
 			room_multiplier = 1
+			
+	globals.character.global_position = room_data[target_room].player_spawn
 	anim_player.play("fade_in")	
 	globals.character.summon_circle.stop_anim()
 	globals.character.camera.tween_parameters.duration = PLAYER_CAMERA_DEFAULT_TWEEN

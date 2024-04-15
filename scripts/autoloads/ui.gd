@@ -36,7 +36,7 @@ func particles_off() -> void:
 	#screeen_particles.visible = false
 	
 func toggle_earnings() -> void:
-	if game_coordinator.in_hub == true:
+	if GameCoordinator.current_room == GameCoordinator.Room.HUB:
 		earnings.visible = false
 	else:
 		earnings.visible = true
