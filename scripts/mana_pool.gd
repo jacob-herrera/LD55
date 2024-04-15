@@ -7,9 +7,11 @@ extends Area3D
 const TIME: float = 0.25 # Every one second
 var time: float = 0.0
 var isFull = false
+var shouldReplay = true
 
 func _ready() -> void:
 	collision_mask = Character.LAYER | Summon.LAYER
+	mana_sound.set_loop(true)
 
 var was_in_area_last_frame: bool = false
 
@@ -24,16 +26,22 @@ func _process(delta: float) -> void:
 				enter_sound.play()
 				mana_sound.play()
 			is_in_area_this_frame = true
+	
+	if is_in_area_this_frame and Globals.mana < Globals.max_mana and shouldReplay:
+		mana_sound.play()
+		shouldReplay = false
 		
 	if Globals.mana == Globals.max_mana:
 		mana_sound.stop()
+		shouldReplay = true
 		if isFull:
 			mana_full.play()
 			isFull = false
-			
+	
 	if not is_in_area_this_frame and was_in_area_last_frame:
 		mana_sound.stop()
-		
+		shouldReplay = true
+	
 	was_in_area_last_frame = is_in_area_this_frame
 	
 		
