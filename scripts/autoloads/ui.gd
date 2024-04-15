@@ -38,6 +38,7 @@ class_name UI
 @onready var purchase_button: Button = %purchase_button
 @onready var freeze_button: Button = %freeze_button
 @onready var buttons_container: HBoxContainer = %buttons_container
+@onready var middle_selection: Panel = %middle_selection_box
 
 static var shop_selecting_buttons: bool = false
 
@@ -127,6 +128,7 @@ func focus_buttons() -> void:
 	shop_left.visible = false
 	shop_right.visible = false
 	buttons_container.modulate = Color.WHITE
+	middle_selection.visible = false
 		
 func unfocus_button() -> void:
 	shop_selecting_buttons = false
@@ -134,6 +136,7 @@ func unfocus_button() -> void:
 	freeze_button.release_focus()
 	shop_left.visible = true
 	shop_right.visible = true
+	#middle_selection.visible = true
 	buttons_container.modulate = Color(0.9,0.9,0.9)
 		
 func preview_summons() -> void:

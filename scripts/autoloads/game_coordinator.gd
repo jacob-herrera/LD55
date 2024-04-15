@@ -18,8 +18,8 @@ const PLAYER_CAMERA_DEFAULT_TWEEN: float = 0.5
 const FADE_DURATION: float = 10.0 / 30.0
 const PLAYER_SUMMON_DURATION = 6.0
 
-const HUB_TIME: float = 60.0
-const COMBAT_TIME: float = 60.0
+const HUB_TIME: float = 30.0
+const COMBAT_TIME: float = 30.0
 
 static var room_multiplier: float = 0
 
@@ -79,9 +79,9 @@ func DEV():
 		else:
 			enemy_manager.spawn_enemy("test", globals.character.global_position)
 	if Input.is_action_just_pressed("dev_spawn_wizard"):
-		summon_manager.give_player_summon("wizard")
+		summon_manager.give_player_summon(Summon.Type.WIZARD)
 	if Input.is_action_just_pressed("dev_spawn_snowman"):
-		summon_manager.give_player_summon("snowman")
+		summon_manager.give_player_summon(Summon.Type.SNOWMAN)
 		
 		
 static func register_room(node: Node3D, room: Room) -> void:

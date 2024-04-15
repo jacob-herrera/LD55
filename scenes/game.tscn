@@ -1544,7 +1544,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5005, 0.25)
 shape = SubResource("BoxShape3D_77h1f")
 
 [node name="ItemCamera0" type="Node3D" parent="Shop"]
-transform = Transform3D(1, 0, 0, 0, 0.906307, 0.422619, 0, -0.422618, 0.906308, -4.5, 1.7483, -3.48706)
+transform = Transform3D(1, 0, 0, 0, 0.984807, 0.173649, 0, -0.173648, 0.984808, -4.5, 1.49331, -3.475)
 script = ExtResource("12_q4tpe")
 priority_override = false
 priority = 0
@@ -1556,7 +1556,7 @@ inactive_update_mode = 0
 camera_3D_resource = null
 
 [node name="ItemCamera1" type="Node3D" parent="Shop"]
-transform = Transform3D(1, 0, 0, 0, 0.906307, 0.422619, 0, -0.422619, 0.906307, -3, 1.7483, -3.48706)
+transform = Transform3D(1, 0, 0, 0, 0.984807, 0.173649, 0, -0.173649, 0.984807, -3, 1.49331, -3.475)
 script = ExtResource("12_q4tpe")
 priority_override = false
 priority = 0
@@ -1568,7 +1568,7 @@ inactive_update_mode = 0
 camera_3D_resource = null
 
 [node name="ItemCamera2" type="Node3D" parent="Shop"]
-transform = Transform3D(1, 0, 0, 0, 0.906308, 0.422618, 0, -0.422618, 0.906308, -1.5, 1.7483, -3.48706)
+transform = Transform3D(1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, -1.5, 1.49331, -3.475)
 script = ExtResource("12_q4tpe")
 priority_override = false
 priority = 0
@@ -1580,7 +1580,7 @@ inactive_update_mode = 0
 camera_3D_resource = null
 
 [node name="ItemCamera3" type="Node3D" parent="Shop"]
-transform = Transform3D(1, 0, 0, 0, 0.906308, 0.422618, 0, -0.422618, 0.906308, 0, 1.7483, -3.48706)
+transform = Transform3D(1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, 0, 1.49331, -3.475)
 script = ExtResource("12_q4tpe")
 priority_override = false
 priority = 0
@@ -1592,7 +1592,7 @@ inactive_update_mode = 0
 camera_3D_resource = null
 
 [node name="ItemCamera4" type="Node3D" parent="Shop"]
-transform = Transform3D(1, 0, 0, 0, 0.906308, 0.422618, 0, -0.422618, 0.906308, 1.5, 1.50681, -3.55176)
+transform = Transform3D(1, 0, 0, 0, 0.766045, 0.642787, 0, -0.642787, 0.766045, 1.5, 1.77679, -3.85)
 script = ExtResource("12_q4tpe")
 priority_override = false
 priority = 0

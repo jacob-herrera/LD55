@@ -1,6 +1,5 @@
 extends Node
 @export var cameras: Array[PhantomCamera3D]
-@export var ShopSounds: Array[AudioStreamPlayer]
 
 @onready var area: Area3D = $Area3D
 
@@ -15,10 +14,24 @@ var current_item = 0
 var in_shop = false
 var debounce: bool = false
 
-var pool = {
-	1: {0: [3, 5], 1: [1, 10]},
-	2: {0: [2, 5], 1: [2, 10]},
-}
+const POOL_SIZE: int = 2
+const POOL : Array[Dictionary] = [
+	## ROUND 0
+	{
+		Summon.Type.WIZARD: 5,
+		Summon.Type.SNOWMAN: 1
+	},
+	## ROUND 1
+	{
+		Summon.Type.WIZARD: 3,
+		Summon.Type.SNOWMAN: 3
+	},
+	## ROUND 2
+	{
+		Summon.Type.WIZARD: 2,
+		Summon.Type.SNOWMAN: 3
+	},
+]
 
 var pedestal_locaction: Array[Vector3] = [
 	Vector3(-4.5, 0.5, -5.5),
@@ -27,70 +40,102 @@ var pedestal_locaction: Array[Vector3] = [
 	Vector3(0, 0.5, -5.5),
 ]
 
-var current_display = []
 var rng = RandomNumberGenerator.new()
-var rerollPrice = 10
-var preview_arr = []
+const REROLL_INDEX: int = 4
+const REROLL_COST: int = 10
+#var preview_nodes: Array[Node3D] = []
+const N_SLOTS: int = 4
+var slots: Array[Dictionary] = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	ui.freeze_button.pressed.connect(_freeze_button_pressed)
 	ui.purchase_button.pressed.connect(_purchase_button_pressed)
-	var total = 0;
-	for val in pool[1].values():
-		total += val[0]
-	for i in range(cameras.size() - 1):
-		var idx = rng.randi_range(1, total)
-		var curRange = 0
-		for key in pool[1].keys():
-			curRange += pool[1][key][0]
-			if idx <= curRange:
-				current_display.append([Summon.TYPE_TO_STRING[key], pool[1][key][1], false, "lorem ipsum", 1, 1])
-				var preview: Node3D = summon_manager.get_preview_of_summon(key)
-				self.add_child(preview)
-				preview.global_position = pedestal_locaction[i]
-				preview_arr.append(preview)
-				break
-	#print(current_display)
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+
+	for index: int in range(5):
+		var display_data = {}
+		display_data.is_frozen = false
+		display_data.is_purchased = false
+		display_data.is_reroll = false
+		display_data.dps = -1
+		display_data.cost = -1
+		display_data.health = -1
+		display_data.text = "ERROR"
+		display_data.type = Summon.Type.WIZARD
+		display_data.preview = null
+		slots.append(display_data)
+		
+	slots[4].is_reroll = true
+	
+	reroll()
+	
+	
+	#for i in range(cameras.size() - 1):
+		#var random_weight = rng.randi_range(1, total_weight)
+		#var curRange = 0
+		#for key in pool[1].keys():
+			#curRange += pool[1][key][0]
+			#if idx <= curRange:
+				#slots.append([Summon.TYPE_TO_STRING[key], pool[1][key][1], false, "lorem ipsum", 1, 1])
+
+				#preview_arr.append(preview)
+				#break
+				
+				
+	#print(slots)
+
+
+
 func _process(_delta: float):
 	if in_shop == true:
-		
-		if(current_item == cameras.size() - 1):
+		var is_selecting_reroll: bool = current_item == cameras.size() - 1
+		var is_slot_empty: bool = false
+				
+		ui.purchase_button.modulate = Color.WHITE
+		if is_selecting_reroll:
 			ui.description.text = "Reroll"
 			ui.dps.text = ""
 			ui.health.text = ""
 			ui.cost.text = ""
-			ui.reroll_cost.text = "$" + str(rerollPrice)
-			
-			#ui.freeze.visible = false;
-			#ui.frozen.visible = false;
-			#ui.purchase.visible = true;
-			#ui.purchased.visible = false;
+			ui.reroll_cost.text = "$" + str(REROLL_COST)
+			ui.purchase_button.visible = true
+			ui.freeze_button.visible = false
+			ui.middle_selection.visible = not ui.shop_selecting_buttons
+			if REROLL_COST > Globals.coins:
+				ui.purchase_button.modulate = Color.DIM_GRAY
 		else:
-			#if(current_display[current_item][2]):
-				#ui.freeze.visible = false;
-				#ui.frozen.visible = true;
-			#else:
-				#ui.freeze.visible = true;
-				#ui.frozen.visible = false;
-				
-			if(current_display[current_item][0] == null):
+			ui.freeze_button.visible = true
+			is_slot_empty = slots[current_item].is_purchased
+			
+			if is_slot_empty:
 				ui.description.text = ""
 				ui.dps.text = ""
 				ui.health.text = ""
 				ui.cost.text = ""
 				ui.reroll_cost.text = ""
-				#ui.freeze.visible = false;
-				#ui.frozen.visible = false;
-				#ui.purchase.visible = false;
-				#ui.purchased.visible = true;
+				ui.freeze_button.visible = false
+				ui.purchase_button.visible = false
+				ui.middle_selection.visible = false
 			else:
-				ui.description.text = str(current_display[current_item][3])
-				ui.dps.text = "DPS:" + str(current_display[current_item][4])
-				ui.health.text = "HP:" + str(current_display[current_item][5])
-				ui.cost.text = "$" + str(current_display[current_item][1])
+				ui.description.text = slots[current_item].text
+				ui.dps.text = "DPS:" + str(slots[current_item].dps)
+				ui.health.text = "HP:" + str(slots[current_item].health)
+				ui.cost.text = "$" + str(slots[current_item].cost)
 				ui.reroll_cost.text = ""
+				ui.freeze_button.visible = true
+				ui.purchase_button.visible = true
+				ui.middle_selection.visible = not ui.shop_selecting_buttons
+				var price: int = slots[current_item].cost
+				if price > Globals.coins:
+					ui.purchase_button.modulate = Color.DIM_GRAY
+				
+				
+		if (Input.is_action_just_pressed("ui_up") or \
+			Input.is_action_just_pressed("ui_accept")) \
+			and UI.shop_selecting_buttons == false:
+			if not is_slot_empty:
+				ui.focus_buttons()
+				ui.open.play()
 				#ui.purchase.visible = true;
 				#ui.purchased.visible = false;
 		
@@ -111,18 +156,8 @@ func _process(_delta: float):
 				current_item += cameras.size()
 			cameras[current_item].set_priority(20)
 			
-		if (Input.is_action_just_pressed("ui_up") or \
-			Input.is_action_just_pressed("ui_accept")) \
-			and UI.shop_selecting_buttons == false:
-			ui.focus_buttons()
-			ui.open.play()
-			#if current_item != cameras.size() - 1 && current_display[current_item][0] != null:
-				#if current_display[current_item][2]:
-					#steam_SFX.play()
-				#else:
-					#freeze_SFX.play()
-				#current_display[current_item][2] = !current_display[current_item][2]
-				#print(current_display)
+
+
 				
 		if Input.is_action_just_pressed("ui_down"):
 			if UI.shop_selecting_buttons == true:
@@ -130,19 +165,8 @@ func _process(_delta: float):
 				ui.close.play()
 			else:
 				exit_shop()
-			#if current_item != cameras.size() - 1:
-				#if current_display[current_item][0] != null && Globals.coins - current_display[current_item][1] >= 0:
-					#Globals.coins -= current_display[current_item][1]
-					#purchase_SFX.play()
-					#current_display[current_item] = [null, 0, false, "", 0, 0]
-					#preview_arr[current_item].queue_free()
-					#print(current_display)
-			#else:
-				#if Globals.coins - rerollPrice >= 0:
-					#Globals.coins -= rerollPrice
-					#dice_SFX.play()
-					#reroll(1)
-					#print(current_display)
+			#
+
 					
 		if Input.is_action_just_pressed("ui_cancel"):
 			if UI.shop_selecting_buttons == true:
@@ -153,13 +177,38 @@ func _process(_delta: float):
 
 
 func _purchase_button_pressed() -> void:
-	print("purchase")
-
+	if current_item != REROLL_INDEX:
+		var price: int = slots[current_item].cost
+		if not slots[current_item].is_purchased and Globals.coins >= price:
+			Globals.coins -= price
+			globals.character.drop_current_carry()
+			var summon: Summon = summon_manager.spawn_summon(slots[current_item].type)
+			get_tree().current_scene.add_child(summon)
+			summon.global_position = Vector3(randf(), 0.0, randf()) + Vector3(0,0,-3)
+			purchase_SFX.play()
+			slots[current_item].is_purchased = true
+			if is_instance_valid(slots[current_item].preview):
+				slots[current_item].preview.queue_free()
+			ui.unfocus_button()
+	else:
+		if Globals.coins - REROLL_COST >= 0:
+			Globals.coins -= REROLL_COST
+			dice_SFX.play()
+			current_item = 0
+			cameras[0].set_priority(20)
+			ui.unfocus_button()
+			reroll()
+			
 func _freeze_button_pressed() -> void:
-	print("Freeze")
-
-
-
+	if current_item != REROLL_INDEX and slots[current_item].is_purchased == false:
+		if slots[current_item].is_frozen:
+			steam_SFX.play()
+			freeze_SFX.stop()
+		else:
+			freeze_SFX.play()
+			steam_SFX.stop()
+			
+		slots[current_item].is_frozen = not slots[current_item].is_frozen
 	
 var char_was_in_area_last_frame: bool = false
 
@@ -185,7 +234,6 @@ func _physics_process(_delta: float) -> void:
 				
 	char_was_in_area_last_frame = char_is_in_area_this_frame
 	
-	
 func enter_shop():
 	if not in_shop and not debounce:
 		debounce = true
@@ -200,8 +248,7 @@ func enter_shop():
 		current_item = 0
 		ui.shop.visible = true
 		ui.unfocus_button()
-		
-	
+			
 func exit_shop() -> void:
 	if in_shop:
 		for cam: PhantomCamera3D in cameras:
@@ -213,42 +260,37 @@ func exit_shop() -> void:
 		ui.shop.visible = false
 		ui.unfocus_button()
 	
-#func _on_area_3d_body_entered(body: Node3D):
-	#if in_area == false:
-		#in_area = true
-		#in_shop = true
-		#enter_SFX.play()
-		#Controls.lock_movement = true
-		#cameras[0].set_priority(20)
-		#current_item = 0
-		#ui.shop.visible = true
-		#body.velocity = Vector3(0, 0, 0)
-		#
-#func _on_area_3d_body_exited(_body: Node3D):
-	#in_area = false
-	#if in_shop:
-		#if GameCoordinator.current_room != GameCoordinator.Room.HUB:
-			#globals.character.camera.tween_parameters.duration = 0
-		#exit_shop()
-
-func reroll(roundNum: int) -> void:
-	var total = 0;
-	for val in pool[roundNum].values():
-		total += val[0]
-	for i in range(current_display.size()):
-		if(current_display[i][2] == true):
-			continue
-		if preview_arr[i] != null:
-			preview_arr[i].queue_free()
-		var idx = rng.randi_range(1, total)
-		var curRange = 0
-		for key in pool[roundNum].keys():
-			curRange += pool[roundNum][key][0]
-			if idx <= curRange:
-				current_display[i] = [Summon.TYPE_TO_STRING[key], pool[roundNum][key][1], false, "lorem ipsum", 1, 1]
-				var preview: Node3D = summon_manager.get_preview_of_summon(key)
-				self.add_child(preview)
-				preview.global_position = pedestal_locaction[i]
-				preview_arr[i] = preview
-				break
+func reroll() -> void:
+	var current_round: int = min(POOL_SIZE, GameCoordinator.current_round)
 	
+	var distribution: Array[Summon.Type] = []
+	var total_weight: int = 0;
+	
+	for summon_type: Summon.Type in POOL[current_round]:
+		var weight: int = POOL[current_round][summon_type]
+		for i in range(weight):
+			distribution.append(summon_type)
+		total_weight += weight
+		
+	
+	for index: int in range(N_SLOTS):
+		if slots[index].is_frozen:
+			continue
+		if is_instance_valid(slots[index].preview):
+			slots[index].preview.queue_free()
+			
+		var random_weight: int = rng.randi_range(0, total_weight-1)
+		var summon_type: Summon.Type = distribution[random_weight]
+		slots[index].is_frozen = false
+		slots[index].is_purchased = false
+		slots[index].is_reroll = false
+		slots[index].dps = 10
+		slots[index].cost = 10
+		slots[index].health = 10
+		slots[index].text = Summon.TYPE_TO_STRING[summon_type]
+		slots[index].type = summon_type
+		var preview: Node3D = summon_manager.get_preview_of_summon(summon_type)
+		add_child(preview)
+		preview.global_position = pedestal_locaction[index]
+		slots[index].preview = preview
+
