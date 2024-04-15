@@ -27,10 +27,5 @@ func recalc_remaining_enemies():
 	 get_tree().get_nodes_in_group(Enemy.GROUP).size()
 	
 func check_enemies() -> void:
-	if get_tree().get_nodes_in_group(Enemy.GROUP).is_empty():
-		globals.last_outcome = 1
-		#print("Lives: " + str(globals.lives))
-	else:
-		globals.last_outcome = 2
+	if not GameCoordinator.wave_cleared:
 		globals.lives -= 1
-		#print("Lives: " + str(globals.lives))

@@ -34,7 +34,7 @@
 [ext_resource type="AudioStream" uid="uid://03a3moyl001g" path="res://assets/audio/diceroll2.mp3" id="28_1vvt3"]
 [ext_resource type="AudioStream" uid="uid://ciufvdumh8l4x" path="res://assets/audio/freeze2.mp3" id="28_yaym2"]
 [ext_resource type="AudioStream" uid="uid://ch5d3q30pl8dr" path="res://assets/audio/steamhiss2.mp3" id="29_2mdqr"]
-[ext_resource type="Material" path="res://assets/mat_icefreeze.tres" id="32_ra551"]
+[ext_resource type="Material" uid="uid://cwq0v1g7q633e" path="res://assets/mat_icefreeze.tres" id="32_ra551"]
 [ext_resource type="AudioStream" uid="uid://crxk7ol62je8l" path="res://assets/audio/enter_pool.mp3" id="35_awl5c"]
 [ext_resource type="Script" path="res://scripts/register_room.gd" id="35_vhw7u"]
 [ext_resource type="AudioStream" uid="uid://by5g27qtkhlo7" path="res://assets/audio/sound_11.wav" id="37_012jf"]

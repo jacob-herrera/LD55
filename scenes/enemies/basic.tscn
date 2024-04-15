@@ -43,7 +43,6 @@ offset = Vector2(0, 0.5)
 path_desired_distance = 0.25
 avoidance_enabled = true
 radius = 0.25
-debug_enabled = true
 
 [node name="Shadow" type="Sprite3D" parent="."]
 transform = Transform3D(3, 0, 0, 0, -1.31134e-07, -3, 0, 3, -1.31134e-07, 0, 0.01, 0)

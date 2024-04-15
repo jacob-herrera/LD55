@@ -21,6 +21,9 @@ const PLAYER_SUMMON_DURATION = 6.0
 const HUB_TIME: float = 30.0
 const COMBAT_TIME: float = 30.0
 
+static var wave_cleared: bool = false
+static var _played_wave_clear_animation: bool = false
+static var _has_started_summon_circle: bool = false
 static var room_multiplier: float = 0
 
 signal goto_hub
@@ -108,7 +111,7 @@ func goto_room(target_room: Room) -> void:
 			time = HUB_TIME
 			enemy_manager.check_enemies()
 			enemy_manager.remove_enemies()
-			ui.wave_player.play("fade_away")
+			
 			emit_signal("goto_hub")
 		_:			
 			time = COMBAT_TIME
@@ -119,7 +122,9 @@ func goto_room(target_room: Room) -> void:
 			EnemyManager.current_room_remaining_enemies = num_enemies
 			enemy_manager.remove_enemies()
 			spawn_enemy_in_current_room()
-	
+			_played_wave_clear_animation = false
+			
+	_has_started_summon_circle = false
 	globals.character.global_position = room_data[target_room].player_spawn
 	anim_player.play("fade_in")	
 	globals.character.summon_circle.stop_anim()
@@ -134,24 +139,36 @@ func _process(delta: float) -> void:
 		time -= delta
 	if time <= FADE_DURATION:
 		anim_player.play("fade_out")
-	if time <= PLAYER_SUMMON_DURATION:
+	if time <= PLAYER_SUMMON_DURATION and not _has_started_summon_circle:
+		_has_started_summon_circle = true
 		globals.character.summon_circle.start_anim()
-	if time <= 3:
 		ui.particles_on()
+	#if time <= PLAYER_SUMMON_DURATION:
 		
 	
 	enemy_manager.recalc_remaining_enemies()
-	if current_room != Room.HUB && enemy_manager.current_room_remaining_enemies == 0 && time > PLAYER_SUMMON_DURATION:
-		time = PLAYER_SUMMON_DURATION
+	if current_room != Room.HUB:
+		wave_cleared = enemy_manager.current_room_remaining_enemies == 0
+	
+	if current_room != Room.HUB and wave_cleared:
+		if time > PLAYER_SUMMON_DURATION:
+			time = PLAYER_SUMMON_DURATION
+			
+		if not _played_wave_clear_animation:
+			_played_wave_clear_animation = true
+			ui.wave_player.play("fade_away")
 	
 	if time <= 0:
 		match current_room:
 			Room.HUB:
-				var room: Room = randi_range(1,3) as Room
-				goto_room(room)
+				var random_room: Room = randi_range(1,3) as Room
+				goto_room(random_room)
 			_:
 				enemy_manager.remove_enemies()
 				goto_room(Room.HUB)
+				print("here", wave_cleared)
+				if wave_cleared == false:
+					ui.wave_player.play("fade_away")
 				num_enemies += 1
 				
 	calc_earnings()
@@ -161,4 +178,4 @@ func _process(delta: float) -> void:
 func calc_earnings() -> int:
 	# multiply by round? wtf that will scale too fast
 	#return round(time * room_multiplier * float(current_round)) as int
-	return round(time * 100)
+	return round(time)

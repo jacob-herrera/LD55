@@ -4,7 +4,6 @@ class_name Globals
 var character: Character
 var highlight: Sprite3D
 var lives: int = 3
-var last_outcome: int = 0
 
 const GROUND_LAYER: int = 1
 const SUMMON_MANA_COST: int = 15
@@ -21,8 +20,6 @@ static var mana: int = 60:
 static var max_mana: int = 60
 static var is_in_shop: bool = false
 static var is_in_summon_ui: bool = false
-
-
 
 func _process(_delta: float) -> void:
 	var all_found: bool = true
