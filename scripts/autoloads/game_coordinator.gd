@@ -23,6 +23,8 @@ const COMBAT_TIME: float = 30.0
 
 static var room_multiplier: float = 0
 
+signal goto_hub
+
 static var current_room: Room = Room.HUB
 static var num_enemies: int = 3
 static var current_round: int = 0
@@ -107,6 +109,7 @@ func goto_room(target_room: Room) -> void:
 			enemy_manager.check_enemies()
 			enemy_manager.remove_enemies()
 			ui.wave_player.play("fade_away")
+			emit_signal("goto_hub")
 		_:			
 			time = COMBAT_TIME
 			current_round += 1

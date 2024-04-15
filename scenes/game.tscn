@@ -1,9 +1,9 @@
-[gd_scene load_steps=188 format=3 uid="uid://dnpi8mksbjqnn"]
+[gd_scene load_steps=191 format=3 uid="uid://dnpi8mksbjqnn"]
 
 [ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map.gd" id="1_fle1t"]
 [ext_resource type="Resource" uid="uid://btwxy5brwdbg4" path="res://fgd/map_settings.tres" id="2_obqiq"]
 [ext_resource type="Material" uid="uid://dqbweinqt7qpy" path="res://trenchbroom/textures/checkered.tres" id="3_fu3gy"]
-[ext_resource type="Material" path="res://trenchbroom/textures/dark_checkered.tres" id="4_02otx"]
+[ext_resource type="Material" uid="uid://cy736heb2jukn" path="res://trenchbroom/textures/dark_checkered.tres" id="4_02otx"]
 [ext_resource type="Material" uid="uid://k1pyyhsac2ir" path="res://trenchbroom/textures/die_face_5.tres" id="5_71nd2"]
 [ext_resource type="Texture2D" uid="uid://2ljib8g6rii4" path="res://assets/shadow.png" id="6_003y4"]
 [ext_resource type="Material" uid="uid://ttov7ld35nax" path="res://trenchbroom/textures/die_face_3.tres" id="6_uj5el"]
@@ -16,10 +16,10 @@
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="13_2hxcw"]
 [ext_resource type="Resource" uid="uid://k62lirijanxl" path="res://assets/cam_tween_player.tres" id="15_36f27"]
 [ext_resource type="Script" path="res://scripts/shop.gd" id="15_itd2k"]
-[ext_resource type="Resource" path="res://assets/camera_resource.tres" id="16_6jxv8"]
+[ext_resource type="Resource" uid="uid://dab5weecvnpwr" path="res://assets/camera_resource.tres" id="16_6jxv8"]
 [ext_resource type="Resource" uid="uid://be15co36abbxx" path="res://assets/cam_tween_shop.tres" id="16_uunvf"]
 [ext_resource type="Script" path="res://scripts/mana_pool.gd" id="17_5wmwc"]
-[ext_resource type="PackedScene" path="res://scenes/summon_circle.tscn" id="17_q38df"]
+[ext_resource type="PackedScene" uid="uid://ofw4dvit1lbl" path="res://scenes/summon_circle.tscn" id="17_q38df"]
 [ext_resource type="AudioStream" uid="uid://cxahdd3c6756b" path="res://assets/audio/teleport4v1.mp3" id="17_y67pv"]
 [ext_resource type="AudioStream" uid="uid://d1fuxqmu8xp5a" path="res://assets/audio/summon_pickup.mp3" id="18_j0qpv"]
 [ext_resource type="AudioStream" uid="uid://cgtdd5x6h26sj" path="res://assets/audio/summon_place_new.mp3" id="19_pgqx0"]
@@ -34,6 +34,7 @@
 [ext_resource type="AudioStream" uid="uid://03a3moyl001g" path="res://assets/audio/diceroll2.mp3" id="28_1vvt3"]
 [ext_resource type="AudioStream" uid="uid://ciufvdumh8l4x" path="res://assets/audio/freeze2.mp3" id="28_yaym2"]
 [ext_resource type="AudioStream" uid="uid://ch5d3q30pl8dr" path="res://assets/audio/steamhiss2.mp3" id="29_2mdqr"]
+[ext_resource type="Material" uid="uid://cwq0v1g7q633e" path="res://assets/mat_icefreeze.tres" id="32_ra551"]
 [ext_resource type="AudioStream" uid="uid://crxk7ol62je8l" path="res://assets/audio/enter_pool.mp3" id="35_awl5c"]
 [ext_resource type="Script" path="res://scripts/register_room.gd" id="35_vhw7u"]
 [ext_resource type="Texture2D" uid="uid://b3ohjdpj1b2uy" path="res://assets/highlight_arrow.png" id="38_48ava"]
@@ -1008,18 +1009,14 @@ _data = {
 [sub_resource type="BoxShape3D" id="BoxShape3D_77h1f"]
 size = Vector3(1.375, 3, 1.375)
 
+[sub_resource type="BoxMesh" id="BoxMesh_gh0jp"]
+size = Vector3(1, 1.5, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fermb"]
+size = Vector3(1, 1.5, 1)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_ha2t1"]
 size = Vector3(4, 0.25, 3.5)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_om2wr"]
-transparency = 1
-blend_mode = 1
-depth_draw_mode = 2
-no_depth_test = true
-albedo_color = Color(0, 0.756863, 1, 0.0823529)
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_ap6qs"]
-size = Vector2(3.75, 3.125)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_05cwf"]
 transparency = 1
@@ -1036,6 +1033,16 @@ size = Vector2(0.05, 0.05)
 [sub_resource type="Gradient" id="Gradient_s0fa4"]
 offsets = PackedFloat32Array(0, 0.522042, 1)
 colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qucb0"]
+transparency = 1
+blend_mode = 1
+depth_draw_mode = 2
+no_depth_test = true
+albedo_color = Color(0.466667, 0.592157, 1, 0.0823529)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_jie0b"]
+size = Vector2(4, 3.5)
 
 [node name="game" type="Node3D"]
 metadata/_edit_lock_ = true
@@ -1530,9 +1537,11 @@ texture_albedo = ExtResource("22_ypcgd")
 modulate = Color(1, 1, 0, 0.25098)
 cull_mask = 1047567
 
-[node name="Shop" type="Node" parent="." node_paths=PackedStringArray("cameras")]
+[node name="Shop" type="Node" parent="." node_paths=PackedStringArray("cameras", "freeze_bodies", "freeze_meshes")]
 script = ExtResource("15_itd2k")
 cameras = [NodePath("ItemCamera0"), NodePath("ItemCamera1"), NodePath("ItemCamera2"), NodePath("ItemCamera3"), NodePath("ItemCamera4")]
+freeze_bodies = [NodePath("Freeze1"), NodePath("Freeze2"), NodePath("Freeze3"), NodePath("Freeze4")]
+freeze_meshes = [NodePath("Freeze1/Mesh"), NodePath("Freeze2/Mesh"), NodePath("Freeze3/Mesh"), NodePath("Freeze4/Mesh")]
 
 [node name="Area3D" type="Area3D" parent="Shop"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.75, 0.25, -3.5)
@@ -1621,6 +1630,70 @@ stream = ExtResource("29_2mdqr")
 [node name="DiceRollSound" type="AudioStreamPlayer" parent="Shop" groups=["sounds"]]
 stream = ExtResource("28_1vvt3")
 
+[node name="Freeze4" type="StaticBody3D" parent="Shop"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, -5.5)
+
+[node name="Mesh" type="MeshInstance3D" parent="Shop/Freeze4"]
+sorting_offset = 100.0
+sorting_use_aabb_center = false
+material_override = ExtResource("32_ra551")
+transparency = 1.0
+cast_shadow = 0
+ignore_occlusion_culling = true
+mesh = SubResource("BoxMesh_gh0jp")
+skeleton = NodePath("../../../ManaPool")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Shop/Freeze4"]
+shape = SubResource("BoxShape3D_fermb")
+
+[node name="Freeze3" type="StaticBody3D" parent="Shop"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 1.25, -5.5)
+
+[node name="Mesh" type="MeshInstance3D" parent="Shop/Freeze3"]
+sorting_offset = 100.0
+sorting_use_aabb_center = false
+material_override = ExtResource("32_ra551")
+transparency = 1.0
+cast_shadow = 0
+ignore_occlusion_culling = true
+mesh = SubResource("BoxMesh_gh0jp")
+skeleton = NodePath("../../../ManaPool")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Shop/Freeze3"]
+shape = SubResource("BoxShape3D_fermb")
+
+[node name="Freeze2" type="StaticBody3D" parent="Shop"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1.25, -5.5)
+
+[node name="Mesh" type="MeshInstance3D" parent="Shop/Freeze2"]
+sorting_offset = 100.0
+sorting_use_aabb_center = false
+material_override = ExtResource("32_ra551")
+transparency = 1.0
+cast_shadow = 0
+ignore_occlusion_culling = true
+mesh = SubResource("BoxMesh_gh0jp")
+skeleton = NodePath("../../../ManaPool")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Shop/Freeze2"]
+shape = SubResource("BoxShape3D_fermb")
+
+[node name="Freeze1" type="StaticBody3D" parent="Shop"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 1.25, -5.5)
+
+[node name="Mesh" type="MeshInstance3D" parent="Shop/Freeze1"]
+sorting_offset = 100.0
+sorting_use_aabb_center = false
+material_override = ExtResource("32_ra551")
+transparency = 1.0
+cast_shadow = 0
+ignore_occlusion_culling = true
+mesh = SubResource("BoxMesh_gh0jp")
+skeleton = NodePath("../../../ManaPool")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Shop/Freeze1"]
+shape = SubResource("BoxShape3D_fermb")
+
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.766044, 0.642788, 0, -0.642788, 0.766044, 0, 2.5, 3)
 current = true
@@ -1637,15 +1710,6 @@ script = ExtResource("17_5wmwc")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ManaPool"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.125, 0)
 shape = SubResource("BoxShape3D_ha2t1")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="ManaPool"]
-sorting_offset = -100.0
-sorting_use_aabb_center = false
-material_override = SubResource("StandardMaterial3D_om2wr")
-transparency = 1.0
-cast_shadow = 0
-ignore_occlusion_culling = true
-mesh = SubResource("PlaneMesh_ap6qs")
 
 [node name="CPUParticles3D" type="CPUParticles3D" parent="ManaPool"]
 amount = 32
@@ -1667,6 +1731,11 @@ bus = &"Effects"
 [node name="EnterPool" type="AudioStreamPlayer3D" parent="ManaPool" groups=["sounds3D"]]
 stream = ExtResource("35_awl5c")
 bus = &"Effects"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ManaPool"]
+sorting_offset = -100.0
+material_override = SubResource("StandardMaterial3D_qucb0")
+mesh = SubResource("PlaneMesh_jie0b")
 
 [node name="SpawnsRoom1" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, 0)

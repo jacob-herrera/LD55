@@ -14,6 +14,9 @@ var current_item = 0
 var in_shop = false
 var debounce: bool = false
 
+@export var freeze_bodies: Array[StaticBody3D]
+#@export var freeze_meshes: MeshInst
+
 const POOL_SIZE: int = 2
 const POOL : Array[Dictionary] = [
 	## ROUND 0
@@ -47,11 +50,33 @@ const REROLL_COST: int = 10
 const N_SLOTS: int = 4
 var slots: Array[Dictionary] = []
 
+var freeze_invisible: Array[Vector3]
+var freeze_visible: Array[Vector3]
+@export var freeze_meshes: Array[MeshInstance3D]
+
+func visible_freeze(i: int, vis: bool) -> void:
+	if vis:
+		freeze_bodies[i].global_position = freeze_visible[i]
+		freeze_meshes[i].visible = true
+	else:
+		freeze_bodies[i].global_position = freeze_invisible[i]
+		freeze_meshes[i].visible = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	ui.freeze_button.pressed.connect(_freeze_button_pressed)
 	ui.purchase_button.pressed.connect(_purchase_button_pressed)
-
+	game_coordinator.goto_hub.connect(reroll)
+	
+	for body: StaticBody3D in freeze_bodies:
+		freeze_visible.append(body.global_position)
+		freeze_invisible.append(body.global_position-Vector3(0,2,0))
+	
+	visible_freeze(0, false)
+	visible_freeze(1, false)
+	visible_freeze(2, false)
+	visible_freeze(3, false)
+	
 	for index: int in range(5):
 		var display_data = {}
 		display_data.is_frozen = false
@@ -125,6 +150,11 @@ func _process(_delta: float):
 				ui.freeze_button.visible = true
 				ui.purchase_button.visible = true
 				ui.middle_selection.visible = not ui.shop_selecting_buttons
+				if slots[current_item].is_frozen:
+					ui.freeze_button.text = "UNFREEZE"
+				else:
+					ui.freeze_button.text = "FREEZE"
+				
 				var price: int = slots[current_item].cost
 				if price > Globals.coins:
 					ui.purchase_button.modulate = Color.DIM_GRAY
@@ -175,7 +205,6 @@ func _process(_delta: float):
 				exit_shop()
 			
 
-
 func _purchase_button_pressed() -> void:
 	if current_item != REROLL_INDEX:
 		var price: int = slots[current_item].cost
@@ -187,6 +216,8 @@ func _purchase_button_pressed() -> void:
 			summon.global_position = Vector3(randf(), 0.0, randf()) + Vector3(0,0,-3)
 			purchase_SFX.play()
 			slots[current_item].is_purchased = true
+			visible_freeze(current_item, false)
+			slots[current_item].is_frozen = false
 			if is_instance_valid(slots[current_item].preview):
 				slots[current_item].preview.queue_free()
 			ui.unfocus_button()
@@ -204,9 +235,11 @@ func _freeze_button_pressed() -> void:
 		if slots[current_item].is_frozen:
 			steam_SFX.play()
 			freeze_SFX.stop()
+			visible_freeze(current_item, false)
 		else:
 			freeze_SFX.play()
 			steam_SFX.stop()
+			visible_freeze(current_item, true)
 			
 		slots[current_item].is_frozen = not slots[current_item].is_frozen
 	
