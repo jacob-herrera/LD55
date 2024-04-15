@@ -169,6 +169,7 @@ func enter_shop():
 		if Globals.is_in_summon_ui:
 			ui.exit_summon_ui()
 		Controls.lock_movement = true
+		globals.character.velocity = Vector3.ZERO
 		Globals.is_in_shop = true
 		cameras[0].set_priority(20)
 		current_item = 0

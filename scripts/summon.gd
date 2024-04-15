@@ -119,7 +119,9 @@ func do_buff() -> void:
 		
 	# iterate through array of nearby allies to change stats
 	for node : Node in nearby:
-		node[aoe_effects.keys()[0]] += aoe_effects.values()[0]
+		for key in aoe_effects:
+			var value = aoe_effects[key]
+			node[key] += value
 
 
 func take_damage(damage_taking: int, damage_dir: Vector3) -> void:
