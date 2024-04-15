@@ -152,6 +152,8 @@ func _physics_process(delta: float) -> void:
 		
 func drop_current_carry() -> void:
 	if is_instance_valid(carrying):
+		aoe_range.visible = false
+		attack_range.visible = false
 		# raycast to floor
 		var space_rid := get_world_3d().space
 		var space_state := PhysicsServer3D.space_get_direct_state(space_rid)
@@ -186,9 +188,14 @@ func do_carry() -> void:
 			if summon.attack_range > 0:
 				attack_range.visible = true
 				attack_range.size = Vector3(summon.attack_range*2,10,summon.attack_range*2)
+			else:
+				attack_range.visible = false
+				
 			if summon.aoe_range > 0:
 				aoe_range.visible = true
 				aoe_range.size = Vector3(summon.aoe_range*2,10,summon.aoe_range*2)
+			else:
+				aoe_range.visible = false
 		if Controls.try_pickup():
 			drop_current_carry()
 				

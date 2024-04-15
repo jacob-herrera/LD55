@@ -18,8 +18,8 @@ const PLAYER_CAMERA_DEFAULT_TWEEN: float = 0.5
 const FADE_DURATION: float = 10.0 / 30.0
 const PLAYER_SUMMON_DURATION = 6.0
 
-const HUB_TIME: float = 30.0
-const COMBAT_TIME: float = 30.0
+const HUB_TIME: float = 10.0
+const COMBAT_TIME: float = 10.0
 
 static var room_multiplier: float = 0
 
@@ -137,7 +137,7 @@ func _process(delta: float) -> void:
 				var room: Room = randi_range(1,3) as Room
 				goto_room(room)
 			_:
-				enemy_manager.remove_enemies
+				enemy_manager.remove_enemies()
 				goto_room(Room.HUB)
 				num_enemies += 1
 	calc_earnings()

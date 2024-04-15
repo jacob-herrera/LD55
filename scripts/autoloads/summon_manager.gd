@@ -21,3 +21,20 @@ func give_player_summon(summon_name: String) -> void:
 	var inst: Node3D = scene.instantiate() 
 	get_tree().current_scene.add_child(inst)
 	globals.character.carrying = inst
+
+func _process(delta: float) -> void:
+	var all_summons: Array[Summon] = []
+	
+	for node: Node in get_tree().get_nodes_in_group(Summon.GROUP):
+		if node is Summon:
+			all_summons.append(node)
+		
+	for summon: Summon in all_summons:
+		summon.do_buffs()
+		
+	for summon: Summon in all_summons:
+		summon.try_attacks(delta)
+		
+	for summon: Summon in all_summons:
+		summon.reset_to_base()
+	

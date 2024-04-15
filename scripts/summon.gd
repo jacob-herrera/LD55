@@ -62,21 +62,10 @@ func _ready() -> void:
 	add_to_group(Summon.GROUP)
 	collision_layer = LAYER
 	sync_to_physics = false
-	
 	reset_to_base()
 	health = max_health
 	attack_cooldown = 1.0 / attack_rate
-	
 	healthbar.initalize(max_health, col, true)
-	
-func _process(delta: float) -> void:	
-	attack_cooldown -= delta
-	if aoe_range > 0:
-		do_buff()
-	if attack_range > 0 && attack_cooldown <= 0: 
-		attack_cooldown = 1.0 / attack_rate
-		do_ranged()
-	reset_to_base()
 	
 func get_center() -> Vector3:
 	return col.global_position
@@ -107,21 +96,26 @@ func do_explode() -> void:
 		# remove sprite from scene and play exploision sound
 		# damage all enemeis in a radius
 	
-func do_buff() -> void:
+func do_buffs() -> void:
+	if aoe_range <= 0 or aoe_effects.is_empty():
+		return
 	# places nearby allies in array named "nearby"
-	var allies: Array[Node] = get_tree().get_nodes_in_group(Summon.GROUP)
-	var nearby: Array[Node] = []
-	var pos: Vector3 = global_position
-	for node : Node in allies:
-		var dist: float = pos.distance_to(node.global_position)
-		if dist > 0 && dist < aoe_range:
-			nearby.append(node)
-		
-	# iterate through array of nearby allies to change stats
-	for node : Node in nearby:
-		for key in aoe_effects:
-			var value = aoe_effects[key]
-			node[key] += value
+	var all_summons: Array[Node] = get_tree().get_nodes_in_group(Summon.GROUP)
+	for node: Node in all_summons:
+		if node is Summon:
+			var other := node as Summon
+			if other != self:
+				var dist: float = global_position.distance_to(node.global_position)
+				if dist <= aoe_range:
+					for key in aoe_effects:
+						var value = aoe_effects[key]
+						node[key] += value
+
+func try_attacks(delta: float) -> void:
+	attack_cooldown -= delta
+	if attack_range > 0 && attack_cooldown <= 0: 
+		attack_cooldown = 1.0 / attack_rate
+		do_ranged()
 
 
 func take_damage(damage_taking: int, damage_dir: Vector3) -> void:

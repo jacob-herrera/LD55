@@ -1,4 +1,4 @@
-[gd_scene load_steps=189 format=3 uid="uid://dnpi8mksbjqnn"]
+[gd_scene load_steps=188 format=3 uid="uid://dnpi8mksbjqnn"]
 
 [ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map.gd" id="1_fle1t"]
 [ext_resource type="Resource" uid="uid://btwxy5brwdbg4" path="res://fgd/map_settings.tres" id="2_obqiq"]
@@ -34,7 +34,6 @@
 [ext_resource type="AudioStream" uid="uid://03a3moyl001g" path="res://assets/audio/diceroll2.mp3" id="28_1vvt3"]
 [ext_resource type="AudioStream" uid="uid://ciufvdumh8l4x" path="res://assets/audio/freeze2.mp3" id="28_yaym2"]
 [ext_resource type="AudioStream" uid="uid://ch5d3q30pl8dr" path="res://assets/audio/steamhiss2.mp3" id="29_2mdqr"]
-[ext_resource type="PackedScene" uid="uid://cyq5jt2re2dc5" path="res://scenes/summons/snowman_summon.tscn" id="29_lxb8g"]
 [ext_resource type="AudioStream" uid="uid://crxk7ol62je8l" path="res://assets/audio/enter_pool.mp3" id="35_awl5c"]
 [ext_resource type="Script" path="res://scripts/register_room.gd" id="35_vhw7u"]
 [ext_resource type="Texture2D" uid="uid://b3ohjdpj1b2uy" path="res://assets/highlight_arrow.png" id="38_48ava"]
@@ -1668,12 +1667,6 @@ bus = &"Effects"
 [node name="EnterPool" type="AudioStreamPlayer3D" parent="ManaPool" groups=["sounds3D"]]
 stream = ExtResource("35_awl5c")
 bus = &"Effects"
-
-[node name="snowman_summon" parent="." instance=ExtResource("29_lxb8g")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 0, -1)
-aoe_effects = {
-"damage": 30
-}
 
 [node name="SpawnsRoom1" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, 0)
