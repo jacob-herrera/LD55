@@ -14,6 +14,7 @@ class_name Character
 @onready var summon_place: AudioStreamPlayer3D = $SummonPlace
 @onready var footsteps: AudioStreamPlayer3D = $Footsteps
 @onready var jump: AudioStreamPlayer3D = $Jump
+@onready var land: AudioStreamPlayer3D = $Land
 @export_flags_3d_physics var ground_layer: int
 @export var camera: PhantomCamera3D
 
@@ -84,7 +85,13 @@ func _ready() -> void:
 	camera.set_priority(10)
 
 func  _process(delta: float) -> void:
-	rot += delta * JUMP_SPIN_SPEED if jumped else 0.0
+	#rot += delta * JUMP_SPIN_SPEED if jumped else 0.0
+	if jumped:
+		rot += delta * JUMP_SPIN_SPEED
+		if is_on_floor():
+			land.play()
+	else:
+		rot = 0
 
 func _physics_process(delta: float) -> void:
 	if Pauser.is_paused: return
