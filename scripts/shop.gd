@@ -49,7 +49,7 @@ func _ready():
 				preview.global_position = pedestal_locaction[i]
 				preview_arr.append(preview)
 				break
-	print(current_display)
+	#print(current_display)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float):
 	if in_shop == true:

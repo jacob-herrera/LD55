@@ -126,7 +126,6 @@ func take_damage(damage_taking: int, damage_dir: Vector3) -> void:
 	health -= damage_taking
 	hurt.play()
 	if health <= 0:
-		print("is kill")
 		#killed.play()
 		utils.death_animation(global_position, damage_dir, sprite)
 		queue_free()
