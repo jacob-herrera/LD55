@@ -1,8 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://bhkryx6iyvbay"]
+[gd_scene load_steps=11 format=3 uid="uid://bhkryx6iyvbay"]
 
 [ext_resource type="Script" path="res://scripts/autoloads/ui.gd" id="1_jrdqv"]
 [ext_resource type="FontFile" uid="uid://ey5uk5evoi8o" path="res://assets/nes.ttf" id="1_rg5ws"]
 [ext_resource type="Texture2D" uid="uid://xvbaf5ypxiby" path="res://assets/particle.png" id="3_55a6y"]
+[ext_resource type="AudioStream" uid="uid://dafno5ot5nbi" path="res://assets/audio/swipe.mp3" id="4_e6ab6"]
+[ext_resource type="AudioStream" uid="uid://b20mpeoqvfmfa" path="res://assets/audio/open_preview.mp3" id="5_gm12l"]
+[ext_resource type="AudioStream" uid="uid://de70lofhcg7fo" path="res://assets/audio/close_preview.mp3" id="6_ulsur"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ub2k2"]
 bg_color = Color(0, 0, 0, 1)
@@ -513,3 +516,19 @@ theme_override_font_sizes/font_size = 24
 text = ">"
 horizontal_alignment = 2
 vertical_alignment = 1
+
+[node name="Swipe" type="AudioStreamPlayer" parent="summon_ui"]
+stream = ExtResource("4_e6ab6")
+max_polyphony = 4
+bus = &"Effects"
+
+[node name="Open" type="AudioStreamPlayer" parent="summon_ui"]
+stream = ExtResource("5_gm12l")
+max_polyphony = 4
+bus = &"Effects"
+
+[node name="Close" type="AudioStreamPlayer" parent="summon_ui"]
+stream = ExtResource("6_ulsur")
+volume_db = 5.571
+max_polyphony = 4
+bus = &"Effects"
