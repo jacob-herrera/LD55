@@ -15,24 +15,108 @@ var in_shop = false
 var debounce: bool = false
 
 @export var freeze_bodies: Array[StaticBody3D]
-#@export var freeze_meshes: MeshInst
+#@export var freeze_meshes: MeshIns
 
-const POOL_SIZE: int = 2
+const POOL_SIZE: int = 10
 const POOL : Array[Dictionary] = [
 	## ROUND 0
 	{
-		Summon.Type.WIZARD: 9,
-		Summon.Type.SNOWMAN: 1,
+		Summon.Type.WIZARD: 0,
+		Summon.Type.SNOWMAN: 0,
+		Summon.Type.ARCHER: 9,
+		Summon.Type.BARD: 0,
+		Summon.Type.SHIELD: 1,
+		Summon.Type.RABBIT: 0
 	},
 	## ROUND 1
 	{
-		Summon.Type.WIZARD: 3,
-		Summon.Type.SNOWMAN: 3,
+		Summon.Type.WIZARD: 0,
+		Summon.Type.SNOWMAN: 5,
+		Summon.Type.ARCHER: 5,
+		Summon.Type.BARD: 1,
+		Summon.Type.SHIELD: 2,
+		Summon.Type.RABBIT: 1
 	},
 	## ROUND 2
 	{
+		Summon.Type.WIZARD: 0,
+		Summon.Type.SNOWMAN: 5,
+		Summon.Type.ARCHER: 5,
+		Summon.Type.BARD: 2,
+		Summon.Type.SHIELD: 2,
+		Summon.Type.RABBIT: 2
+	},
+	## ROUND 3
+	{
+		Summon.Type.WIZARD: 0,
+		Summon.Type.SNOWMAN: 5,
+		Summon.Type.ARCHER: 5,
+		Summon.Type.BARD: 2,
+		Summon.Type.SHIELD: 2,
+		Summon.Type.RABBIT: 2
+	},
+	## ROUND 4
+	{
+		Summon.Type.WIZARD: 0,
+		Summon.Type.SNOWMAN: 5,
+		Summon.Type.ARCHER: 5,
+		Summon.Type.BARD: 2,
+		Summon.Type.SHIELD: 2,
+		Summon.Type.RABBIT: 2
+	},
+	## ROUND 5
+	{
+		Summon.Type.WIZARD: 0,
+		Summon.Type.SNOWMAN: 5,
+		Summon.Type.ARCHER: 3,
+		Summon.Type.BARD: 2,
+		Summon.Type.SHIELD: 2,
+		Summon.Type.RABBIT: 2
+	},
+	## ROUND 6
+	{
+		Summon.Type.WIZARD: 0,
+		Summon.Type.SNOWMAN: 5,
+		Summon.Type.ARCHER: 3,
+		Summon.Type.BARD: 2,
+		Summon.Type.SHIELD: 2,
+		Summon.Type.RABBIT: 2
+	},
+	## ROUND 7
+	{
 		Summon.Type.WIZARD: 2,
-		Summon.Type.SNOWMAN: 3,
+		Summon.Type.SNOWMAN: 5,
+		Summon.Type.ARCHER: 2,
+		Summon.Type.BARD: 2,
+		Summon.Type.SHIELD: 2,
+		Summon.Type.RABBIT: 2
+	},
+	## ROUND 8
+	{
+		Summon.Type.WIZARD: 2,
+		Summon.Type.SNOWMAN: 5,
+		Summon.Type.ARCHER: 2,
+		Summon.Type.BARD: 2,
+		Summon.Type.SHIELD: 2,
+		Summon.Type.RABBIT: 2
+	},
+	## ROUND 9
+	{
+		Summon.Type.WIZARD: 5,
+		Summon.Type.SNOWMAN: 5,
+		Summon.Type.ARCHER: 0,
+		Summon.Type.BARD: 2,
+		Summon.Type.SHIELD: 2,
+		Summon.Type.RABBIT: 2
+	},
+	## ROUND 10
+	{
+		Summon.Type.WIZARD: 5,
+		Summon.Type.SNOWMAN: 5,
+		Summon.Type.ARCHER: 0,
+		Summon.Type.BARD: 2,
+		Summon.Type.SHIELD: 2,
+		Summon.Type.RABBIT: 2
 	},
 ]
 

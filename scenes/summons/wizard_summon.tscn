@@ -18,9 +18,9 @@ script = ExtResource("1_2v8pu")
 projectile_texture = ExtResource("2_055ni")
 base_attack_range = 5.0
 base_attack_rate = 2.0
-base_damage = 1
-base_max_health = 10
-price = 3
+base_damage = 5
+base_max_health = 5
+price = 10
 desc = "magic man"
 
 [node name="Sprite3D" type="Sprite3D" parent="."]

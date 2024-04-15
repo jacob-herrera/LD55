@@ -8,7 +8,7 @@ var lives: int = 3
 const GROUND_LAYER: int = 1
 const SUMMON_MANA_COST: int = 15
 
-static var coins: int = 33
+static var coins: int = 30
 static var mana: int = 60:
 	set(new_value):
 		mana = new_value

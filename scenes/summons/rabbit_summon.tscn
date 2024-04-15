@@ -14,13 +14,14 @@ size = Vector3(0.5, 1.12292, 0.5)
 [node name="rabbit_summon" type="AnimatableBody3D"]
 collision_layer = 16
 script = ExtResource("1_aem7j")
-base_max_health = 10
+base_max_health = 5
 base_aoe_range = 2.5
 aoe_effects = {
 "attack_rate": 2
 }
 type = 8
 range_type = 1
+price = 5
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, 0)

@@ -149,9 +149,10 @@ func _process(delta: float) -> void:
 	enemy_manager.recalc_remaining_enemies()
 	if current_room != Room.HUB:
 		wave_cleared = enemy_manager.current_room_remaining_enemies == 0
-	
+	calc_earnings()
 	if current_room != Room.HUB and wave_cleared:
 		if time > PLAYER_SUMMON_DURATION:
+			Globals.coins += calc_earnings()
 			time = PLAYER_SUMMON_DURATION
 			
 		if not _played_wave_clear_animation:
@@ -171,7 +172,7 @@ func _process(delta: float) -> void:
 					ui.wave_player.play("fade_away")
 				num_enemies += 1
 				
-	calc_earnings()
+	
 	
 	
 

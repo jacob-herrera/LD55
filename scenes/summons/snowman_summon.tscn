@@ -17,11 +17,11 @@ collision_layer = 16
 script = ExtResource("1_f0v8i")
 projectile_texture = ExtResource("2_0fwh1")
 base_attack_range = 5.0
-base_attack_rate = 3.0
+base_attack_rate = 2.0
 base_damage = 2
-base_max_health = 10
+base_max_health = 5
 type = 1
-price = 5
+price = 6
 desc = "cool guy who does cool things"
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
