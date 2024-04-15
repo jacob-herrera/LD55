@@ -19,7 +19,7 @@ const FADE_DURATION: float = 10.0 / 30.0
 const PLAYER_SUMMON_DURATION = 6.0
 
 const HUB_TIME: float = 30.0
-const COMBAT_TIME: float = 60.0
+const COMBAT_TIME: float = 30.0
 
 static var room_multiplier: float = 0
 
@@ -84,10 +84,9 @@ func goto_room(target_room: Room) -> void:
 	match target_room:
 		Room.HUB:
 			time = HUB_TIME
-			room_multiplier = 0
-		Room.ROOM_1:
+		_:
 			time = COMBAT_TIME
-			room_multiplier = 1
+			current_round += 1
 			
 	globals.character.global_position = room_data[target_room].player_spawn
 	anim_player.play("fade_in")	
@@ -110,11 +109,14 @@ func _process(delta: float) -> void:
 	if time <= 0:
 		match current_room:
 			Room.HUB:
-				goto_room(Room.ROOM_1)
-			Room.ROOM_1:
+				var room: Room = randi_range(1,3) as Room
+				print(room)
+				goto_room(room)
+			_:
 				goto_room(Room.HUB)
 	calc_earnings()
 
 func calc_earnings() -> int:
 	# multiply by round? wtf that will scale too fast
-	return round(time * room_multiplier * float(current_round)) as int
+	#return round(time * room_multiplier * float(current_round)) as int
+	return round(time * 100)
