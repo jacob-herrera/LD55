@@ -39,7 +39,7 @@ shape = SubResource("CapsuleShape3D_foljy")
 [node name="healthbar" parent="." instance=ExtResource("5_nhedk")]
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
-path_desired_distance = 0.3
+path_desired_distance = 0.5
 avoidance_enabled = true
 radius = 0.25
 

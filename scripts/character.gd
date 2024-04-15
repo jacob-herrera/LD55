@@ -150,6 +150,20 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	do_carry()
 		
+func drop_current_carry() -> void:
+	if is_instance_valid(carrying):
+		# raycast to floor
+		var space_rid := get_world_3d().space
+		var space_state := PhysicsServer3D.space_get_direct_state(space_rid)
+		var from: Vector3 = global_position + Vector3(0, 1, 0)
+		var to: Vector3 = global_position - Vector3(0, 100, 0)
+		var query := PhysicsRayQueryParameters3D.create(from, to, ground_layer)
+		var result = space_state.intersect_ray(query)
+		if not result.is_empty():
+			carrying.position = result.position
+			carrying = null
+			summon_place.play()
+	
 func do_carry() -> void:
 	if not is_instance_valid(carrying):
 		aoe_range.visible = false
@@ -170,17 +184,7 @@ func do_carry() -> void:
 				aoe_range.visible = true
 				aoe_range.size = Vector3(summon.aoe_range*2,10,summon.aoe_range*2)
 		if Controls.try_pickup():
-			# raycast to floor
-			var space_rid := get_world_3d().space
-			var space_state := PhysicsServer3D.space_get_direct_state(space_rid)
-			var from: Vector3 = global_position + Vector3(0, 1, 0)
-			var to: Vector3 = global_position - Vector3(0, 100, 0)
-			var query := PhysicsRayQueryParameters3D.create(from, to, ground_layer)
-			var result = space_state.intersect_ray(query)
-			if not result.is_empty():
-				carrying.position = result.position
-				carrying = null
-				summon_place.play()
+			drop_current_carry()
 				
 func play_footsteps() -> void:
 	if !footsteps.playing && is_on_floor():

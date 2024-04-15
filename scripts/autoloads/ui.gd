@@ -23,6 +23,9 @@ class_name UI
 @onready var preview2: Camera3D = %preview2
 @onready var preview3: Camera3D = %preview3
 
+@onready var summon_left_arrow: Label = %summon_left_arrow
+@onready var summon_right_arrow: Label = %summon_right_arrow
+
 const PREVIEW_OFFSET: Vector3 = Vector3(0, 1, 2)
 const OOB: Vector3 = Vector3(0, -100, 0)
 
@@ -48,6 +51,24 @@ func _process(_delta: float) -> void:
 		selected -= 1
 		selected = clampi(selected, 0, selection_max)
 		preview_summons()
+	if Globals.is_in_summon_ui and Input.is_action_just_pressed("primary_action"):
+		summon_selected()
+		
+func summon_selected() -> void:
+	if summons.is_empty():
+		return
+	if Globals.mana >= 10:
+		Globals.mana -= 10
+		globals.character.drop_current_carry()
+		exit_summon_ui()
+		var selected_summon: Summon = summons[selected]
+		if is_instance_valid(selected_summon):
+			globals.character.carrying = selected_summon
+			game_coordinator.anim_player.play("fade_in")
+			globals.mana -= 10
+	else:
+		# TODO NOT ENOUGH MANA SOUND
+		pass
 		
 func enter_summon_ui() -> void:
 	Controls.lock_movement = true
@@ -79,8 +100,10 @@ func preview_summons() -> void:
 		
 	if is_instance_valid(previous_summon):
 		preview1.global_position = previous_summon.get_center() + PREVIEW_OFFSET
+		summon_left_arrow.visible = true
 	else:
 		preview1.global_position = OOB
+		summon_left_arrow.visible = false
 		
 	if is_instance_valid(selected_summon):
 		preview2.position = selected_summon.get_center() + PREVIEW_OFFSET
@@ -89,8 +112,10 @@ func preview_summons() -> void:
 		
 	if is_instance_valid(next_summon):
 		preview3.position = next_summon.get_center() + PREVIEW_OFFSET
+		summon_right_arrow.visible = true
 	else:
 		preview3.global_position = OOB
+		summon_right_arrow.visible = false
 	
 func exit_summon_ui() -> void:
 	Globals.is_in_summon_ui = false

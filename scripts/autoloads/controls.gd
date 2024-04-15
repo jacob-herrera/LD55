@@ -52,7 +52,7 @@ static func is_move_input() -> bool:
 static func try_pickup() -> bool:
 	if lock_movement:
 		return false
-	return Input.is_action_just_pressed("pickup")
+	return Input.is_action_just_pressed("primary_action")
 
 # Move direction relative to camera orientation
 static func get_forward(relative_to: Node3D) -> Basis:
