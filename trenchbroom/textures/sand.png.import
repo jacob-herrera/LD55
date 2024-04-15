@@ -2,20 +2,21 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d3ulfd6jih58g"
-path="res://.godot/imported/summon_eyeball.png-5459ee63d7de53437c65be8479663bda.ctex"
+uid="uid://c5h2kgeggdnls"
+path.s3tc="res://.godot/imported/sand.png-faeeccc4774222aeeb059e0714ea5f96.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
-source_file="res://assets/summon_eyeball.png"
-dest_files=["res://.godot/imported/summon_eyeball.png-5459ee63d7de53437c65be8479663bda.ctex"]
+source_file="res://trenchbroom/textures/sand.png"
+dest_files=["res://.godot/imported/sand.png-faeeccc4774222aeeb059e0714ea5f96.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

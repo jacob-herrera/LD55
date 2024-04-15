@@ -2,20 +2,21 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d3ulfd6jih58g"
-path="res://.godot/imported/summon_eyeball.png-5459ee63d7de53437c65be8479663bda.ctex"
+uid="uid://cecmo5mffv4cm"
+path.s3tc="res://.godot/imported/brick.png-ce4e3439bb28acd8fca6b03cc8fe7ab5.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
-source_file="res://assets/summon_eyeball.png"
-dest_files=["res://.godot/imported/summon_eyeball.png-5459ee63d7de53437c65be8479663bda.ctex"]
+source_file="res://trenchbroom/textures/brick.png"
+dest_files=["res://.godot/imported/brick.png-ce4e3439bb28acd8fca6b03cc8fe7ab5.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

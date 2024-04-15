@@ -3,20 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bva0k7ivrd4f8"
-path.s3tc="res://.godot/imported/summon_bard.png-debe8acc938a4f8de33d31d469e81f6e.s3tc.ctex"
+path="res://.godot/imported/summon_bard.png-debe8acc938a4f8de33d31d469e81f6e.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://assets/summon_bard.png"
-dest_files=["res://.godot/imported/summon_bard.png-debe8acc938a4f8de33d31d469e81f6e.s3tc.ctex"]
+dest_files=["res://.godot/imported/summon_bard.png-debe8acc938a4f8de33d31d469e81f6e.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

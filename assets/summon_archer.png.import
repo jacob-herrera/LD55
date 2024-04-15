@@ -3,20 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cln7irybph7x3"
-path.s3tc="res://.godot/imported/summon_archer.png-541cb0afe17c7d87132fd6b7e779742c.s3tc.ctex"
+path="res://.godot/imported/summon_archer.png-541cb0afe17c7d87132fd6b7e779742c.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://assets/summon_archer.png"
-dest_files=["res://.godot/imported/summon_archer.png-541cb0afe17c7d87132fd6b7e779742c.s3tc.ctex"]
+dest_files=["res://.godot/imported/summon_archer.png-541cb0afe17c7d87132fd6b7e779742c.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

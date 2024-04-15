@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d3ulfd6jih58g"
-path="res://.godot/imported/summon_eyeball.png-5459ee63d7de53437c65be8479663bda.ctex"
+uid="uid://1ko6yreq4b"
+path="res://.godot/imported/trimsheet1.png-d5285d0fbc23b6742ef091761bf0cfb9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/summon_eyeball.png"
-dest_files=["res://.godot/imported/summon_eyeball.png-5459ee63d7de53437c65be8479663bda.ctex"]
+source_file="res://trenchbroom/textures/trimsheet1.png"
+dest_files=["res://.godot/imported/trimsheet1.png-d5285d0fbc23b6742ef091761bf0cfb9.ctex"]
 
 [params]
 
@@ -21,7 +21,7 @@ compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=true
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
@@ -31,4 +31,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=0
+detect_3d/compress_to=1

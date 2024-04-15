@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://c6dq6udanxdc8"]
+[gd_scene load_steps=9 format=3 uid="uid://dudswvkre0lo5"]
 
 [ext_resource type="Script" path="res://scripts/summon.gd" id="1_cbt1k"]
 [ext_resource type="Texture2D" uid="uid://oaeb4cps8gf3" path="res://assets/summon_cleric.png" id="2_483nh"]
