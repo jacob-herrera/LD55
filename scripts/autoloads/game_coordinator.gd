@@ -19,9 +19,9 @@ const FADE_DURATION: float = 10.0 / 30.0
 const PLAYER_SUMMON_DURATION = 6.0
 
 const HUB_TIME: float = 30.0
-const COMBAT_TIME: float = 60.0
+const COMBAT_TIME: float = 30.0
 
-static var room_multiplier: float = 0
+static var room_multiplier: float = 1.0
 
 static var current_room: Room = Room.HUB
 static var current_round: int = 0
@@ -45,7 +45,7 @@ static var room_data: Dictionary = {
 } 
 
 func _ready() -> void:
-	print_rich("[b]DEV CONTROLS[/b]\n ~ : Pause/Unpause Timer\n 1 : Goto Hub\n 2 : Goto Room 1\n Tab : Spawn wizard\n M : Spawn enemy\n")
+	print_rich("[b]DEV CONTROLS[/b]\n ~ : Pause/Unpause Timer\n 1 : Goto Hub\n 2-4 : Goto Room X\n Tab : Spawn wizard\n N : Spawn summon\n M : Spawn enemy\n")
 
 func DEV():
 	if Input.is_action_just_pressed("dev_pause_timer"):
@@ -77,11 +77,9 @@ func goto_room(target_room: Room) -> void:
 	match target_room:
 		Room.HUB:
 			time = HUB_TIME
-			room_multiplier = 0
-		Room.ROOM_1:
+		_:
 			time = COMBAT_TIME
-			room_multiplier = 1
-			
+			current_round += 1
 	globals.character.global_position = room_data[target_room].player_spawn
 	anim_player.play("fade_in")	
 	globals.character.summon_circle.stop_anim()
@@ -110,4 +108,5 @@ func _process(delta: float) -> void:
 
 func calc_earnings() -> int:
 	# multiply by round? wtf that will scale too fast
-	return round(time * room_multiplier * float(current_round)) as int
+	#return round(time * room_multiplier * float(current_round)) as int
+	return round(float(100) * time)

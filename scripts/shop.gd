@@ -153,6 +153,7 @@ func enter_shop():
 		cameras[0].set_priority(20)
 		current_item = 0
 		ui.shop.visible = true
+		globals.character.velocity = Vector3.ZERO
 	
 func exit_shop() -> void:
 	if in_shop:
