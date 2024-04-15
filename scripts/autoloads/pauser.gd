@@ -9,6 +9,12 @@ var pause_menu: PauseMenu
 
 func pause() -> void:
 	if not is_paused:
+		var sounds3d: Array[Node] = get_tree().get_nodes_in_group("sounds3D")
+		var sounds: Array[Node] = get_tree().get_nodes_in_group("sounds")
+		for player: AudioStreamPlayer3D in sounds3d:
+			player.stream_paused = true
+		for player: AudioStreamPlayer in sounds:
+			player.stream_paused = true
 		last_focus = get_viewport().gui_get_focus_owner()
 		is_paused = true
 		pause_menu = pause_menu_scene.instantiate()
@@ -19,6 +25,12 @@ func pause() -> void:
 		
 func unpause() -> void:
 	if is_paused:
+		var sounds3d: Array[Node] = get_tree().get_nodes_in_group("sounds3D")
+		var sounds: Array[Node] = get_tree().get_nodes_in_group("sounds")
+		for player: AudioStreamPlayer3D in sounds3d:
+			player.stream_paused = false
+		for player: AudioStreamPlayer in sounds:
+			player.stream_paused = false
 		is_paused = false
 		pause_menu.queue_free()
 		pause_menu = null

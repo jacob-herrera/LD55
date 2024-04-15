@@ -1490,29 +1490,29 @@ camera_3D_resource = ExtResource("16_6jxv8")
 
 [node name="summon_circle" parent="Character" instance=ExtResource("17_q38df")]
 
-[node name="Teleport" type="AudioStreamPlayer3D" parent="Character/summon_circle"]
+[node name="Teleport" type="AudioStreamPlayer3D" parent="Character/summon_circle" groups=["sounds3D"]]
 stream = ExtResource("18_25tfw")
 bus = &"Effects"
 
-[node name="SummonPickup" type="AudioStreamPlayer3D" parent="Character"]
+[node name="SummonPickup" type="AudioStreamPlayer3D" parent="Character" groups=["sounds3D"]]
 stream = ExtResource("18_j0qpv")
 bus = &"Effects"
 
-[node name="SummonPlace" type="AudioStreamPlayer3D" parent="Character"]
+[node name="SummonPlace" type="AudioStreamPlayer3D" parent="Character" groups=["sounds3D"]]
 stream = ExtResource("19_pgqx0")
 bus = &"Effects"
 
-[node name="Footsteps" type="AudioStreamPlayer3D" parent="Character"]
+[node name="Footsteps" type="AudioStreamPlayer3D" parent="Character" groups=["sounds3D"]]
 stream = ExtResource("20_p7t87")
 volume_db = -20.426
 bus = &"Effects"
 
-[node name="Land" type="AudioStreamPlayer3D" parent="Character"]
+[node name="Land" type="AudioStreamPlayer3D" parent="Character" groups=["sounds3D"]]
 stream = ExtResource("21_oq1ps")
 volume_db = -24.692
 bus = &"Effects"
 
-[node name="Jump" type="AudioStreamPlayer3D" parent="Character"]
+[node name="Jump" type="AudioStreamPlayer3D" parent="Character" groups=["sounds3D"]]
 stream = ExtResource("21_7g1t4")
 bus = &"Effects"
 
@@ -1603,22 +1603,22 @@ tween_on_load = true
 inactive_update_mode = 0
 camera_3D_resource = null
 
-[node name="PurchaseSound" type="AudioStreamPlayer" parent="Shop"]
+[node name="PurchaseSound" type="AudioStreamPlayer" parent="Shop" groups=["sounds"]]
 stream = ExtResource("25_ybodh")
 
-[node name="ShopSwipeSound" type="AudioStreamPlayer" parent="Shop"]
+[node name="ShopSwipeSound" type="AudioStreamPlayer" parent="Shop" groups=["sounds"]]
 stream = ExtResource("26_emyb1")
 
-[node name="EnterExitShopSound" type="AudioStreamPlayer" parent="Shop"]
+[node name="EnterExitShopSound" type="AudioStreamPlayer" parent="Shop" groups=["sounds"]]
 stream = ExtResource("27_c5wru")
 
-[node name="FreezeSound" type="AudioStreamPlayer" parent="Shop"]
+[node name="FreezeSound" type="AudioStreamPlayer" parent="Shop" groups=["sounds"]]
 stream = ExtResource("28_yaym2")
 
-[node name="SteamSound" type="AudioStreamPlayer" parent="Shop"]
+[node name="SteamSound" type="AudioStreamPlayer" parent="Shop" groups=["sounds"]]
 stream = ExtResource("29_2mdqr")
 
-[node name="DiceRollSound" type="AudioStreamPlayer" parent="Shop"]
+[node name="DiceRollSound" type="AudioStreamPlayer" parent="Shop" groups=["sounds"]]
 stream = ExtResource("28_1vvt3")
 
 [node name="Camera3D" type="Camera3D" parent="."]
@@ -1660,11 +1660,11 @@ initial_velocity_min = 1.0
 initial_velocity_max = 1.0
 color_ramp = SubResource("Gradient_s0fa4")
 
-[node name="ManaPickup" type="AudioStreamPlayer3D" parent="ManaPool"]
+[node name="ManaPickup" type="AudioStreamPlayer3D" parent="ManaPool" groups=["sounds3D"]]
 stream = ExtResource("20_8o20s")
 bus = &"Effects"
 
-[node name="EnterPool" type="AudioStreamPlayer3D" parent="ManaPool"]
+[node name="EnterPool" type="AudioStreamPlayer3D" parent="ManaPool" groups=["sounds3D"]]
 stream = ExtResource("35_awl5c")
 bus = &"Effects"
 
