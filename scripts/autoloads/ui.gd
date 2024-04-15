@@ -9,11 +9,13 @@ class_name UI
 @onready var wave_player: AnimationPlayer = $outcome/AnimationPlayer
 @onready var earnings: Label = %earnings
 @onready var shop: Node = $shop_ui
+@onready var space: Label = %space
+@onready var shop_desc: Label = %shop_desc
+@onready var shop_name: Label = %shop_name
 
-@onready var description: Node = $shop_ui/description
-@onready var dps: Node = $shop_ui/DPS
-@onready var health: Node = $shop_ui/health
-@onready var cost: Node = $shop_ui/cost
+@onready var dps: Node = %DPS
+@onready var health: Node = %health
+@onready var cost: Node = %cost
 @onready var reroll_cost: Node = $shop_ui/rerollCost
 @onready var screeen_particles: CPUParticles2D = $screen_particles
 @onready var current_round: Label = %round
@@ -128,6 +130,7 @@ func focus_buttons() -> void:
 	purchase_button.grab_focus()
 	shop_left.visible = false
 	shop_right.visible = false
+	space.visible = false
 	buttons_container.modulate = Color.WHITE
 	middle_selection.visible = false
 		
@@ -137,6 +140,7 @@ func unfocus_button() -> void:
 	freeze_button.release_focus()
 	shop_left.visible = true
 	shop_right.visible = true
+	space.visible = true
 	#middle_selection.visible = true
 	buttons_container.modulate = Color(0.9,0.9,0.9)
 		
