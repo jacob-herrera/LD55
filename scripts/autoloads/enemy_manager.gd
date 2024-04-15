@@ -24,7 +24,7 @@ func remove_enemies() -> void:
 	
 func recalc_remaining_enemies():
 	EnemyManager.current_room_remaining_enemies = \
-	get_tree().get_nodes_in_group(Enemy.GROUP).size()
+	 get_tree().get_nodes_in_group(Enemy.GROUP).size()
 	
 func check_enemies() -> void:
 	if get_tree().get_nodes_in_group(Enemy.GROUP).is_empty():

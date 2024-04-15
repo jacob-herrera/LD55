@@ -136,6 +136,9 @@ func _process(delta: float) -> void:
 	if time <= 3:
 		ui.particles_on()
 		
+	
+	enemy_manager.recalc_remaining_enemies()
+	
 	if time <= 0:
 		match current_room:
 			Room.HUB:
@@ -147,7 +150,7 @@ func _process(delta: float) -> void:
 				num_enemies += 1
 				
 	calc_earnings()
-	enemy_manager.recalc_remaining_enemies()
+	
 	
 
 func calc_earnings() -> int:
