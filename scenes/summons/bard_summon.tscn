@@ -21,6 +21,7 @@ aoe_effects = {
 }
 type = 3
 price = 5
+desc = "INCREASE DAMAGE OF NEARBY SUMMONS"
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, 0)
