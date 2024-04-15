@@ -119,7 +119,7 @@ func _process(_delta: float):
 				
 		ui.purchase_button.modulate = Color.WHITE
 		if is_selecting_reroll:
-			ui.shop_name.text = "Reroll"
+			ui.shop_name.text = "reroll shop"
 			ui.shop_desc.text = "REROLL UNFROZEN SUMMONS FOR SALE"
 			ui.dps.text = ""
 			ui.health.text = ""

@@ -130,7 +130,7 @@ func focus_buttons() -> void:
 	purchase_button.grab_focus()
 	shop_left.visible = false
 	shop_right.visible = false
-	space.visible = false
+	space.visible = true
 	buttons_container.modulate = Color.WHITE
 	middle_selection.visible = false
 		
@@ -140,7 +140,7 @@ func unfocus_button() -> void:
 	freeze_button.release_focus()
 	shop_left.visible = true
 	shop_right.visible = true
-	space.visible = true
+	space.visible = false
 	#middle_selection.visible = true
 	buttons_container.modulate = Color(0.9,0.9,0.9)
 		

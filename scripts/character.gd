@@ -85,6 +85,7 @@ func _ready() -> void:
 
 func  _process(delta: float) -> void:
 	#rot += delta * JUMP_SPIN_SPEED if jumped else 0.0
+	if Pauser.is_paused: return
 	if jumped:
 		rot += delta * JUMP_SPIN_SPEED
 		if is_on_floor():
