@@ -117,7 +117,6 @@ func goto_room(target_room: Room) -> void:
 			time = COMBAT_TIME
 			current_round += 1
 			# extra call to increment num_enemies for dev teleporting
-			num_enemies += 1
 			EnemyManager.current_room_max_enemies = num_enemies
 			EnemyManager.current_room_remaining_enemies = num_enemies
 			enemy_manager.remove_enemies()
@@ -170,7 +169,7 @@ func _process(delta: float) -> void:
 				print("here", wave_cleared)
 				if wave_cleared == false:
 					ui.wave_player.play("fade_away")
-				
+				num_enemies += 1
 	
 	
 	
