@@ -7,7 +7,7 @@ class_name Enemy
 @onready var healthbar: Healthbar = $healthbar
 @onready var agent: NavigationAgent3D = $NavigationAgent3D
 @onready var hurt: AudioStreamPlayer3D = $Hurt
-
+@onready var drop: AudioStreamPlayer3D = $DropCoins
 @export var healthbar_offset: float
 
 @export var max_health: int
@@ -123,6 +123,7 @@ func take_damage(damage_taking: int, damage_dir: Vector3) -> void:
 	utils.spawn_number(get_top(), false, damage_taking)
 	hurt.play()
 	if health <= 0:
+		utils.death_noise(global_position, false)
 		Globals.coins += gold_value
 		utils.death_animation(global_position, damage_dir, sprite)
 		utils.spawn_number(get_top(), true, gold_value)

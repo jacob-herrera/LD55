@@ -28,8 +28,8 @@
 [ext_resource type="AudioStream" uid="uid://dh3jc01yu8u1" path="res://assets/audio/player_jump.mp3" id="21_7g1t4"]
 [ext_resource type="AudioStream" uid="uid://y4y0cwo3gvof" path="res://assets/audio/land.mp3" id="21_oq1ps"]
 [ext_resource type="Texture2D" uid="uid://clewkrg4itfw5" path="res://assets/attack_circle.png" id="22_ypcgd"]
-[ext_resource type="AudioStream" uid="uid://cc2q35iu46ygk" path="res://assets/audio/purchase3.mp3" id="25_ybodh"]
 [ext_resource type="AudioStream" uid="uid://dafno5ot5nbi" path="res://assets/audio/swipe.mp3" id="26_emyb1"]
+[ext_resource type="AudioStream" uid="uid://cp03vpjcd3hqr" path="res://assets/audio/purchase.mp3" id="26_wt2ej"]
 [ext_resource type="AudioStream" uid="uid://2dxajc7jcbvw" path="res://assets/audio/store_bell2.mp3" id="27_c5wru"]
 [ext_resource type="AudioStream" uid="uid://03a3moyl001g" path="res://assets/audio/diceroll2.mp3" id="28_1vvt3"]
 [ext_resource type="AudioStream" uid="uid://ciufvdumh8l4x" path="res://assets/audio/freeze2.mp3" id="28_yaym2"]
@@ -1614,7 +1614,7 @@ inactive_update_mode = 0
 camera_3D_resource = null
 
 [node name="PurchaseSound" type="AudioStreamPlayer" parent="Shop" groups=["sounds"]]
-stream = ExtResource("25_ybodh")
+stream = ExtResource("26_wt2ej")
 
 [node name="ShopSwipeSound" type="AudioStreamPlayer" parent="Shop" groups=["sounds"]]
 stream = ExtResource("26_emyb1")

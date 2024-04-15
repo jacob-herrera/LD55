@@ -16,8 +16,16 @@ func death_animation(origin: Vector3, dir: Vector3, sprite: Sprite3D) -> void:
 	node_death.global_position = origin
 	sprite_clone.billboard = BaseMaterial3D.BILLBOARD_DISABLED
 	
-	pass
-
+func death_noise(pos: Vector3, is_summon: bool) -> void:
+	var player: AudioStreamPlayer3D = AudioStreamPlayer3D.new()
+	player.transform.origin = pos
+	if is_summon:
+		player.stream = load("res://assets/audio/summon_death.mp3")
+	else:
+		player.stream = load("res://assets/audio/drop_coins.mp3")
+	get_tree().current_scene.add_child(player)
+	player.play()
+	
 func spawn_number(sprite_loc: Vector3, is_gold: bool, val: int) -> void:
 	var label: Label3D = gold_dmg_display.instantiate() as Label3D
 	get_tree().current_scene.add_child(label)
