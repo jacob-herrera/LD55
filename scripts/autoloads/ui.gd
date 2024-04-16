@@ -36,7 +36,7 @@ class_name UI
 @onready var summon_right_arrow: Label = %summon_right_arrow
 @onready var shop_left: Label = $shop_ui/shop_left
 @onready var shop_right: Label = $shop_ui/shop_right
-
+@onready var game_over_sound: AudioStreamPlayer = $GameOverSound
 
 @onready var purchase_button: Button = %purchase_button
 @onready var freeze_button: Button = %freeze_button
@@ -51,6 +51,7 @@ const OOB: Vector3 = Vector3(0, -100, 0)
 var summons: Array[Summon] = []
 var selected: int
 var selection_max: int
+var first_gameover_play = true
 
 func _ready() -> void:
 	shop.visible = false
@@ -188,6 +189,7 @@ func check_lives() -> void:
 	if globals.lives == 1:
 		life_2.hide()
 	if globals.lives == 0:
+		game_over_sound.play()
 		life_1.hide()
 		ui.visible = false
 		print("TODO GAMEOVER")
