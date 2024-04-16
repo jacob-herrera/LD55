@@ -17,6 +17,8 @@ const ROOM_1_TELE := Vector3(32, 0, 0)
 const PLAYER_CAMERA_DEFAULT_TWEEN: float = 0.5
 const FADE_DURATION: float = 10.0 / 30.0
 const PLAYER_SUMMON_DURATION = 6.0
+const TIME_MOD = 4.0
+const PAYOUT_MOD = 0.3
 
 const HUB_TIME: float = 30.0
 const COMBAT_TIME: float = 30.0
@@ -176,5 +178,5 @@ func _process(delta: float) -> void:
 
 func calc_earnings() -> int:
 	# multiply by round? wtf that will scale too fast
-	#return round(time * room_multiplier * float(current_round)) as int
-	return round(time)
+	return round((time * (TIME_MOD / float(current_round)) + float(current_round)) * PAYOUT_MOD) as int
+	#return round(time)

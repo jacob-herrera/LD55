@@ -21,12 +21,12 @@ const POOL_SIZE: int = 10
 const POOL : Array[Dictionary] = [
 	## ROUND 0
 	{
-		Summon.Type.WIZARD: 0,
-		Summon.Type.SNOWMAN: 0,
-		Summon.Type.ARCHER: 9,
-		Summon.Type.BARD: 0,
-		Summon.Type.SHIELD: 1,
-		Summon.Type.RABBIT: 0
+		Summon.Type.WIZARD: 1,
+		Summon.Type.SNOWMAN: 1,
+		Summon.Type.ARCHER: 8,
+		Summon.Type.BARD: 1,
+		Summon.Type.SHIELD: 2,
+		Summon.Type.RABBIT: 1
 	},
 	## ROUND 1
 	{
