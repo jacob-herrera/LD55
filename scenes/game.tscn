@@ -25,7 +25,7 @@
 [ext_resource type="Resource" path="res://assets/camera_resource.tres" id="16_6jxv8"]
 [ext_resource type="Resource" uid="uid://be15co36abbxx" path="res://assets/cam_tween_shop.tres" id="16_uunvf"]
 [ext_resource type="Script" path="res://scripts/mana_pool.gd" id="17_5wmwc"]
-[ext_resource type="PackedScene" uid="uid://ofw4dvit1lbl" path="res://scenes/summon_circle.tscn" id="17_q38df"]
+[ext_resource type="PackedScene" path="res://scenes/summon_circle.tscn" id="17_q38df"]
 [ext_resource type="Texture2D" uid="uid://cr6rjchwhjc24" path="res://assets/player.png" id="17_t4sp0"]
 [ext_resource type="AudioStream" uid="uid://cxahdd3c6756b" path="res://assets/audio/teleport4v1.mp3" id="17_y67pv"]
 [ext_resource type="AudioStream" uid="uid://d1fuxqmu8xp5a" path="res://assets/audio/summon_pickup.mp3" id="18_j0qpv"]
