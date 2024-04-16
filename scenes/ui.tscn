@@ -197,6 +197,7 @@ fill_mode = 3
 show_percentage = false
 
 [node name="FPS" type="Label" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -681,3 +682,16 @@ stream = ExtResource("10_n2ikq")
 [node name="SummonSound" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("11_257v2")
 max_polyphony = 5
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("1_rg5ws")
+text = "[TAB] TO SUMMON"

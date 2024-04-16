@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/pause_menu.gd" id="1_rr6ye"]
 [ext_resource type="FontFile" uid="uid://ey5uk5evoi8o" path="res://assets/nes.ttf" id="2_rutg5"]
-[ext_resource type="PackedScene" uid="uid://b56jbfnwrg5u0" path="res://scenes/volume_slider.tscn" id="3_8ax3d"]
+[ext_resource type="PackedScene" path="res://scenes/volume_slider.tscn" id="3_8ax3d"]
 
 [node name="pause_menu" type="CenterContainer"]
 anchors_preset = 15
@@ -31,6 +31,7 @@ text = "RESUME"
 
 [node name="Settings" type="Button" parent="Main"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 focus_neighbor_top = NodePath("../Resume")
 focus_previous = NodePath("../Resume")

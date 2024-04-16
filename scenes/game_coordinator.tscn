@@ -120,3 +120,4 @@ text = "REFRESH PAGE TO TRY AGAIN"
 
 [node name="music" type="AudioStreamPlayer" parent="." groups=["sounds"]]
 stream = ExtResource("2_j8ija")
+volume_db = -8.0

@@ -4,7 +4,7 @@ extends Area3D
 @onready var enter_sound: AudioStreamPlayer3D = $EnterPool
 @onready var mana_full: AudioStreamPlayer3D = $ManaFull
 
-const TIME: float = 0.25 # Every one second
+const TIME: float = 0.75 # Every one second
 var time: float = 0.0
 var isFull = false
 var shouldReplay = true

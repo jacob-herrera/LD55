@@ -21,8 +21,8 @@ const PLAYER_SUMMON_DURATION = 6.0
 const TIME_MOD = 4.0
 const PAYOUT_MOD = 0.3
 
-const HUB_TIME: float = 7.0
-const COMBAT_TIME: float = 7.0
+const HUB_TIME: float = 30.0
+const COMBAT_TIME: float = 30.0
 
 @onready var game_over: Control = $game_over
 @onready var music: AudioStreamPlayer = $music
@@ -157,7 +157,7 @@ func goto_room(target_room: Room) -> void:
 	
 	
 func _process(delta: float) -> void:
-	DEV()
+	#DEV()
 	
 	if DEV_timer_paused == false:
 		time -= delta
