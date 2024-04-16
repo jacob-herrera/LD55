@@ -22,11 +22,11 @@ const POOL : Array[Dictionary] = [
 	## ROUND 0
 	{
 		Summon.Type.WIZARD: 0,
-		Summon.Type.SNOWMAN: 0,
-		Summon.Type.ARCHER: 9,
-		Summon.Type.BARD: 0,
-		Summon.Type.SHIELD: 1,
-		Summon.Type.RABBIT: 0
+		Summon.Type.SNOWMAN: 1,
+		Summon.Type.ARCHER: 16,
+		Summon.Type.BARD: 1,
+		Summon.Type.SHIELD: 5,
+		Summon.Type.RABBIT: 1
 	},
 	## ROUND 1
 	{
