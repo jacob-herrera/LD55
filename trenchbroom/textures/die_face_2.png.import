@@ -3,20 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bif2jvwa61n82"
-path.s3tc="res://.godot/imported/die_face_2.png-66156a6b5ff6800a261bad7ae9be843d.s3tc.ctex"
+path="res://.godot/imported/die_face_2.png-66156a6b5ff6800a261bad7ae9be843d.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://trenchbroom/textures/die_face_2.png"
-dest_files=["res://.godot/imported/die_face_2.png-66156a6b5ff6800a261bad7ae9be843d.s3tc.ctex"]
+dest_files=["res://.godot/imported/die_face_2.png-66156a6b5ff6800a261bad7ae9be843d.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

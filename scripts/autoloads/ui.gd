@@ -194,8 +194,9 @@ func check_lives() -> void:
 			first_gameover_play = false
 		life_1.hide()
 		ui.visible = false
-		print("TODO GAMEOVER")
-		get_tree().change_scene_to_file("res://scenes/gameover.tscn")
+		game_coordinator.goto_room(GameCoordinator.Room.GAME_OVER)
+		#print("TODO GAMEOVER")
+		#get_tree().change_scene_to_file("res://scenes/gameover.tscn")
 	
 func exit_summon_ui() -> void:
 	Globals.is_in_summon_ui = false
