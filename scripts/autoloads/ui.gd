@@ -189,7 +189,9 @@ func check_lives() -> void:
 	if globals.lives == 1:
 		life_2.hide()
 	if globals.lives == 0:
-		game_over_sound.play()
+		if first_gameover_play:
+			game_over_sound.play()
+			first_gameover_play = false
 		life_1.hide()
 		ui.visible = false
 		print("TODO GAMEOVER")
