@@ -1,4 +1,4 @@
-[gd_scene load_steps=205 format=3 uid="uid://dnpi8mksbjqnn"]
+[gd_scene load_steps=206 format=3 uid="uid://dnpi8mksbjqnn"]
 
 [ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map.gd" id="1_fle1t"]
 [ext_resource type="Resource" uid="uid://btwxy5brwdbg4" path="res://fgd/map_settings.tres" id="2_obqiq"]
@@ -22,10 +22,11 @@
 [ext_resource type="Texture2D" uid="uid://cexl2v5jtv1s6" path="res://trenchbroom/textures/rock3.png" id="14_wbbmc"]
 [ext_resource type="Resource" uid="uid://k62lirijanxl" path="res://assets/cam_tween_player.tres" id="15_36f27"]
 [ext_resource type="Script" path="res://scripts/shop.gd" id="15_itd2k"]
-[ext_resource type="Resource" uid="uid://dab5weecvnpwr" path="res://assets/camera_resource.tres" id="16_6jxv8"]
+[ext_resource type="Resource" path="res://assets/camera_resource.tres" id="16_6jxv8"]
 [ext_resource type="Resource" uid="uid://be15co36abbxx" path="res://assets/cam_tween_shop.tres" id="16_uunvf"]
 [ext_resource type="Script" path="res://scripts/mana_pool.gd" id="17_5wmwc"]
-[ext_resource type="PackedScene" uid="uid://ofw4dvit1lbl" path="res://scenes/summon_circle.tscn" id="17_q38df"]
+[ext_resource type="PackedScene" path="res://scenes/summon_circle.tscn" id="17_q38df"]
+[ext_resource type="Texture2D" uid="uid://cr6rjchwhjc24" path="res://assets/player.png" id="17_t4sp0"]
 [ext_resource type="AudioStream" uid="uid://cxahdd3c6756b" path="res://assets/audio/teleport4v1.mp3" id="17_y67pv"]
 [ext_resource type="AudioStream" uid="uid://d1fuxqmu8xp5a" path="res://assets/audio/summon_pickup.mp3" id="18_j0qpv"]
 [ext_resource type="AudioStream" uid="uid://cgtdd5x6h26sj" path="res://assets/audio/summon_place_new.mp3" id="19_pgqx0"]
@@ -40,7 +41,7 @@
 [ext_resource type="AudioStream" uid="uid://03a3moyl001g" path="res://assets/audio/diceroll2.mp3" id="28_1vvt3"]
 [ext_resource type="AudioStream" uid="uid://ciufvdumh8l4x" path="res://assets/audio/freeze2.mp3" id="28_yaym2"]
 [ext_resource type="AudioStream" uid="uid://ch5d3q30pl8dr" path="res://assets/audio/steamhiss2.mp3" id="29_2mdqr"]
-[ext_resource type="Material" uid="uid://cwq0v1g7q633e" path="res://assets/mat_icefreeze.tres" id="32_ra551"]
+[ext_resource type="Material" path="res://assets/mat_icefreeze.tres" id="32_ra551"]
 [ext_resource type="AudioStream" uid="uid://crxk7ol62je8l" path="res://assets/audio/enter_pool.mp3" id="35_awl5c"]
 [ext_resource type="Script" path="res://scripts/register_room.gd" id="35_vhw7u"]
 [ext_resource type="AudioStream" uid="uid://by5g27qtkhlo7" path="res://assets/audio/sound_11.wav" id="37_012jf"]
@@ -671,7 +672,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [12]
+"values": [3]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -700,7 +701,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [24]
+"values": [3]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -729,7 +730,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [24]
+"values": [3]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -787,7 +788,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [18]
+"values": [0]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -816,7 +817,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [18]
+"values": [0]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -905,7 +906,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.0833333),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [13, 14]
+"values": [4, 5]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -935,7 +936,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.0833333),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [25, 26]
+"values": [4, 5]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -965,7 +966,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.0833333),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [25, 26]
+"values": [4, 5]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -1025,7 +1026,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.0833333),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [19, 20]
+"values": [1, 2]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -1055,7 +1056,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.0833333),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [19, 20]
+"values": [1, 2]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -1562,14 +1563,13 @@ shape = SubResource("SphereShape3D_ijqfj")
 [node name="MainSprite" type="Sprite3D" parent="Character"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.34, 0)
 layers = 2
-flip_h = true
 pixel_size = 0.04
 billboard = 1
 texture_filter = 0
-texture = ExtResource("12_mjo44")
-hframes = 6
-vframes = 5
-frame = 8
+texture = ExtResource("17_t4sp0")
+hframes = 3
+vframes = 3
+frame = 7
 
 [node name="JumpSprite" type="Sprite3D" parent="Character"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, 0)

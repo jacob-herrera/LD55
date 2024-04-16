@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cyq5jt2re2dc5"]
+[gd_scene load_steps=11 format=3 uid="uid://cyq5jt2re2dc5"]
 
 [ext_resource type="Script" path="res://scripts/summon.gd" id="1_f0v8i"]
 [ext_resource type="Texture2D" uid="uid://bya6c5qvsm4v0" path="res://assets/snowball.png" id="2_0fwh1"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bk2528lpxk3ek" path="res://scenes/healthbar.tscn" id="5_exyuv"]
 [ext_resource type="AudioStream" uid="uid://f0t4iidnaqa6" path="res://assets/audio/summon_damaged.mp3" id="6_83ck0"]
 [ext_resource type="AudioStream" uid="uid://dxgq4ttkwo0o2" path="res://assets/audio/summon_killed.mp3" id="7_7qubf"]
+[ext_resource type="AudioStream" uid="uid://clxnwurgyvk4d" path="res://assets/audio/snowthrow1.mp3" id="9_4i45l"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_t6qms"]
 size = Vector3(0.5, 1.12292, 0.5)
@@ -56,3 +57,7 @@ bus = &"Effects"
 stream = ExtResource("7_7qubf")
 max_polyphony = 4
 bus = &"Effects"
+
+[node name="Projectile" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("9_4i45l")
+max_polyphony = 5

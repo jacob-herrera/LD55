@@ -8,7 +8,7 @@ class_name Summon
 @onready var healthbar: Healthbar = $healthbar
 @onready var hurt: AudioStreamPlayer3D = $Hurt
 @onready var killed: AudioStreamPlayer3D = $Killed
-
+@onready var projectileSound: AudioStreamPlayer3D = $Projectile
 
 const LAYER: int = 16
 const GROUP: String = "summons"
@@ -103,6 +103,7 @@ func do_ranged() -> void:
 	if enemy == null: return
 	var proj: Projectile = projectile.instantiate() as Projectile
 	get_tree().current_scene.add_child(proj)
+	projectileSound.play()
 	proj.initalize(projectile_texture)
 	proj.global_position = get_center()
 	proj.dir = get_center().direction_to(get_intercept(proj.global_position, proj.speed, enemy.get_center(), enemy.velocity))
