@@ -29,7 +29,7 @@ static var room_multiplier: float = 0
 signal goto_hub
 
 static var current_room: Room = Room.HUB
-static var num_enemies: int = 3
+static var num_enemies: int = 1
 static var current_round: int = 0
 static var time: float = HUB_TIME
 static var enemy_order: Array = ["basic", "basic", "basic", "strong"]
@@ -117,7 +117,6 @@ func goto_room(target_room: Room) -> void:
 			time = COMBAT_TIME
 			current_round += 1
 			# extra call to increment num_enemies for dev teleporting
-			num_enemies += 1
 			EnemyManager.current_room_max_enemies = num_enemies
 			EnemyManager.current_room_remaining_enemies = num_enemies
 			enemy_manager.remove_enemies()
@@ -171,7 +170,6 @@ func _process(delta: float) -> void:
 				if wave_cleared == false:
 					ui.wave_player.play("fade_away")
 				num_enemies += 1
-				
 	
 	
 	
