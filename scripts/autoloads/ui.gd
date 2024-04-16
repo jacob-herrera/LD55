@@ -37,6 +37,7 @@ class_name UI
 @onready var shop_left: Label = $shop_ui/shop_left
 @onready var shop_right: Label = $shop_ui/shop_right
 @onready var game_over_sound: AudioStreamPlayer = $GameOverSound
+@onready var summon_sound: AudioStreamPlayer3D = $SummonSound
 
 @onready var purchase_button: Button = %purchase_button
 @onready var freeze_button: Button = %freeze_button
@@ -103,6 +104,7 @@ func summon_selected() -> void:
 		Globals.mana -= Globals.SUMMON_MANA_COST
 		globals.character.drop_current_carry()
 		globals.character.carrying = selected_summon
+		summon_sound.play()
 		game_coordinator.anim_player.play("fade_in")
 		exit_summon_ui()
 	else:

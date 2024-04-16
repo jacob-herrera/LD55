@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bhkryx6iyvbay"]
+[gd_scene load_steps=20 format=3 uid="uid://bhkryx6iyvbay"]
 
 [ext_resource type="Script" path="res://scripts/autoloads/ui.gd" id="1_jrdqv"]
 [ext_resource type="FontFile" uid="uid://ey5uk5evoi8o" path="res://assets/nes.ttf" id="1_rg5ws"]
@@ -10,6 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://bccp7rst0qx7i" path="res://assets/audio/murp.mp3" id="8_4brbd"]
 [ext_resource type="Texture2D" uid="uid://dcljb05njcqqt" path="res://assets/gameheart.png" id="9_wjusl"]
 [ext_resource type="AudioStream" uid="uid://c0td6oi007qoi" path="res://assets/audio/gameover1.mp3" id="10_n2ikq"]
+[ext_resource type="AudioStream" uid="uid://qrj6yxej62w3" path="res://assets/audio/summon4.wav" id="11_257v2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ub2k2"]
 bg_color = Color(0, 0, 0, 1)
@@ -676,3 +677,7 @@ libraries = {
 
 [node name="GameOverSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_n2ikq")
+
+[node name="SummonSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("11_257v2")
+max_polyphony = 5
