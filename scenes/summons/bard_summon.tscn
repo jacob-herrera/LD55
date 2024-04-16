@@ -20,7 +20,7 @@ aoe_effects = {
 "damage": 2
 }
 type = 3
-price = 5
+price = 20
 desc = "INCREASE DAMAGE OF NEARBY SUMMONS"
 
 [node name="Sprite3D" type="Sprite3D" parent="."]

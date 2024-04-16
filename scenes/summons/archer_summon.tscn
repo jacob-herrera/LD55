@@ -22,7 +22,7 @@ base_attack_rate = 2.0
 base_damage = 1
 base_max_health = 5
 type = 2
-price = 3
+price = 10
 desc = "DEALS RANGED DAMAGE TO ENEMIES"
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
