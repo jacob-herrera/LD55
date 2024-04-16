@@ -1,6 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://bywoxkuyku0xj"]
+[gd_scene load_steps=9 format=3 uid="uid://bywoxkuyku0xj"]
 
 [ext_resource type="Script" path="res://scripts/autoloads/game_coordinator.gd" id="1_bqojs"]
+[ext_resource type="AudioStream" uid="uid://cumc2v6uhepwa" path="res://assets/hub.mp3" id="2_j8ija"]
+[ext_resource type="FontFile" uid="uid://ey5uk5evoi8o" path="res://assets/nes.ttf" id="2_sasm6"]
+[ext_resource type="AudioStream" uid="uid://cdbjhjtawfkwy" path="res://assets/combat.mp3" id="3_q8fwo"]
 
 [sub_resource type="Animation" id="Animation_kk0kn"]
 length = 0.001
@@ -59,6 +62,8 @@ _data = {
 
 [node name="game_coordinator" type="Node"]
 script = ExtResource("1_bqojs")
+hub = ExtResource("2_j8ija")
+combat = ExtResource("3_q8fwo")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -76,3 +81,42 @@ color = Color(0, 0, 0, 0)
 libraries = {
 "": SubResource("AnimationLibrary_wiu4w")
 }
+
+[node name="game_over" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="game_over"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 265.0
+offset_top = 58.0
+offset_right = -551.0
+offset_bottom = -459.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(3, 3)
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_sasm6")
+text = "Game Over"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="game_over"]
+layout_mode = 0
+offset_left = 277.0
+offset_top = 138.0
+offset_right = 677.0
+offset_bottom = 161.0
+theme_override_fonts/font = ExtResource("2_sasm6")
+text = "REFRESH PAGE TO TRY AGAIN"
+
+[node name="music" type="AudioStreamPlayer" parent="." groups=["sounds"]]
+stream = ExtResource("2_j8ija")

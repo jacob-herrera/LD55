@@ -3,20 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://3ndnbr4pslcy"
-path.s3tc="res://.godot/imported/grass.png-65ca9ee11924e6cc10e2f76085edaeb3.s3tc.ctex"
+path="res://.godot/imported/grass.png-65ca9ee11924e6cc10e2f76085edaeb3.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://trenchbroom/textures/grass.png"
-dest_files=["res://.godot/imported/grass.png-65ca9ee11924e6cc10e2f76085edaeb3.s3tc.ctex"]
+dest_files=["res://.godot/imported/grass.png-65ca9ee11924e6cc10e2f76085edaeb3.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

@@ -8,7 +8,8 @@ enum Room {
 	HUB,
 	ROOM_1,
 	ROOM_2,
-	ROOM_3
+	ROOM_3,
+	GAME_OVER
 }
 
 const ROOM_HUB_TELE := Vector3(0,0,0)
@@ -20,8 +21,14 @@ const PLAYER_SUMMON_DURATION = 6.0
 const TIME_MOD = 4.0
 const PAYOUT_MOD = 0.3
 
-const HUB_TIME: float = 30.0
-const COMBAT_TIME: float = 30.0
+const HUB_TIME: float = 7.0
+const COMBAT_TIME: float = 7.0
+
+@onready var game_over: Control = $game_over
+@onready var music: AudioStreamPlayer = $music
+@export var hub: AudioStreamMP3
+@export var combat: AudioStreamMP3
+
 
 static var wave_cleared: bool = false
 static var _played_wave_clear_animation: bool = false
@@ -51,9 +58,13 @@ static var room_data: Dictionary = {
 	Room.ROOM_3: {
 		enemy_spawns = []
 	},
+	Room.GAME_OVER: {
+		enemy_spawns = []
+	},
 } 
 
 func _ready() -> void:
+	music.play()
 	print_rich(
 		"""
 			[b]DEV CONTROLS[/b]
@@ -101,6 +112,8 @@ static func register_room(node: Node3D, room: Room) -> void:
 			room_data[room].enemy_spawns.append(marker.global_position)
 
 func spawn_enemy_in_current_room() -> void:
+	if current_room == Room.GAME_OVER:
+		return
 	for i in range(num_enemies):
 		var rand_pos: Vector3 = room_data[current_room].enemy_spawns.pick_random()
 		enemy_manager.spawn_enemy(enemy_order[i % enemy_order.size()], rand_pos)	
@@ -113,21 +126,31 @@ func goto_room(target_room: Room) -> void:
 			time = HUB_TIME
 			enemy_manager.check_enemies()
 			enemy_manager.remove_enemies()
-			
+			music.stream = hub
+			music.play()
+			anim_player.play("fade_in")	
 			emit_signal("goto_hub")
+		Room.GAME_OVER:
+			time = 99999
+			music.stop()
+			game_over.visible = true
+			set_process(false)
 		_:			
 			time = COMBAT_TIME
 			current_round += 1
+			music.stream = combat
+			music.play()
 			# extra call to increment num_enemies for dev teleporting
 			EnemyManager.current_room_max_enemies = num_enemies
 			EnemyManager.current_room_remaining_enemies = num_enemies
 			enemy_manager.remove_enemies()
 			spawn_enemy_in_current_room()
 			_played_wave_clear_animation = false
+			anim_player.play("fade_in")	
 			
 	_has_started_summon_circle = false
 	globals.character.global_position = room_data[target_room].player_spawn
-	anim_player.play("fade_in")	
+	
 	globals.character.summon_circle.stop_anim()
 	globals.character.camera.tween_parameters.duration = PLAYER_CAMERA_DEFAULT_TWEEN
 	ui.particles_off()
